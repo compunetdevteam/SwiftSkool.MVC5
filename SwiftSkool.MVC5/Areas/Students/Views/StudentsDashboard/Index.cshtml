@@ -1,0 +1,183 @@
+﻿@model IEnumerable<SwiftSkool.Entities.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Attendance.StatusDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class.Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Club.Clubname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Guardian.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hostel.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicalHistory.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateOfOrigin.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentPassport)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdmissionNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicalHistoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attendance.StatusDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Club.Clubname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guardian.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hostel.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicalHistory.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateOfOrigin.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentPassport)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicalHistoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<SwiftSkool.MVC5.ViewModels.ResultViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CA.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TermTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassAverage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CA.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CA.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TermTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TermTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassAverage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
+        </td>
+    </tr>
+}
+
+</table>
