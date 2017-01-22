@@ -8,6 +8,7 @@ using SwiftSkool.MVC5.Models;
 using AutoMapper.QueryableExtensions;
 using SwiftSkool.MVC5.ViewModels;
 using SwiftSkool.Abstractions;
+using System.Collections.Generic;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
 {
@@ -63,8 +64,15 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,SchoolSessionId,StudentId,SubjectId,ScoreGradeId,TermTotal,ClassAverage,Position,Status,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] Result result)
+        public async Task<ActionResult> Create(ResultViewModel resultvm)
         {
+            var student = await db.Students.Where(x => x.FirstName == resultvm.Student.FirstName
+            && x.LastName == resultvm.Student.LastName).FirstOrDefaultAsync();
+            var subject = await db.Subjects.Where(x => x.Name == resultvm.Subject.Name).FirstOrDefaultAsync();
+            var session = await db.Sessions.Where(x => x.SessionName == resultvm.Session).FirstOrDefaultAsync();
+            var ca = new List<ContinuousAssessment>();
+            var result = new Result(student, subject, session, ca);
+
             if (ModelState.IsValid)
             {
                 db.Results.Add(result);
