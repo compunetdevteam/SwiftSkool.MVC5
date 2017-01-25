@@ -6,22 +6,18 @@ namespace SwiftSkool.Entities
 {
     public class Result : Entity
     {
-        private List<ContinuousAssessment> _ca;
-
         private Result()
         {
 
         }
 
-        public Result(Student student, Subject subject, SchoolSession session,
-            List<ContinuousAssessment> ca)
+        public Result(Student student, Subject subject, SchoolSession session)
         {
-            if(student.Id != 0 && subject.Id != 0 && session.Id != 0 && ca.Any())
+            if(student.Id != 0 && subject.Id != 0 && session.Id != 0)
             {
                 Student = student;
                 Subject = subject;
                 SchoolSession = session;
-                _ca = ca;
             }
         }
 
@@ -43,10 +39,7 @@ namespace SwiftSkool.Entities
 
         public List<ContinuousAssessment> ContinuousAssessments
         {
-            get
-            {
-                return _ca;
-            }
+            get; private set;
         }
 
         public double TermTotal { get; private set; }
@@ -70,15 +63,15 @@ namespace SwiftSkool.Entities
 
         public void CalculateSubjectAverage()
         {
-            var scores = ContinuousAssessments.Where(x => x.ResultId == Id).Sum(x => x.Score);
-            var students = Student.Subjects.Count;
+            var scores = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value).Sum(x => x.Score);
+            var students = Subject.Students.Count;
             ClassAverage = scores / students;
         }
 
         public void SumCAScoreOverHundred()
         {
             TermTotal = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value)
-                                              .Sum(s => s.Score) / 100;
+                                             .Sum(s => s.Score) / 100;
         }
 
         public void AllocatePosition()

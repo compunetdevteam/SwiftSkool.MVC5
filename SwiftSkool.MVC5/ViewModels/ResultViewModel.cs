@@ -3,6 +3,7 @@ using SwiftSkool.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace SwiftSkool.MVC5.ViewModels
 {
@@ -186,39 +187,20 @@ namespace SwiftSkool.MVC5.ViewModels
         public double Score { get; set; }
     }
 
-    public class ClassResultTermWorkTypeViewModel
+    public class CreateResultViewModel
     {
-        [StringLength(10)]
-        [Display(Name = "Class")]
-        public string ClassName { get; set; }
+        public int StudentId { get; set; }
 
-        [StringLength(20)]
-        [Display(Name = "Student Name")]
-        public string StudentName { get; set; }
+        public SelectList Student { get; set; }
 
-        [StringLength(20)]
-        [Display(Name = "Admission Number")]
-        public string StudentAdmissionNumber { get; set; }
+        public int SubjectId { get; set; }
 
-        [StringLength(20)]
-        [Display(Name = "Term Work")]
-        public string TermWork { get; set; }
+        public SelectList Subject { get; set; }
 
-        [StringLength(2)]
-        [Display(Name = "Score Grade")]
-        public string Grade { get; set; }
+        public int SessionId { get; set; }
 
-        [Display(Name = "Total Score")]
-        [DisplayFormat(DataFormatString = "{0:F2}")]
-        public double Score { get; set; }
-    }
+        public SelectList SchoolSession { get; set; }
 
-    public class TermWorkTypeResultViewModel
-    {
-        public string TermWorkTypeName { get; set; }
-        public string Subject { get; set; }
-        public double Score { get; set; }
-        public string Grade { get; set; }
-
+        public Term Term { get; set; }
     }
 }

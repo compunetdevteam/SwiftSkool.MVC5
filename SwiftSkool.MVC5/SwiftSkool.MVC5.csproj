@@ -254,6 +254,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Results\Controllers\ResultsController.cs" />
     <Compile Include="Areas\Results\Controllers\ResultsDashboardController.cs" />
     <Compile Include="Areas\Results\ResultsAreaRegistration.cs" />
     <Compile Include="Areas\Students\Controllers\StudentsDashboardController.cs" />
@@ -266,7 +267,8 @@
     <Compile Include="BusinessLogic\LessonPlanManager.cs" />
     <Compile Include="BusinessLogic\PaymentManager.cs" />
     <Compile Include="BusinessLogic\ReportManager.cs" />
-    <Compile Include="BusinessLogic\ResultManager.cs" />
+    <Compile Include="BusinessLogic\ResultCommandManager.cs" />
+    <Compile Include="BusinessLogic\ResultQueryManager.cs" />
     <Compile Include="BusinessLogic\StudentManager.cs" />
     <Compile Include="BusinessLogic\SubjectManager.cs" />
     <Compile Include="BusinessLogic\TeacherManager.cs" />
@@ -320,6 +322,10 @@
     <Compile Include="Migrations\201701181508112_v1.cs" />
     <Compile Include="Migrations\201701181508112_v1.Designer.cs">
       <DependentUpon>201701181508112_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701240142141_v2.cs" />
+    <Compile Include="Migrations\201701240142141_v2.Designer.cs">
+      <DependentUpon>201701240142141_v2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -385,6 +391,11 @@
     <Content Include="Areas\Students\Views\StudentsDashboard\Edit.cshtml" />
     <Content Include="Areas\Students\Views\StudentsDashboard\Index.cshtml" />
     <Content Include="Areas\Results\Views\ResultsDashboard\Create.cshtml" />
+    <Content Include="Areas\Results\Views\Results\Delete.cshtml" />
+    <Content Include="Areas\Results\Views\Results\Details.cshtml" />
+    <Content Include="Areas\Results\Views\Results\Edit.cshtml" />
+    <Content Include="Areas\Results\Views\Results\Index.cshtml" />
+    <Content Include="Areas\Results\Views\Results\Create.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -454,6 +465,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701181508112_v1.resx">
       <DependentUpon>201701181508112_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701240142141_v2.resx">
+      <DependentUpon>201701240142141_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
