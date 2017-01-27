@@ -45,6 +45,17 @@ namespace SwiftSkool.Entities
 
         public StudentViewModel Student { get; set; }
 
+        public void AllocatePosition()
+        {
+            //get all students scores per subject
+            //
+        }
+
+        public void AllocateRemark()
+        {
+
+        }
+
 
     }
 }

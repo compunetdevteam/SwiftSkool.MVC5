@@ -1,8 +1,6 @@
 ﻿using SwiftSkool.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwiftSkool.Entities
 {
@@ -36,6 +34,16 @@ namespace SwiftSkool.Entities
         public Result Result { get; private set; }
 
         public int? ResultId { get; private set; }
+
+        public void UpdateCA(int? subjectid, string name, double? score)
+        {
+            if(subjectid.Value != 0 && !string.IsNullOrWhiteSpace(name))
+            {
+                SubjectId = subjectid.Value;
+                Name = name;
+                Score = score.Value;
+            }
+        }
         
     }
 }

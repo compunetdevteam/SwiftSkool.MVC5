@@ -12,7 +12,6 @@ namespace SwiftSkool.BusinessLogic
         Task<SubjectDetailViewModel> GetSubjectByName(string subjectName);
         bool IfExit(int aclass);
         Task<IEnumerable<Subject>> SelectStudentSubjects(Student student);
-        Task<Subject> Update(Subject subject, SubjectInputModel updatedSubjects);
         void ViewClassToUpdate(int id);
     }
 }

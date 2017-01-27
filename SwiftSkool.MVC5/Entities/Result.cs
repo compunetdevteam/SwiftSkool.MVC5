@@ -73,16 +73,6 @@ namespace SwiftSkool.Entities
             TermTotal = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value)
                                              .Sum(s => s.Score) / 100;
         }
-
-        public void AllocatePosition()
-        {
-
-        }
-
-        public void AllocateRemark()
-        {
-
-        }
     }
 
 }

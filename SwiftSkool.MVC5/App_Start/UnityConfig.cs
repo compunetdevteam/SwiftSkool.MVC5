@@ -4,6 +4,8 @@ using System.Data.Entity;
 using SwiftSkool.BusinessLogic;
 using SwiftSkool.Abstractions;
 using SwiftSkool.MVC5.Models;
+using SwiftSkool.MVC5.BusinessLogic;
+using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.MVC5.App_Start
 {
@@ -43,6 +45,7 @@ namespace SwiftSkool.MVC5.App_Start
             container.RegisterType<DbContext, SchoolDb>(new PerRequestLifetimeManager());
             container.RegisterType<IResultQueryManager, ResultQueryManager>();
             container.RegisterType<ISubjectQueryManager, SubjectQueryManager>();
+            container.RegisterType<ICAQueryManager, CAQueryManager>();
         }
     }
 }

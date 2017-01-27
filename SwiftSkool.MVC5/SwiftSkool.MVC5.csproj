@@ -254,16 +254,21 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Results\Controllers\ContinuousAssessmentsController.cs" />
     <Compile Include="Areas\Results\Controllers\ResultsController.cs" />
     <Compile Include="Areas\Results\Controllers\ResultsDashboardController.cs" />
     <Compile Include="Areas\Results\ResultsAreaRegistration.cs" />
     <Compile Include="Areas\Students\Controllers\StudentsDashboardController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
+    <Compile Include="BusinessLogic\CACommandManager.cs" />
+    <Compile Include="BusinessLogic\CAQueryManager.cs" />
     <Compile Include="BusinessLogic\ClassManager.cs" />
     <Compile Include="BusinessLogic\EntranceExamManager.cs" />
     <Compile Include="Abstractions\IResultQueryManager.cs" />
     <Compile Include="Abstractions\ISubjectQueryManager.cs" />
+    <Compile Include="Abstractions\ICACommandManager.cs" />
+    <Compile Include="Abstractions\ICAQueryManager.cs" />
     <Compile Include="BusinessLogic\LessonPlanManager.cs" />
     <Compile Include="BusinessLogic\PaymentManager.cs" />
     <Compile Include="BusinessLogic\ReportManager.cs" />
@@ -335,7 +340,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CAViewModel.cs" />
-    <Compile Include="ViewModels\ClassInputModel.cs" />
     <Compile Include="ViewModels\ClassViewModel.cs" />
     <Compile Include="ViewModels\HostelViewModel.cs" />
     <Compile Include="ViewModels\LessonPlanInputModel.cs" />
@@ -350,9 +354,7 @@
     <Compile Include="ViewModels\StudentResultViewModel.cs" />
     <Compile Include="ViewModels\StudentScoreInputModel.cs" />
     <Compile Include="ViewModels\StudentSubjectInputModel.cs" />
-    <Compile Include="ViewModels\StudentUpdateModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
-    <Compile Include="ViewModels\SubjectInputModel.cs" />
     <Compile Include="ViewModels\SubjectSelectedInputModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />
     <Compile Include="ViewModels\TeacherInputModel.cs" />
@@ -396,6 +398,11 @@
     <Content Include="Areas\Results\Views\Results\Edit.cshtml" />
     <Content Include="Areas\Results\Views\Results\Index.cshtml" />
     <Content Include="Areas\Results\Views\Results\Create.cshtml" />
+    <Content Include="Areas\Results\Views\ContinuousAssessments\Create.cshtml" />
+    <Content Include="Areas\Results\Views\ContinuousAssessments\Delete.cshtml" />
+    <Content Include="Areas\Results\Views\ContinuousAssessments\Details.cshtml" />
+    <Content Include="Areas\Results\Views\ContinuousAssessments\Edit.cshtml" />
+    <Content Include="Areas\Results\Views\ContinuousAssessments\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -455,6 +462,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Results\Models\" />
     <Folder Include="Areas\Students\Models\" />
+    <Folder Include="Infrastructure\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
