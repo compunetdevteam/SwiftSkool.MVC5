@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using SwiftSkool.Entities;
 using SwiftSkool.MVC5.ViewModels;
+using System.Linq;
 
-namespace SwiftSkool.Abstractions
+namespace SwiftSkool.MVC5.Abstractions
 {
     public interface IResultQueryManager
     {
@@ -12,7 +13,20 @@ namespace SwiftSkool.Abstractions
         Task<double> CalculateClassLowestPerSubject(string classname, string subjectname, string term);
         double CalculateCumilativeResult(double firsttermtotal, double secondtermtotal, double thirdtermtotal);
         double CalculateFirstTermTotalPerStudent(List<Result> results, string studentname);
+
+        /// <summary>
+        /// Calculate score of a student per subject per year 
+        /// </summary>
+        /// <param name="subjectName"></param>
+        /// <param name="className"></param>
+        /// <param name="studentname"></param>
+        /// <returns>score of type double</returns>
         Task<double> CalucaluteCumilativeScorePerSubject(string subjectName, string className, string studentname);
+
+        /// <summary>
+        /// Perform aggregation and return number of results
+        /// </summary>
+        /// <returns>int</returns>
         Task<int> CountNumberOfResultsAsync();
 
         /// <summary>
@@ -20,7 +34,22 @@ namespace SwiftSkool.Abstractions
         /// </summary>
         /// <returns>List<ResultViewModel></returns>
         Task<List<ResultViewModel>> GetAllResultsAsync();
-        
+
+        /// <summary>
+        /// Get an IQueryable of Results and return it so LINQ
+        /// operations can be performed on it.
+        /// </summary>
+        /// <returns>IQueryable<Result></returns>
+        IQueryable<Result> GetResults();
+
+        /// <summary>
+        /// Find and return a result by its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Result</returns>
+        Task<Result> FindResultByIdAsync(int? id);
+
+
         Task<List<ResultViewModel>> GetAllResultsByNameAsync(string name);
         Task<List<ResultViewModel>> GetAllResultsBySessionAsync(string sessionname);
         Task<List<ResultViewModel>> GetAllResultsDescendingAsync();

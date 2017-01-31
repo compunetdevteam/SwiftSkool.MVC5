@@ -5,6 +5,7 @@ using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -65,6 +66,23 @@ namespace SwiftSkool.MVC5.BusinessLogic
             {
 
                 return false;
+            }
+        }
+
+
+        public async Task<bool> DeleteCA(int ca)
+        {
+            var dca = await _db.ContinuousAssessment.FindAsync(ca);
+            try
+            {
+                _db.ContinuousAssessment.Remove(dca);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 

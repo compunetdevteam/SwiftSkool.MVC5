@@ -31,7 +31,7 @@ namespace SwiftSkool.MVC5.ViewModels
                 (q.ContinuousAssessments.Single())))
                 .ForMember(d => d.Session, opt => opt.MapFrom(src => src.SchoolSession.SessionName));            CreateMap<Student, StudentViewModel>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(
-                    q => q.FirstName + " " + q.LastName));
+                    q => q.FirstName + " " + q.LastName)).ReverseMap();
 
             CreateMap<StudentViewModel, Student>();
             CreateMap<ContinuousAssessment, CAViewModel>();
@@ -202,5 +202,36 @@ namespace SwiftSkool.MVC5.ViewModels
         public SelectList SchoolSession { get; set; }
 
         public Term Term { get; set; }
+    }
+
+    public class UpdateResultViewModel
+    {
+        public int ResultId { get; set; }
+
+        public int StudentId { get; set; }
+
+        public SelectList Students { get; set; }
+
+        public int SchoolSessionId { get; set; }
+
+        public SelectList SchoolSessions { get; set; }
+
+        public int SubjectId { get; set; }
+
+        public SelectList Subjects { get; set; }
+
+        public int ScoreGradeId { get; set; }
+
+        public SelectList ScoreGrade { get; set; }
+
+        public double TermTotal { get; set; }
+
+        public double SubjectAverage { get; set; }
+
+        public string Position { get; set; }
+
+        public string Status { get; set; }
+
+
     }
 }

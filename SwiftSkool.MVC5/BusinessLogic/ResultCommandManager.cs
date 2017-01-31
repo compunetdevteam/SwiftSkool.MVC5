@@ -1,14 +1,17 @@
-﻿using SwiftSkool.Entities;
+﻿using AutoMapper;
+using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SwiftSkool.MVC5.BusinessLogic
 {
-    public class ResultCommandManager
+    public class ResultCommandManager : IResultCommandManager
     {
         private SchoolDb _db;
 
@@ -45,7 +48,34 @@ namespace SwiftSkool.MVC5.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Change any result provided an UpdateResultViewModel in a valid state
+        /// is provided
+        /// </summary>
+        /// <param name="model">UpdateResultViewModel</param>
+        /// <returns>int</returns>
+        public async Task<int> ChangeResult(UpdateResultViewModel model)
+        {
+            var result = await _db.Results.FindAsync(model.ResultId);
+            
+            if(model.StudentId ==0 && model.SubjectId == 0 && model.SchoolSessionId == 0)
+            {
+                throw new ArgumentException("You have given values that are invalid!");
+            }
 
+            result = Mapper.Map<Result>(model);
+
+            try
+            {
+                _db.Entry(result).State = EntityState.Modified;
+                return await _db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         
     }

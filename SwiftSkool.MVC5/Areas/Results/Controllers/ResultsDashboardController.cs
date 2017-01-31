@@ -3,7 +3,7 @@ using System.Net;
 using System.Web.Mvc;
 using SwiftSkool.Entities;
 using SwiftSkool.MVC5.Models;
-using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
 {

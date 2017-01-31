@@ -7,6 +7,8 @@ using SwiftSkool.Abstractions;
 using AutoMapper.QueryableExtensions;
 using System.Data.Entity;
 using SwiftSkool.MVC5.Models;
+using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.BusinessLogic
 {
@@ -16,6 +18,34 @@ namespace SwiftSkool.BusinessLogic
         public ResultQueryManager(SchoolDb db)
         {
             _db = db;
+        }
+
+
+        public IQueryable<Result> GetResults()
+        {
+            return   _db.Results.Include(r => r.ContinuousAssessments)
+                                    .Include(r => r.SchoolSession)
+                                    .Include(r => r.ScoreGrade)
+                                    .Include(r => r.Student)
+                                    .Include(r => r.Subject);                          
+        }
+
+        /// <summary>
+        /// Find a result by a given Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Result</returns>
+        public async Task<Result> FindResultByIdAsync(int? id)
+        {
+            try
+            {
+                return await _db.Results.FindAsync(id.Value);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public ResultViewModel GetResultById(int id)
@@ -140,6 +170,12 @@ namespace SwiftSkool.BusinessLogic
                                     }).ToListAsync();
         }
 
+        /// <summary>
+        /// Return a ResultViewModel when a student's name is 
+        /// given as a parameter to this method
+        /// </summary>
+        /// <param name="name">string of student's first or complete name</param>
+        /// <returns>ResultViewModel</returns>
         public async Task<List<ResultViewModel>> GetAllResultsByNameAsync(string name)
         {
             return await _db.Results
@@ -183,39 +219,39 @@ namespace SwiftSkool.BusinessLogic
                                     .Include(r => r.Subject)
                                     .Include(r => r.ContinuousAssessments)
                                     .Include(r => r.SchoolSession)
-                                .Select(r => new ResultViewModel
-                                {
-                                    Student = new StudentViewModel
+                                    .Select(r => new ResultViewModel
                                     {
-                                        AdmissionDate = r.Student.AdmissionDate,
-                                        AdmissionNumber = r.Student.AdmissionNumber,
-                                        Class = r.Student.Class.ClassName +
-                                              r.Student.Class.Level + r.Student.Class.Section,
-                                        FirstName = r.Student.FirstName,
-                                        LastName = r.Student.LastName,
+                                        Student = new StudentViewModel
+                                        {
+                                            AdmissionDate = r.Student.AdmissionDate,
+                                            AdmissionNumber = r.Student.AdmissionNumber,
+                                            Class = r.Student.Class.ClassName +
+                                                  r.Student.Class.Level + r.Student.Class.Section,
+                                            FirstName = r.Student.FirstName,
+                                            LastName = r.Student.LastName,
 
-                                        FullName = r.Student.FirstName+" "+r.Student.LastName,
-                                        Hostel = r.Student.Hostel.Name
-                                    },
-                                    CA = new CAViewModel
-                                    {
-                                        Id = r.ContinuousAssessments.FirstOrDefault().Id.Value,
-                                        Name = r.ContinuousAssessments.FirstOrDefault().Name,
-                                        Score = r.ContinuousAssessments.FirstOrDefault().Score
-                                    },
-                                    ResultId = r.Id.Value,
-                                    Session = r.SchoolSession.SessionName,
-                                    ClassAverage = r.ClassAverage,
-                                    Term = r.SchoolSession.Term.ToString(),
-                                    Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
-                                    Position = r.Position,
-                                    TermTotal = r.TermTotal,
-                                    Subject = new SimpleSubjectViewModel
-                                    {
-                                        Name = r.Subject.Name,
-                                        SubjectCode = r.Subject.SubjectCode
-                                    }
-                                }).SingleOrDefaultAsync();
+                                            FullName = r.Student.FirstName+" "+r.Student.LastName,
+                                            Hostel = r.Student.Hostel.Name
+                                        },
+                                        CA = new CAViewModel
+                                        {
+                                            Id = r.ContinuousAssessments.FirstOrDefault().Id.Value,
+                                            Name = r.ContinuousAssessments.FirstOrDefault().Name,
+                                            Score = r.ContinuousAssessments.FirstOrDefault().Score
+                                        },
+                                        ResultId = r.Id.Value,
+                                        Session = r.SchoolSession.SessionName,
+                                        ClassAverage = r.ClassAverage,
+                                        Term = r.SchoolSession.Term.ToString(),
+                                        Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
+                                        Position = r.Position,
+                                        TermTotal = r.TermTotal,
+                                        Subject = new SimpleSubjectViewModel
+                                        {
+                                            Name = r.Subject.Name,
+                                            SubjectCode = r.Subject.SubjectCode
+                                        }
+                                    }).FirstOrDefaultAsync();
         }
 
         public async Task<List<ResultViewModel>> GetAllResultsBySessionAsync(string sessionname)

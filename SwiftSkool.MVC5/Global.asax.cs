@@ -1,4 +1,5 @@
-﻿using SwiftSkool.MVC5.Infrastructure.Mapping;
+﻿using FluentValidation.Mvc;
+using SwiftSkool.MVC5.Infrastructure.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace SwiftSkool.MVC5
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperInitializer.Initialize();
+
+            //FluentValidationModelValidatorProvider.Configure();
         }
     }
 }

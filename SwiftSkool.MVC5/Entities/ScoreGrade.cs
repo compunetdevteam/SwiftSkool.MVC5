@@ -24,10 +24,10 @@ namespace SwiftSkool.Entities
         public string Level { get; set; } //complex type
 
         [Range(0,100)]
-        public double MinimumScore { get; set; }
+        public double MinimumScore { get; private set; }
 
         [Range(0,100)]
-        public double MaximumScore { get; set; }
+        public double MaximumScore { get; private set; }
 
         public int RatingId { get; set; }
 

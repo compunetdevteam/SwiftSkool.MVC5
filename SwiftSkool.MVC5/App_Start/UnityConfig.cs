@@ -44,8 +44,10 @@ namespace SwiftSkool.MVC5.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<DbContext, SchoolDb>(new PerRequestLifetimeManager());
             container.RegisterType<IResultQueryManager, ResultQueryManager>();
+            container.RegisterType<IResultCommandManager, ResultCommandManager>();
             container.RegisterType<ISubjectQueryManager, SubjectQueryManager>();
             container.RegisterType<ICAQueryManager, CAQueryManager>();
+            container.RegisterType<ICACommandManager, CACommandManager>();
         }
     }
 }

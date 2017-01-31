@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using SwiftSkool.MVC5.ViewModels;
 using SwiftSkool.MVC5.Models;
-using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.BusinessLogic
 {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using SwiftSkool.MVC5.ViewModels;
 
-namespace SwiftSkool.Abstractions
+namespace SwiftSkool.MVC5.Abstractions
 {
     public interface ISubjectQueryManager
     {

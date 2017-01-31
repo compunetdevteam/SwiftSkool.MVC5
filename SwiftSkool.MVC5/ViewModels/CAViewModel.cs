@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation.Attributes;
 using SwiftSkool.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

@@ -23,5 +23,13 @@ namespace SwiftSkool.MVC5.Abstractions
         /// <returns>return a Task of Int if successful 
         /// or an ArgumentOutOfRangeException on failure</returns>
         Task<int> CreateCA(CreateCAViewModel ca);
+
+        /// <summary>
+        /// Delete particular CA from the database provided the Id
+        /// supplied is a valid Id of a valid CA in Persistence
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Task of bool</returns>
+        Task<bool> DeleteCA(int id);
     }
 }

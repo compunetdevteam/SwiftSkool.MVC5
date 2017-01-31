@@ -12,16 +12,18 @@ using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.BusinessLogic;
 using SwiftSkool.BusinessLogic;
 using SwiftSkool.MVC5.ViewModels;
+using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
 {
     public class ResultsController : Controller
     {
-        private ResultCommandManager db;
-        private readonly ResultQueryManager qdb;
+        private IResultCommandManager db;
+        private readonly IResultQueryManager qdb;
         private readonly SchoolDb _ctx;
 
-        public ResultsController(ResultCommandManager _db, ResultQueryManager _qdb, SchoolDb ctx)
+        public ResultsController(IResultCommandManager _db, IResultQueryManager _qdb, SchoolDb ctx)
         {
             db = _db;
             qdb = _qdb;
@@ -60,65 +62,73 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
             return View(rim);
         }
 
-        //// POST: Results/Results/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "Id,SchoolSessionId,StudentId,SubjectId,ScoreGradeId,TermTotal,ClassAverage,Position,Status,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] Result result)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Results.Add(result);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: Results/Results/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(CreateResultViewModel model)
+        {
+            try
+            {
 
-        //    ViewBag.SchoolSessionId = new SelectList(db.Sessions, "Id", "SessionName", result.SchoolSessionId);
-        //    ViewBag.ScoreGradeId = new SelectList(db.ScoreGrades, "Id", "Level", result.ScoreGradeId);
-        //    ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", result.StudentId);
-        //    ViewBag.Id = new SelectList(db.Subjects, "Id", "Name", result.Id);
-        //    return View(result);
-        //}
+                if (ModelState.IsValid)
+                {
+                    await db.CreateResult(model);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
 
-        //// GET: Results/Results/Edit/5
-        //public async Task<ActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Result result = await db.Results.FindAsync(id);
-        //    if (result == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.SchoolSessionId = new SelectList(db.Sessions, "Id", "SessionName", result.SchoolSessionId);
-        //    ViewBag.ScoreGradeId = new SelectList(db.ScoreGrades, "Id", "Level", result.ScoreGradeId);
-        //    ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", result.StudentId);
-        //    ViewBag.Id = new SelectList(db.Subjects, "Id", "Name", result.Id);
-        //    return View(result);
-        //}
+                throw;
+            }
 
-        //// POST: Results/Results/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit([Bind(Include = "Id,SchoolSessionId,StudentId,SubjectId,ScoreGradeId,TermTotal,ClassAverage,Position,Status,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] Result result)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(result).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.SchoolSessionId = new SelectList(db.Sessions, "Id", "SessionName", result.SchoolSessionId);
-        //    ViewBag.ScoreGradeId = new SelectList(db.ScoreGrades, "Id", "Level", result.ScoreGradeId);
-        //    ViewBag.StudentId = new SelectList(db.Students, "Id", "FirstName", result.StudentId);
-        //    ViewBag.Id = new SelectList(db.Subjects, "Id", "Name", result.Id);
-        //    return View(result);
-        //}
+            model.SchoolSession = new SelectList(_ctx.Sessions, "Id", "SessionName", model.SessionId);
+            model.Student = new SelectList(_ctx.Students, "Id", "FirstName", model.StudentId);
+            model.Subject = new SelectList(_ctx.Subjects, "Id", "Name", model.SubjectId);
+            return View(model);
+        }
+
+        // GET: Results/Results/Edit/5
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var result = new UpdateResultViewModel();
+            
+            result.SchoolSessions = new SelectList(await _ctx.Sessions.ToListAsync(), "Id", "SessionName", result.SchoolSessionId);
+            result.Students = new SelectList(await _ctx.Students.ToListAsync(), "Id", "FullName", result.StudentId);
+            result.Subjects = new SelectList(await _ctx.Subjects.ToListAsync(), "Id", "Name", result.SubjectId);
+            return View(result);
+        }
+
+        // POST: Results/Results/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(UpdateResultViewModel result)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await db.ChangeResult(result);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return RedirectToAction("Index");
+            }
+            result.SchoolSessions = new SelectList(_ctx.Sessions, "Id", "SessionName", result.SchoolSessionId);
+            result.Students = new SelectList(_ctx.Students, "Id", "FirstName", result.StudentId);
+            result.Subjects = new SelectList(_ctx.Subjects, "Id", "Name", result.SubjectId);
+            return View(result);
+        }
 
         //// GET: Results/Results/Delete/5
         //public async Task<ActionResult> Delete(int? id)

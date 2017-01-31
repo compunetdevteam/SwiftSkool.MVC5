@@ -10,18 +10,21 @@ using System.Web.Mvc;
 using SwiftSkool.Entities;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.Abstractions;
+using SwiftSkool.MVC5.ViewModels;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
 {
     public class ContinuousAssessmentsController : Controller
     {
         private readonly ICAQueryManager _cqm;
+        private ICACommandManager _ccm;
         private SchoolDb db;
 
-        public ContinuousAssessmentsController(ICAQueryManager cqm, SchoolDb _db)
+        public ContinuousAssessmentsController(ICAQueryManager cqm, SchoolDb _db, ICACommandManager ccm)
         {
             db = _db;
             _cqm = cqm;
+            _ccm = ccm;
         }
 
         // GET: Results/ContinuousAssessments
@@ -48,9 +51,10 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         // GET: Results/ContinuousAssessments/Create
         public ActionResult Create()
         {
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "Position");
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name");
-            return View();
+            var canew = new CreateCAViewModel();
+            canew.Results = new SelectList(db.Results, "Id", "Id");
+            canew.Subject = new SelectList(db.Subjects, "Id", "Name");
+            return View(canew);
         }
 
         // POST: Results/ContinuousAssessments/Create
@@ -58,34 +62,41 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Score,Name,SubjectId,ResultId,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] ContinuousAssessment continuousAssessment)
+        public async Task<ActionResult> Create(CreateCAViewModel cont)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                db.ContinuousAssessment.Add(continuousAssessment);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var result = await db.Results.FindAsync(cont.ResultId);
+                var subject = await db.Subjects.FindAsync(cont.SubjectId);
+
+                var continuousAssessment = new ContinuousAssessment(cont.Score.Value, cont.CAName, subject, result);
+                if (ModelState.IsValid)
+                {
+                    db.ContinuousAssessment.Add(continuousAssessment);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "Position", continuousAssessment.ResultId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", continuousAssessment.SubjectId);
-            return View(continuousAssessment);
+            cont.Results = new SelectList(db.Results, "Id", "Position", cont.ResultId);
+            cont.Subject = new SelectList(db.Subjects, "Id", "Name", cont.SubjectId);
+            return View(cont);
         }
 
         // GET: Results/ContinuousAssessments/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContinuousAssessment continuousAssessment = await db.ContinuousAssessment.FindAsync(id);
-            if (continuousAssessment == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "Position", continuousAssessment.ResultId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", continuousAssessment.SubjectId);
+
+            var continuousAssessment = new CAUpdateViewModel();
+            
+            continuousAssessment.Subject = new SelectList(await db.Subjects.ToListAsync(),
+                "Id", "Name", continuousAssessment.SubjectId);
             return View(continuousAssessment);
         }
 
@@ -94,17 +105,23 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Score,Name,SubjectId,ResultId,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] ContinuousAssessment continuousAssessment)
+        public async Task<ActionResult> Edit(CAUpdateViewModel cont)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(continuousAssessment).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var result = await _ccm.CorrectCA(cont);
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.ResultId = new SelectList(db.Results, "Id", "Position", continuousAssessment.ResultId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", continuousAssessment.SubjectId);
-            return View(continuousAssessment);
+            catch (Exception)
+            {
+
+                throw;
+            }
+            cont.Subject = new SelectList(await db.Subjects.ToListAsync(), "Id", "Name", cont.SubjectId);
+            return View(cont);
         }
 
         // GET: Results/ContinuousAssessments/Delete/5
@@ -127,19 +144,16 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ContinuousAssessment continuousAssessment = await db.ContinuousAssessment.FindAsync(id);
-            db.ContinuousAssessment.Remove(continuousAssessment);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                db.Dispose();
+                await _ccm.DeleteCA(id);
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
