@@ -257,6 +257,7 @@ namespace SwiftSkool.MVC5.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SchoolSessions", t => t.Id)
+                .ForeignKey("dbo.Subjects", t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.TeacherId)
                 .Index(t => t.Id)
                 .Index(t => t.TeacherId);
@@ -316,16 +317,8 @@ namespace SwiftSkool.MVC5.Migrations
                         ModifiedBy = c.String(),
                         UpdatedAt = c.DateTime(),
                         Version = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
-                        ApplicationUser_Id = c.Int(),
-                        Student_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.LessonPlans", t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
-                .ForeignKey("dbo.Students", t => t.Student_Id)
-                .Index(t => t.Id)
-                .Index(t => t.ApplicationUser_Id)
-                .Index(t => t.Student_Id);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ScoreGrades",
@@ -703,6 +696,32 @@ namespace SwiftSkool.MVC5.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.SubjectStudents",
+                c => new
+                    {
+                        Subject_Id = c.Int(nullable: false),
+                        Student_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Subject_Id, t.Student_Id })
+                .ForeignKey("dbo.Subjects", t => t.Subject_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Students", t => t.Student_Id, cascadeDelete: true)
+                .Index(t => t.Subject_Id)
+                .Index(t => t.Student_Id);
+            
+            CreateTable(
+                "dbo.SubjectApplicationUsers",
+                c => new
+                    {
+                        Subject_Id = c.Int(nullable: false),
+                        ApplicationUser_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Subject_Id, t.ApplicationUser_Id })
+                .ForeignKey("dbo.Subjects", t => t.Subject_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
+                .Index(t => t.Subject_Id)
+                .Index(t => t.ApplicationUser_Id);
+            
         }
         
         public override void Down()
@@ -713,7 +732,6 @@ namespace SwiftSkool.MVC5.Migrations
             DropForeignKey("dbo.EntranceExamCandidates", "EntranceExamId", "dbo.EntranceExams");
             DropForeignKey("dbo.Allergies", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.MedicalHistories", "Id", "dbo.Students");
-            DropForeignKey("dbo.Subjects", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.Students", "StateId", "dbo.States");
             DropForeignKey("dbo.Results", "Id", "dbo.Subjects");
             DropForeignKey("dbo.Results", "StudentId", "dbo.Students");
@@ -734,14 +752,17 @@ namespace SwiftSkool.MVC5.Migrations
             DropForeignKey("dbo.Attendances", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Attendances", "ClassId", "dbo.Classes");
             DropForeignKey("dbo.Classes", "FormTeacher_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Subjects", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "StateId", "dbo.States");
             DropForeignKey("dbo.LocalGovernments", "StateId", "dbo.States");
             DropForeignKey("dbo.AspNetUsers", "SchoolId", "dbo.Schools");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.LessonPlans", "TeacherId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Subjects", "Id", "dbo.LessonPlans");
+            DropForeignKey("dbo.LessonPlans", "Id", "dbo.Subjects");
+            DropForeignKey("dbo.SubjectApplicationUsers", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SubjectApplicationUsers", "Subject_Id", "dbo.Subjects");
+            DropForeignKey("dbo.SubjectStudents", "Student_Id", "dbo.Students");
+            DropForeignKey("dbo.SubjectStudents", "Subject_Id", "dbo.Subjects");
             DropForeignKey("dbo.ScoreGrades", "Id", "dbo.Subjects");
             DropForeignKey("dbo.ScoreGrades", "Id", "dbo.Ratings");
             DropForeignKey("dbo.BehaviourActivities", "Id", "dbo.Ratings");
@@ -753,6 +774,10 @@ namespace SwiftSkool.MVC5.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Illnesses", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.Disabilities", "MedicalHistoryId", "dbo.MedicalHistories");
+            DropIndex("dbo.SubjectApplicationUsers", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.SubjectApplicationUsers", new[] { "Subject_Id" });
+            DropIndex("dbo.SubjectStudents", new[] { "Student_Id" });
+            DropIndex("dbo.SubjectStudents", new[] { "Subject_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.EntranceExamSubjects", new[] { "EntranceExamId" });
             DropIndex("dbo.EntranceExamSubjects", new[] { "EntranceExamCandidateId" });
@@ -774,9 +799,6 @@ namespace SwiftSkool.MVC5.Migrations
             DropIndex("dbo.KeyToRatings", new[] { "Id" });
             DropIndex("dbo.BehaviourActivities", new[] { "Id" });
             DropIndex("dbo.ScoreGrades", new[] { "Id" });
-            DropIndex("dbo.Subjects", new[] { "Student_Id" });
-            DropIndex("dbo.Subjects", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Subjects", new[] { "Id" });
             DropIndex("dbo.SchoolSessions", new[] { "SchoolId" });
             DropIndex("dbo.LessonPlans", new[] { "TeacherId" });
             DropIndex("dbo.LessonPlans", new[] { "Id" });
@@ -800,6 +822,8 @@ namespace SwiftSkool.MVC5.Migrations
             DropIndex("dbo.Disabilities", new[] { "MedicalHistoryId" });
             DropIndex("dbo.MedicalHistories", new[] { "Id" });
             DropIndex("dbo.Allergies", new[] { "MedicalHistoryId" });
+            DropTable("dbo.SubjectApplicationUsers");
+            DropTable("dbo.SubjectStudents");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.EntranceExamRegistrations");
             DropTable("dbo.EntranceExamSubjects");

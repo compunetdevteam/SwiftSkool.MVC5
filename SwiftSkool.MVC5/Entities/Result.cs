@@ -56,9 +56,10 @@ namespace SwiftSkool.Entities
 
         }
 
-        public void CalculateTermAverage()
+        public void CalculateTermAverage(SchoolSession session)
         {
-
+            var result = ContinuousAssessments.Where(x => x.Result.SchoolSession == session).Sum(y => y.Score);
+            var subjectsoffered = Student.Subjects.Count;
         }
 
         public void CalculateSubjectAverage()

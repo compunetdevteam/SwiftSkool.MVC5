@@ -30,7 +30,44 @@ namespace SwiftSkool.MVC5.Migrations
             //    );
             //
 
-            if(!ctx.Classes.Any())
+            if (!ctx.Sessions.Any())
+            {
+                var session = new SchoolSession("2016/2017", Term.Second, new DateTime(2017, 01, 15),
+                    new DateTime(2017, 04, 09));
+                var session1 = new SchoolSession("2016/2017", Term.First, new DateTime(2016, 09, 15),
+                    new DateTime(2016, 12, 17));
+                ctx.Sessions.AddOrUpdate(session1);
+                ctx.Sessions.AddOrUpdate(session);
+                ctx.SaveChanges();
+            }
+
+            if (!ctx.Subjects.Any())
+            {
+                var subject1 = new Subject("Mathematics");
+                var subject2 = new Subject("Englist Language");
+                var subject3 = new Subject("Economics");
+                var subject4 = new Subject("Government");
+                var subject5 = new Subject("Accounting");
+                ctx.Subjects.AddOrUpdate(subject1);
+                ctx.Subjects.AddOrUpdate(subject2);
+                ctx.Subjects.AddOrUpdate(subject3);
+                ctx.Subjects.AddOrUpdate(subject4);
+                ctx.Subjects.AddOrUpdate(subject5);
+                ctx.SaveChanges();
+            }
+
+            if (!ctx.Classes.Any())
+            {
+                var class1 = new Class("JSS", "1", "A");
+                var class2 = new Class("JSS", "2", "B");
+                var class3 = new Class("SSS", "3", "C");
+                ctx.Classes.AddOrUpdate(class1);
+                ctx.Classes.AddOrUpdate(class2);
+                ctx.Classes.AddOrUpdate(class3);
+                ctx.SaveChanges();
+            }
+
+            if (!ctx.Classes.Any())
             {
                 var jss1a = new Class("JSS", "1", "A");
                 var jss1b = new Class("JSS", "1", "B");
@@ -3430,7 +3467,6 @@ namespace SwiftSkool.MVC5.Migrations
 
                 ctx.SaveChanges();
             }
-
         }
     }
 }

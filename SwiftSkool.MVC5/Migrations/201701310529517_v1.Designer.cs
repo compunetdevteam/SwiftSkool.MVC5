@@ -13,7 +13,7 @@ namespace SwiftSkool.MVC5.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701181508112_v1"; }
+            get { return "201701310529517_v1"; }
         }
         
         string IMigrationMetadata.Source

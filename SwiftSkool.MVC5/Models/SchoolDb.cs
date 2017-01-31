@@ -131,7 +131,7 @@ namespace SwiftSkool.MVC5.Models
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
                    .HasRequired(l => l.Subject)
-                   .WithRequiredPrincipal(s => s.LessonPlan)
+                   .WithOptional(s => s.LessonPlan)
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
                    .HasRequired(l => l.Teacher)

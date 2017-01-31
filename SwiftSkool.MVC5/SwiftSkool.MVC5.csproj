@@ -419,13 +419,9 @@
     </Compile>
     <Compile Include="Infrastructure\Mapping\AutoMapperInitializer.cs" />
     <Compile Include="Infrastructure\Validation\ValidationActionFilter.cs" />
-    <Compile Include="Migrations\201701181508112_v1.cs" />
-    <Compile Include="Migrations\201701181508112_v1.Designer.cs">
-      <DependentUpon>201701181508112_v1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701240142141_v2.cs" />
-    <Compile Include="Migrations\201701240142141_v2.Designer.cs">
-      <DependentUpon>201701240142141_v2.cs</DependentUpon>
+    <Compile Include="Migrations\201701310541079_v1.cs" />
+    <Compile Include="Migrations\201701310541079_v1.Designer.cs">
+      <DependentUpon>201701310541079_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -566,11 +562,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701181508112_v1.resx">
-      <DependentUpon>201701181508112_v1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701240142141_v2.resx">
-      <DependentUpon>201701240142141_v2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701310541079_v1.resx">
+      <DependentUpon>201701310541079_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

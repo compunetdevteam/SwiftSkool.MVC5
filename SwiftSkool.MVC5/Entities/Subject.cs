@@ -53,9 +53,9 @@ namespace SwiftSkool.Entities
 
         public ScoreGrade ScoreGrade { get; private set; }
 
-        public int? LessonPlanId { get; private set; }
+        public int? LessonPlanId { get; set; }
 
-        public LessonPlan LessonPlan { get; private set; }
+        public LessonPlan LessonPlan { get; set; }
 
         public void SetSubjectDetails(string description, string subjectcode)
         {

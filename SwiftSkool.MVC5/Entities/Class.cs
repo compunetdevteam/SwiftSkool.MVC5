@@ -44,10 +44,5 @@ namespace SwiftSkool.Entities
 
         public IEnumerable<Subject> Subjects { get; private set; }
 
-        //public async Task AsignStudentToClass()
-        //{
-            
-        //}
-
     }
 }
