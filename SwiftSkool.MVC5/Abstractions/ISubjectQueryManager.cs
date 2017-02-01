@@ -15,6 +15,6 @@ namespace SwiftSkool.MVC5.Abstractions
         /// </summary>
         /// <param name="id">int</param>
         /// <returns>Subject</returns>
-        Task<Subject> FindSubjectByIdAsync(int id)
+        Task<Subject> FindSubjectByIdAsync(int id);
     }
 }

@@ -2,18 +2,24 @@
 @model IEnumerable<SwiftSkool.MVC5.ViewModels.ResultViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard - Index";
 }
 
-<h2>Index</h2>
+<h2>Results Dashboard</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Create", "Create", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-list-alt" })
+
+    @Html.ActionLink(" Sort", "Index", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-sort-by-order" })
+
+    @Html.ActionLink(" Filter", "Index", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-filter" })
+
+    @Html.ActionLink(" Create New", "Create", "Results", new { }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Student.FullName)
+            @Html.DisplayNameFor(model => model.Student)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CA)
@@ -33,43 +39,43 @@
         <th>
             @Html.DisplayNameFor(model => model.Position)
         </th>
-        
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CA.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CA.Score)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TermTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TermTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassAverage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ResultId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ResultId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ResultId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CA.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CA.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassAverage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", "Results", new { id = item.ResultId }, new { @class = "btn btn-info glyphicon glyphicon-eye-open" }) |
+                @Html.ActionLink("Delete", "Delete", "Results", new { id = item.ResultId }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
 
 </table>

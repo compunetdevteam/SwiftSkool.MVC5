@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.Abstractions;
+using System.Linq;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
 {
@@ -22,9 +23,27 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         }
 
         // GET: Results/ResultsDashboard
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sort, string filter)
         {
+            //check to see if the sorting is not empty and apply sorting to result
             var results = await _rqm.GetAllResultsAsync();
+
+            if(!string.IsNullOrWhiteSpace(sort))
+            {
+                if (sort == "asc")
+                {
+                    results = results.OrderBy(x => x.Student.FullName).ToList();
+                }else if(sort == "desc")
+                {
+                    results = results.OrderByDescending(x => x.Student.FullName).ToList();
+                }
+            }
+
+            if(!string.IsNullOrWhiteSpace(filter))
+            {
+                results = results.Where(x => x.Student.FirstName.Contains(filter) || x.Student.LastName.Contains(filter)
+                                  || x.CA.Name.Contains(filter) || x.Subject.Name.Contains(filter)).ToList();
+            }
             return View(results);
         }
 
