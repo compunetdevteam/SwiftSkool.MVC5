@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using SwiftSkool.MVC5.ViewModels;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.Abstractions;
+using SwiftSkool.MVC5.Entities;
+using System;
 
-namespace SwiftSkool.BusinessLogic
+namespace SwiftSkool.MVC5.BusinessLogic
 {
     public class SubjectQueryManager : ISubjectQueryManager
     {
@@ -48,6 +50,15 @@ namespace SwiftSkool.BusinessLogic
                                 SubjectCode = s.SubjectCode,
                                 SubjectName = s.Name
                             }).ToListAsync();
+        }
+
+        public async Task<Subject> FindSubjectByIdAsync(int id)
+        {
+            if (id != 0)
+            {
+                return await _db.Subjects.FindAsync(id); 
+            }
+            throw new ArgumentException("The primary key provided is not a valid type!");
         }
     }
 }

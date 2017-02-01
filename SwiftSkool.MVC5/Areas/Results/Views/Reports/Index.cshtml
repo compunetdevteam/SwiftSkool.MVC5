@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SwiftSkool.MVC5.Entities.Report>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Term)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TermEnding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NextTermBegins)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportFinalGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportFinalAverage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResultRemark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrincipalRemark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormTeacherRemark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportGenerationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportFinalTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfStudentsInClass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FormTeacher)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Term)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TermEnding)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NextTermBegins)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportFinalGrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportFinalAverage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResultRemark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrincipalRemark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormTeacherRemark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportGenerationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportFinalTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfStudentsInClass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormTeacher)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

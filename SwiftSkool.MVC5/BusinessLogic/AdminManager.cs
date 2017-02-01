@@ -9,7 +9,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace SwiftSkools.BusinessLogic
+//namespace SwiftSkool.MVC5.BusinessLogic
 //{
 //    public class AdminManager
 //    {

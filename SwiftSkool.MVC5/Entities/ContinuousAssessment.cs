@@ -3,7 +3,7 @@ using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SwiftSkool.Entities
+namespace SwiftSkool.MVC5.Entities
 {
     public class ContinuousAssessment : Entity
     {

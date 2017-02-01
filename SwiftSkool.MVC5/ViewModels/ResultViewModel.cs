@@ -1,5 +1,5 @@
 using AutoMapper;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -189,14 +189,17 @@ namespace SwiftSkool.MVC5.ViewModels
 
     public class CreateResultViewModel
     {
+        [Display(Name ="Student")]
         public int StudentId { get; set; }
 
         public SelectList Student { get; set; }
 
+        [Display(Name = "Subject")]
         public int SubjectId { get; set; }
 
         public SelectList Subject { get; set; }
 
+        [Display(Name ="Session")]
         public int SessionId { get; set; }
 
         public SelectList SchoolSession { get; set; }

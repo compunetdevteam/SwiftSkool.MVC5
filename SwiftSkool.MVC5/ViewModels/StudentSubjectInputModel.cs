@@ -1,4 +1,4 @@
-﻿using SwiftSkool.Entities;
+﻿using SwiftSkool.MVC5.Entities;
 using System;
 
 namespace SwiftSkool.MVC5.ViewModels

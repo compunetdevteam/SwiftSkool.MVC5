@@ -1,4 +1,4 @@
-﻿using SwiftSkool.Entities;
+﻿using SwiftSkool.MVC5.Entities;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SwiftSkool.MVC5.Models;
@@ -241,6 +241,6 @@ namespace SwiftSkool.MVC5.Models
 
         public DbSet<Rating> Ratings { get; set; }
 
-        public System.Data.Entity.DbSet<SwiftSkool.Entities.Club> Clubs { get; set; }
+        public System.Data.Entity.DbSet<SwiftSkool.MVC5.Entities.Club> Clubs { get; set; }
     }
 }

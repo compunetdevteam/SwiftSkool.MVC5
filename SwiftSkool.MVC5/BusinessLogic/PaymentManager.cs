@@ -3,7 +3,7 @@
 //using System.Threading.Tasks;
 //using SwiftSkools.Abstractions;
 
-//namespace SwiftSkools.BusinessLogic
+//namespace SwiftSkool.MVC5.BusinessLogic
 //{
 //    public class PaymentManager : IPaymentManager
 //    {

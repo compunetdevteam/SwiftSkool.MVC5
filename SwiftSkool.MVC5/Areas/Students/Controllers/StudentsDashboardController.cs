@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
 
 namespace SwiftSkool.MVC5.Areas.Students.Controllers
 {
     public class StudentsDashboardController : Controller
     {
-        private SchoolDb db = new SchoolDb();
+        private readonly SchoolDb db;
+
+        public StudentsDashboardController(SchoolDb _db)
+        {
+            db = _db;
+        }
 
         // GET: Students/StudentsDashboard
         public async Task<ActionResult> Index()
@@ -144,15 +149,6 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
             db.Students.Remove(student);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

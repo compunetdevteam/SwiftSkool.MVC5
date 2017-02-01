@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SwiftSkool.Entities
+namespace SwiftSkool.MVC5.Entities
 {
     public class Student : Entity
     {

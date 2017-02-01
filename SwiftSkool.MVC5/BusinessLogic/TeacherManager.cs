@@ -7,7 +7,7 @@
 //using static SchoolPortal.ViewModels.TeacherViewModel;
 //using SwiftSkool.Abstractions;
 
-//namespace SwiftSkool.BusinessLogic
+//namespace SwiftSkool.MVC5.BusinessLogic
 //{
 //    public class TeacherManager : ITeacherManager
 //    {

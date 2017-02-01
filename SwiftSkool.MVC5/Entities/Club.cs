@@ -1,7 +1,7 @@
 ﻿using SwiftSkool.Abstractions;
 using SwiftSkool.MVC5.Models;
 
-namespace SwiftSkool.Entities
+namespace SwiftSkool.MVC5.Entities
 {
     public class Club : Entity
     {

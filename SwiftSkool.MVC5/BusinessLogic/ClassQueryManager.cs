@@ -4,52 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using SwiftSkool.MVC5.Models;
+using SwiftSkool.MVC5.Abstractions;
 
-namespace SwiftSkools.BusinessLogic
+namespace SwiftSkool.MVC5.BusinessLogic
 {
-    public class ClassManager
+    public class ClassQueryManager : IClassQueryManager
     {
         private readonly SchoolDb db;
         
 
 
-        public ClassManager(SchoolDb _db)
+        public ClassQueryManager(SchoolDb _db)
         {
             db = _db;
         }
 
-        
-        //// To display class by level for example Jss1,Jss2 or SS1
-        //public async Task<List<ClassViewModel>> GetClassLevelAsync(int classid)
-        //{
-            
-        //}
-        //// To display class by name; for example Jss1A or Jss1B
-        //public async Task <List<ClassViewModel >>GetClassByName(string name)
-        //{
-            
-        //}
-        //// method to get student class attendance count
-        //public async Task<List<ClassViewModel>>GetStudentClassAttndance(int studentid)
-        //{
-
-        //}
-
-        public async Task<List<ClassViewModel>> GetClassByNameAsync(string classname)
+        /// <summary>
+        /// Return a Class projected into a ClassViewModel
+        /// </summary>
+        /// <param name="classname">string representing the target class</param>
+        /// <returns>ClassViewModel</returns>
+        public async Task<ClassViewModel> GetClassByNameAsync(string classname)
         {
             return await db.Classes
                            .Include(c => c.Students)
                            .Include(c => c.FormTeacher)
-                           .Where(c => c.ClassName.Contains(classname) && 
+                           .Where(c => c.ClassName.Contains(classname) &&
                            c.Level.Contains(classname) && c.Section.Contains(classname))
                            .Select(c => new ClassViewModel
                            {
                                ClassName = c.ClassName + c.Level + c.Section,
                                FormMaster = c.FormTeacher.FirstName + " " + c.FormTeacher.LastName,
                                NumberOfStudentInClass = c.Students.Count()
-                           }).ToListAsync();
+                           }).FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Returns a list of all classes projected to classviewmodels
+        /// </summary>
+        /// <returns>List of ClassViewModels</returns>
         public async Task<List<ClassViewModel>> GetClassesAsync()
         {
             return await db.Classes

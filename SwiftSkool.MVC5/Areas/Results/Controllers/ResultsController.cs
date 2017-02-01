@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
-using SwiftSkool.MVC5.BusinessLogic;
-using SwiftSkool.BusinessLogic;
 using SwiftSkool.MVC5.ViewModels;
-using SwiftSkool.Abstractions;
 using SwiftSkool.MVC5.Abstractions;
 
 namespace SwiftSkool.MVC5.Areas.Results.Controllers
@@ -145,15 +138,15 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         //    return View(result);
         //}
 
-        //// POST: Results/Results/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(int id)
-        //{
-        //    Result result = await db.Results.FindAsync(id);
-        //    db.Results.Remove(result);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
+        // POST: Results/Results/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Result result = await _ctx.Results.FindAsync(id);
+            _ctx.Results.Remove(result);
+            await _ctx.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

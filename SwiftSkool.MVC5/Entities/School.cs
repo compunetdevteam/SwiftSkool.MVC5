@@ -2,7 +2,7 @@
 using SwiftSkool.MVC5.Models;
 using System.Collections.Generic;
 
-namespace SwiftSkool.Entities
+namespace SwiftSkool.MVC5.Entities
 {
     public class School : Entity
     {

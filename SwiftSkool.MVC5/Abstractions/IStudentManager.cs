@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.ViewModels;
 
-namespace SwiftSkool.BusinessLogic
+namespace SwiftSkool.MVC5.BusinessLogic
 {
     public interface IStudentManager
     {

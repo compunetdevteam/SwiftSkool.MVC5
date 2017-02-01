@@ -3,7 +3,7 @@
 //using System.Linq;
 //using System;
 
-//namespace SwiftSkool.BusinessLogic
+//namespace SwiftSkool.MVC5.BusinessLogic
 //{
 //    public class ReportManager : IReportManager
 //    {

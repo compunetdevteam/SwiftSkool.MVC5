@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Attributes;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;

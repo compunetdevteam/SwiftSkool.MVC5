@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 
 namespace SwiftSkool.Abstractions
 {

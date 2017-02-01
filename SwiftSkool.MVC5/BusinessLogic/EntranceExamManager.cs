@@ -1,4 +1,4 @@
-﻿namespace SwiftSkools.BusinessLogic
+﻿namespace SwiftSkool.MVC5.BusinessLogic
 {
     public class EntranceExamManager
     {

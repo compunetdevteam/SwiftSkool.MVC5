@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 
 namespace SwiftSkool.MVC5.ViewModels
 {

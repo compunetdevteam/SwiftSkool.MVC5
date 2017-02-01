@@ -1,7 +1,7 @@
 ﻿using SwiftSkool.Abstractions;
 using System.Collections.Generic;
 
-namespace SwiftSkool.Entities
+namespace SwiftSkool.MVC5.Entities
 {
     public class State : Entity
     {

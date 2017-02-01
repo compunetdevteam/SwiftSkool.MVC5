@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.ViewModels;
 using System.Linq;
 

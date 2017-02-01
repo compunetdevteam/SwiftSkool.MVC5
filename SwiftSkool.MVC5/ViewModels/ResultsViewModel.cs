@@ -1,4 +1,4 @@
-﻿using SwiftSkool.Entities;
+﻿using SwiftSkool.MVC5.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 

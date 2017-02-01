@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.ViewModels;

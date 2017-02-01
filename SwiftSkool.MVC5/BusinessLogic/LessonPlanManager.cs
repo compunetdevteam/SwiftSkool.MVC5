@@ -1,5 +1,5 @@
 ﻿using SwiftSkool.Abstractions;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SwiftSkool.BusinessLogic
+namespace SwiftSkool.MVC5.BusinessLogic
 {
     public class LessonPlanManager //: ILessonPlanManager
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using System.Collections.Generic;
 
 namespace SwiftSkool.MVC5.Models

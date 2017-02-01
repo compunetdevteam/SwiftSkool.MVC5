@@ -7,10 +7,10 @@ using SwiftSkool.Abstractions;
 using AutoMapper.QueryableExtensions;
 using System.Data.Entity;
 using SwiftSkool.MVC5.Models;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Abstractions;
 
-namespace SwiftSkool.BusinessLogic
+namespace SwiftSkool.MVC5.BusinessLogic
 {
     public class ResultQueryManager : IResultQueryManager
     {

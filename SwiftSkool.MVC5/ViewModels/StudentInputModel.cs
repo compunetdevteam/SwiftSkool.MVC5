@@ -1,5 +1,5 @@
 ﻿using System;
-using SwiftSkool.Entities;
+using SwiftSkool.MVC5.Entities;
 using static SwiftSkool.MVC5.ViewModels.SubjectViewModel;
 using System.Collections.Generic;
 
