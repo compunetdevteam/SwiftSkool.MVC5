@@ -122,40 +122,6 @@ namespace SwiftSkool.MVC5.Entities
             }
         }
 
-        private void ValidateDependencies(Address addy, State whereufrom, Attendance uInClass, Class classUin,
-            Club clubUin, Guardian relative, Hostel hostel, MedicalHistory medHis)
-        {
-            if(whereufrom.Id != 0 && whereufrom != null)
-            {
-                StateOfOrigin = whereufrom;
-            }
-            if(uInClass.Id != 0 && uInClass != null)
-            {
-                Attendance = uInClass;
-            }
-            if(classUin.Id != 0 && classUin != null)
-            {
-                Class = classUin;
-            }
-            if(clubUin.Id != 0 && clubUin != null)
-            {
-                Club = clubUin;
-            }
-            if(relative.Id != 0 && relative != null)
-            {
-                Guardian = relative;
-            }
-            if(hostel.Id != 0 && hostel != null)
-            {
-                Hostel = hostel;
-            }
-            if(medHis.Id != 0 && medHis != null)
-            {
-                MedicalHistory = medHis;
-            }
-            throw new ArgumentException("One or more dependencies are null or invalid!");
-        }
-
         public Student PrepareStudent(string firstname, string lastname, string gender, DateTime dob,
             string passport)
         {
@@ -181,9 +147,9 @@ namespace SwiftSkool.MVC5.Entities
 
         }
 
-        //public async void AsignStudentToClass()
-        //{
+        public void AsignStudentToClass()
+        {
 
-        //}
+        }
     }
 }

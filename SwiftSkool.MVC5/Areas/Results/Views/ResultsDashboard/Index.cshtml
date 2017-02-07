@@ -10,11 +10,18 @@
 <p>
     @Html.ActionLink(" Create", "Create", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-list-alt" })
 
-    @Html.ActionLink(" Sort", "Index", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-sort-by-order" })
+    @Html.ActionLink(" Sort", "Index", "ResultsDashboard", new { }, new { @class = "btn btn-success glyphicon glyphicon-sort-by-order", @id = "sort" })
 
-    @Html.ActionLink(" Filter", "Index", "Results", new { }, new { @class = "btn btn-success glyphicon glyphicon-filter" })
+    @Html.ActionLink(" Filter", "Index", "ResultsDashboard", new { }, new { @class = "btn btn-success glyphicon glyphicon-filter", @id = "filterbtn" })
 
     @Html.ActionLink(" Create New", "Create", "Results", new { }, new { @class = "btn btn-success" })
+</p>
+
+<p id="filtertext" style="display: none;">
+    
+        <input type="text" name="filter" placeholder="filter by student, CA or Subject" 
+               class="form-control" id="filterinput"/>
+            <input type="submit" value="Filter" class="btn btn-info glyphicon glyphicon-search" id="filtersubmit" />
 </p>
 <table class="table">
     <tr>
@@ -79,3 +86,20 @@
     }
 
 </table>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            
+            $("#filterbtn").click(function (eve) {
+                eve.preventDefault();
+                $("#filtertext").toggle("slow");
+            });
+
+            //handle the filter form and send filter to relevant controller to act on ajaxly
+            $("#filtersubmit").click(function (eve) {
+                $.get(@Url.Action("Index","ResultDashboard"),{"filter":$("#filterinput").val()})
+            })
+        });
+    </script>
+}

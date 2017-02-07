@@ -23,23 +23,26 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         }
 
         // GET: Results/ResultsDashboard
-        public async Task<ActionResult> Index(string sort, string filter)
+        public async Task<ActionResult> Index(string filter, string sort)
         {
             //check to see if the sorting is not empty and apply sorting to result
             var results = await _rqm.GetAllResultsAsync();
 
-            if(!string.IsNullOrWhiteSpace(sort))
+            if (!string.IsNullOrWhiteSpace(sort))
             {
                 if (sort == "asc")
                 {
                     results = results.OrderBy(x => x.Student.FullName).ToList();
-                }else if(sort == "desc")
+                }
+                else if (sort == "desc")
                 {
                     results = results.OrderByDescending(x => x.Student.FullName).ToList();
                 }
             }
 
-            if(!string.IsNullOrWhiteSpace(filter))
+            //check to see if the sorting is not empty and apply sorting to result
+
+            if (!string.IsNullOrWhiteSpace(filter))
             {
                 results = results.Where(x => x.Student.FirstName.Contains(filter) || x.Student.LastName.Contains(filter)
                                   || x.CA.Name.Contains(filter) || x.Subject.Name.Contains(filter)).ToList();

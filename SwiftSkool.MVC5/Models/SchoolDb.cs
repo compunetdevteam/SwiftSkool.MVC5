@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SwiftSkool.MVC5.Models;
+using System.Collections.Generic;
 
 namespace SwiftSkool.MVC5.Models
 {
@@ -95,7 +96,7 @@ namespace SwiftSkool.MVC5.Models
             //       .WillCascadeOnDelete(false);
             builder.Entity<ContinuousAssessment>()
                    .HasRequired(x => x.Result)
-                   .WithMany(r => r.ContinuousAssessments)
+                   .WithMany(r => (System.Collections.Generic.List<ContinuousAssessment>)r.ContinuousAssessments)
                    .WillCascadeOnDelete(false);
             builder.Entity<Disability>()
                    .HasRequired(d => d.MedicalHistory)
@@ -241,6 +242,6 @@ namespace SwiftSkool.MVC5.Models
 
         public DbSet<Rating> Ratings { get; set; }
 
-        public System.Data.Entity.DbSet<SwiftSkool.MVC5.Entities.Club> Clubs { get; set; }
+        public DbSet<Club> Clubs { get; set; }
     }
 }

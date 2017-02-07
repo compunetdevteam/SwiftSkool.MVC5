@@ -40,9 +40,32 @@ namespace SwiftSkool.MVC5.Entities
 
         public ApplicationUser FormTeacher { get; private set; }
 
-        public IEnumerable<Student> Students { get; private set; }
+        public List<Student> Students { get; private set; }
 
-        public IEnumerable<Subject> Subjects { get; private set; }
+        public IEnumerable<Subject> Subjects
+        {
+            get
+            {
+                return Subjects.ToList();//defensive copy so a copy is return not original.
+            }
+            private set
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Ensure that all students in a class get assigned
+        /// the default number of subjects for their classes
+        /// </summary>
+        public void AssignSubjectsToClass(List<Subject> subjects)
+        {
+            //make sure that the List of Subjects passed is valid
+            //defensive guarding of condition
+            if (!subjects.Any())
+                return;
+            Subjects = subjects;
+        }
 
     }
 }

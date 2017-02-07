@@ -37,43 +37,45 @@ namespace SwiftSkool.MVC5.Entities
 
         public ScoreGrade ScoreGrade { get; private set; }
 
-        public List<ContinuousAssessment> ContinuousAssessments
+        public IEnumerable<ContinuousAssessment> ContinuousAssessments
         {
-            get; private set;
+            get
+            {
+                return ContinuousAssessments.ToList(); //defensive copy of our sequence
+            }
+            private set
+            {
+
+            }
         }
 
         public double TermTotal { get; private set; }
 
         public double ClassAverage { get; private set; }
 
+        public double SubjectAverage { get; private set; }
+
         public string Position { get; private set; }
 
         public string Status { get; private set; }
 
-
-        public void SetStatus()
-        {
-
-        }
-
-        public void CalculateTermAverage(SchoolSession session)
+        public void CalculateClassAverage(SchoolSession session)
         {
             var result = ContinuousAssessments.Where(x => x.Result.SchoolSession == session).Sum(y => y.Score);
-            var subjectsoffered = Student.Subjects.Count;
+            var subjectsoffered = Student.Subjects.Count();
         }
 
         public void CalculateSubjectAverage()
         {
             var scores = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value).Sum(x => x.Score);
             var students = Subject.Students.Count;
-            ClassAverage = scores / students;
+            SubjectAverage = scores / students;
         }
 
-        public void SumCAScoreOverHundred()
+        public void SumCAScore()
         {
             TermTotal = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value)
-                                             .Sum(s => s.Score) / 100;
+                                             .Sum(s => s.Score);
         }
     }
-
 }
