@@ -352,6 +352,7 @@
     <Compile Include="Areas\Results\Controllers\ResultsController.cs" />
     <Compile Include="Areas\Results\Controllers\ResultsDashboardController.cs" />
     <Compile Include="Areas\Results\ResultsAreaRegistration.cs" />
+    <Compile Include="Areas\Students\Controllers\ClassesController.cs" />
     <Compile Include="Areas\Students\Controllers\StudentsDashboardController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
@@ -502,6 +503,11 @@
     <Content Include="Areas\Results\Views\ContinuousAssessments\Edit.cshtml" />
     <Content Include="Areas\Results\Views\Results\Edit.cshtml" />
     <Content Include="Areas\Results\Views\Reports\Index.cshtml" />
+    <Content Include="Areas\Students\Views\Classes\Create.cshtml" />
+    <Content Include="Areas\Students\Views\Classes\Delete.cshtml" />
+    <Content Include="Areas\Students\Views\Classes\Details.cshtml" />
+    <Content Include="Areas\Students\Views\Classes\Edit.cshtml" />
+    <Content Include="Areas\Students\Views\Classes\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
