@@ -1,14 +1,12 @@
 ﻿using SwiftSkool.Abstractions;
 using SwiftSkool.MVC5.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SwiftSkool.MVC5.Entities
 {
     public class Subject : Entity
     {
-        private List<Student> _students;
-
-        private List<ApplicationUser> _teachers;
 
         public Subject(string name)
         {
@@ -16,9 +14,6 @@ namespace SwiftSkool.MVC5.Entities
             {
                 Name = name;
             }
-
-            _students = new List<Student>();
-            _teachers = new List<ApplicationUser>();
         }
 
         private Subject()
@@ -37,7 +32,7 @@ namespace SwiftSkool.MVC5.Entities
         {
             get
             {
-                return _teachers;
+                return Teachers.ToList();
             }
         }
 
@@ -45,7 +40,7 @@ namespace SwiftSkool.MVC5.Entities
         {
             get
             {
-                return _students;
+                return Students.ToList();
             }
         }
 
@@ -53,9 +48,9 @@ namespace SwiftSkool.MVC5.Entities
 
         public ScoreGrade ScoreGrade { get; private set; }
 
-        public int? LessonPlanId { get; set; }
+        public int? LessonPlanId { get; private set; }
 
-        public LessonPlan LessonPlan { get; set; }
+        public LessonPlan LessonPlan { get; private set; }
 
         public void SetSubjectDetails(string description, string subjectcode)
         {
