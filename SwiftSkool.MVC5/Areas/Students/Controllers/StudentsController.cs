@@ -1,4 +1,5 @@
 ﻿using SwiftSkool.MVC5.Abstractions;
+using SwiftSkool.MVC5.BusinessLogic;
 using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
@@ -13,12 +14,13 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
     public class StudentsController : Controller
     {
         private readonly IStudentQueryManager _studQry;
-        private readonly IStudentCommaneManager _studCmd;
+        private readonly IStudentCommandManager _studCmd;
         private readonly SchoolDb _db;
 
-        public StudentsController(IStudentQueryManager stud, SchoolDb db)
+        public StudentsController(IStudentQueryManager stud, SchoolDb db,IStudentCommandManager studCmd)
         {
-            _stud = stud;
+            _studQry = stud;
+            _studCmd = studCmd;
             _db = db;
         }
         // GET: Students/Students
@@ -54,6 +56,8 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
                     var guardian = model.guardian;
 
                     var student = new Student(guardian,firsName,lastName);
+                    _db.Students.Add(student);
+                    _db.SaveChangesAsync();
                 }
 
                 return RedirectToAction("Index");

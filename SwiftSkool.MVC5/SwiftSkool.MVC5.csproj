@@ -368,6 +368,7 @@
     <Compile Include="Abstractions\IResultCommandManager.cs" />
     <Compile Include="Abstractions\IStudentQueryManager.cs" />
     <Compile Include="Abstractions\IClassQueryManager.cs" />
+    <Compile Include="Abstractions\IStudentCommandManager.cs" />
     <Compile Include="BusinessLogic\LessonPlanManager.cs" />
     <Compile Include="BusinessLogic\PaymentManager.cs" />
     <Compile Include="BusinessLogic\ReportManager.cs" />
