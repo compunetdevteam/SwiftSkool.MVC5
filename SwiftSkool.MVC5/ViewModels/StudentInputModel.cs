@@ -2,14 +2,19 @@
 using SwiftSkool.MVC5.Entities;
 using static SwiftSkool.MVC5.ViewModels.SubjectViewModel;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace SwiftSkool.MVC5.ViewModels
 {
     public class CreateStudentInputModel
     {
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
-        public Guardian guardian { get; set; } 
+
+        public int GuardianId { get; set; }
+
+        public SelectList guardian { get; set; } 
     }
     public class GuardianViewModel
     {

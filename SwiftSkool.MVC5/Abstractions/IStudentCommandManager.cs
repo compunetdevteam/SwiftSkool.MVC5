@@ -5,6 +5,6 @@ namespace SwiftSkool.MVC5.Abstractions
 {
     public interface IStudentCommandManager
     {
-        Task RegisterStudent(CreateStudentViewModel model);
+        Task RegisterStudent(CreateStudentInputModel model);
     }
 }
