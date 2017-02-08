@@ -6,6 +6,7 @@ using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -45,28 +46,25 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
 
         // POST: Students/Students/Create
         [HttpPost]
-        public ActionResult Create(CreateStudentInputModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(CreateStudentInputModel model)
         {
            
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    var firsName = model.FirstName;
-                    var lastName = model.LastName;
-                    var guardian = model.guardian;
-
-                    var student = new Student(guardian,firsName,lastName);
-                    _db.Students.Add(student);
-                    _db.SaveChangesAsync();
+                    await _studCmd.RegisterStudent(model);
                 }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception)
             {
-                return View();
+               
             }
+            model.guardian = new SelectList(_db.Guardians,"Id","FullName",model.GuardianId);
+            return View();
         }
 
         // GET: Students/Students/Edit/5
