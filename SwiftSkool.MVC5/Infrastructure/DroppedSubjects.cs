@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SwiftSkool.MVC5.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,20 +8,36 @@ namespace SwiftSkool.MVC5.Infrastructure
 {
     public class DroppedSubjects
     {
-        private ICollection<string> _droppedSubjects;
+        private List<Subject> _droppedSubjects;
+
+        private List<Subject> addedsubs;
 
 
-        public DroppedSubjects()
+        public DroppedSubjects(Subject subject, Subject subject1, Subject subject2)
         {
-            _droppedSubjects = new List<string>();
+            addedsubs = new List<Subject>();
+
+            addedsubs.Add(subject);
+            addedsubs.Add(subject1);
+            addedsubs.Add(subject2);
         }
 
-        public DroppedSubjects AddSubject(string subjectname)
+        /// <summary>
+        /// Requires a subject that a student desires to drop or not offer.
+        /// </summary>
+        /// <param name="subject">Subject</param>
+        /// <returns>DroppedSubjects</returns>
+        public DroppedSubjects AddSubject()
         {
-            _droppedSubjects.Add(subjectname);
+            _droppedSubjects.AddRange(addedsubs);
             return this;
         }
 
+        /// <summary>
+        /// Called when adding subjects is complete. Will throw exception if more than 3 subjects
+        /// are added to DroppedSubjects
+        /// </summary>
+        /// <returns>DroppedSubjects</returns>
         public DroppedSubjects Done()
         {
             if (_droppedSubjects.Count > 3)
@@ -28,7 +45,7 @@ namespace SwiftSkool.MVC5.Infrastructure
             return this;
         }
 
-        public IEnumerable<string> StudentsDroppedSubjects => _droppedSubjects.ToList();
+        public IEnumerable<Subject> StudentsDroppedSubjects => _droppedSubjects.ToList();
 
     }
 }

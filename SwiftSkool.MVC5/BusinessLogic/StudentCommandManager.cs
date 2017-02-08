@@ -1,4 +1,5 @@
 ﻿using SwiftSkool.MVC5.Models;
+using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
