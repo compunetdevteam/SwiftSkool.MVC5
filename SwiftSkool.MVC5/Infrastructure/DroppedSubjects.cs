@@ -10,28 +10,25 @@ namespace SwiftSkool.MVC5.Infrastructure
     {
         private List<Subject> _droppedSubjects;
 
-        private List<Subject> addedsubs;
-
 
         public DroppedSubjects(Subject subject, Subject subject1, Subject subject2)
         {
-            addedsubs = new List<Subject>();
+            _droppedSubjects = new List<Subject>();
 
-            addedsubs.Add(subject);
-            addedsubs.Add(subject1);
-            addedsubs.Add(subject2);
+            _droppedSubjects.Add(subject);
+            _droppedSubjects.Add(subject1);
+            _droppedSubjects.Add(subject2);
         }
 
-        /// <summary>
-        /// Requires a subject that a student desires to drop or not offer.
-        /// </summary>
-        /// <param name="subject">Subject</param>
-        /// <returns>DroppedSubjects</returns>
-        public DroppedSubjects AddSubject()
-        {
-            _droppedSubjects.AddRange(addedsubs);
-            return this;
-        }
+        ///// <summary>
+        ///// Requires a subject that a student desires to drop or not offer.
+        ///// </summary>
+        ///// <param name="subject">Subject</param>
+        ///// <returns>DroppedSubjects</returns>
+        //public DroppedSubjects AddSubject()
+        //{
+        //    return this;
+        //}
 
         /// <summary>
         /// Called when adding subjects is complete. Will throw exception if more than 3 subjects
