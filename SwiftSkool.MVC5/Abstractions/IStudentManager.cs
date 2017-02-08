@@ -11,7 +11,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         int CountAllStudent();
         int CountNumberOfStudents();
         int CountTotalNumberOfStudents(); 
-        Student CreateStudent(StudentInputModel student);
+        Student CreateStudent(CreateStudentInputModel student);
         bool DeleteStudent(string student);
         Task<List<SimpleSubjectViewModel>> GetAllStudentsSubjectsByStudentName(string name);
         Task<List<SimpleSubjectViewModel>> GetAllStudentSubjects(string id);
@@ -36,11 +36,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
         Task<List<StudentViewModel>> SearchStudentByGender(string gender);
         Task<List<StudentGuardianViewModel>> SearchStudentByGuardian(string studentGuardian);
         Task<IEnumerable<Student>> SearchStudentByName(string student);
-        Student SelectStudentSubjects(Student student, StudentInputModel stud = null);
+        Student SelectStudentSubjects(Student student, CreateStudentInputModel stud = null);
         Task<List<StudentViewModel>> StudentInSameHostel(string student);
         Task<List<StudentSubjectViewModel>> StudentSubjectTeacher(string id);
         Task<List<SimpleSubjectViewModel>> SubjectsOfferedByStudent(string id);
-        Task Update(StudentInputModel student);
+        Task Update(CreateStudentInputModel student);
         Task<Student> ViewStudentToDelete(string studentID);
         Task<List<bool>> IfGuadianExist(Student student);
         Student ViewStudentToDelete(int studentID);
