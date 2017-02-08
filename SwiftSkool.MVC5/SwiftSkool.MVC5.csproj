@@ -453,7 +453,6 @@
     <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\ScoresModel.cs" />
-    <Compile Include="ViewModels\StudentInputModel.cs" />
     <Compile Include="ViewModels\StudentResultViewModel.cs" />
     <Compile Include="ViewModels\StudentScoreInputModel.cs" />
     <Compile Include="ViewModels\StudentSubjectInputModel.cs" />

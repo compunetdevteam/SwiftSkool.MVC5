@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace SwiftSkool.MVC5.ViewModels
 {
@@ -52,5 +53,21 @@ namespace SwiftSkool.MVC5.ViewModels
         public string StudentName { get; set; }
         public string SubjectName { get; set; }
         public string TeacherName { get; set; }
+    }
+
+    public class CreateStudentInputModel
+    {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int GuardianId { get; set; }
+
+        public SelectList guardian { get; set; }
+    }
+
+    public class UpdateStudentInputModel
+    {
+
     }
 }
