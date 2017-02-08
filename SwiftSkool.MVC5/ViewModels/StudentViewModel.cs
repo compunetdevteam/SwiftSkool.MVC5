@@ -53,9 +53,4 @@ namespace SwiftSkool.MVC5.ViewModels
         public string SubjectName { get; set; }
         public string TeacherName { get; set; }
     }
-
-    public class CreateStudentViewModel
-    {
-
-    }
 }
