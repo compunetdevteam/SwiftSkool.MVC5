@@ -1,6 +1,9 @@
 ﻿using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SwiftSkool.MVC5.Entities
@@ -8,30 +11,31 @@ namespace SwiftSkool.MVC5.Entities
     public class Student : Entity
     {
 
-        private readonly List<Payment> payment;
-        private readonly List<Result> result;
-        private readonly List<Subject> subjects;
-
         private  Student()
         {
             
         }
 
-        public Student(Address addy, Guardian relative)
+        public Student(Address addy, Guardian relative, string firstname, string lastname)
         {
-            payment = new List<Payment>();
-            result = new List<Result>();
-            subjects = new List<Subject>();
+            if (relative.Id.Value == 0 && addy == null)
+                throw new ArgumentException("Student cannot be created without an address and a Guardian!");
+            Address = addy;
+            Guardian = relative;
+            FirstName = firstname;
+            LastName = lastname;
         }
 
         public Student(Guardian relative, string firstname, string lastname)
         {
-            if(relative.Id != 0 && string.IsNullOrEmpty(firstname) && string.IsNullOrEmpty(lastname))
+            if(relative.Id == 0 && string.IsNullOrEmpty(firstname) && string.IsNullOrEmpty(lastname))
             {
-                Guardian = relative;
-                FirstName = firstname;
-                LastName = lastname;
+                throw new ArgumentException("Student cannot be created with out a Guardian and Ward names!");
             }
+
+            Guardian = relative;
+            FirstName = firstname;
+            LastName = lastname;
         }
         
         public string FirstName { get; private set; }
@@ -40,6 +44,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public string OtherName { get; private set; }
 
+        [NotMapped]
         public string FullName
         {
             get
@@ -98,27 +103,27 @@ namespace SwiftSkool.MVC5.Entities
 
         public Address Address { get;  private set; }
 
-        public List<Subject> Subjects
+        public IEnumerable<Subject> Subjects
         {
             get
             {
-                return subjects;
+                return Subjects.ToList();//defensive copy
             }
         }
 
-        public List<Payment> Payments
+        public IEnumerable<Payment> Payments
         {
             get
             {
-                return payment;
+                return Payments.ToList();//defensive copy
             }
         }
 
-        public List<Result> Results
+        public IEnumerable<Result> Results
         {
             get
             {
-                return result;
+                return Results.ToList(); //defensive copy
             }
         }
 
@@ -147,9 +152,21 @@ namespace SwiftSkool.MVC5.Entities
 
         }
 
-        public void AsignStudentToClass()
+        public void AssignStudentToClass()
         {
 
+        }
+
+        /// <summary>
+        /// Returns the list of subjects a student offers after giving
+        /// DroppedSubjects
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns></returns>
+        public IEnumerable<Subject> DropSubjects(DroppedSubjects ds)
+        { 
+            ds.AddSubject().Done();
+            return Subjects.Except(ds.StudentsDroppedSubjects);
         }
     }
 }
