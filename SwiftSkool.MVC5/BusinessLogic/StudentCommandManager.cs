@@ -38,5 +38,10 @@ namespace SwiftSkool.MVC5.BusinessLogic
                 throw new EntityException("The Student could not be created at this time please try again later!");
             }
         }
+
+        public async Task ChangeStudentDetails(UpdateStudentInputModel model)
+        {
+
+        }
     }
 }
