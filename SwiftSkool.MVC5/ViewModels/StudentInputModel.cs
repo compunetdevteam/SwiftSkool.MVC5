@@ -9,7 +9,7 @@ namespace SwiftSkool.MVC5.ViewModels
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Guardian guardian { get; set; } 
+        public GuardianViewModel guardian { get; set; } 
     }
     public class GuardianViewModel
     {

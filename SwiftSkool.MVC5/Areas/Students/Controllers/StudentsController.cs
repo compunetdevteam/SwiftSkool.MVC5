@@ -26,7 +26,6 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         // GET: Students/Students
         public ActionResult Index()
         {
-            var student = 
             return View();
         }
 
@@ -39,6 +38,8 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         // GET: Students/Students/Create
         public ActionResult Create()
         {
+            var student = new CreateStudentInputModel();
+            student.guardian = new SelectList(_db.Guardians,"FirstName","LastName");
             return View();
         }
 
