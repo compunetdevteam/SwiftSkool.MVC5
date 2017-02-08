@@ -40,8 +40,9 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         public ActionResult Create()
         {
             var student = new CreateStudentInputModel();
+
             student.guardian = new SelectList(_db.Guardians,"Id","FullName");
-            return View();
+            return View(student);
         }
 
         // POST: Students/Students/Create
