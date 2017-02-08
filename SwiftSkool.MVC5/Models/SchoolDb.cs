@@ -96,7 +96,7 @@ namespace SwiftSkool.MVC5.Models
             //       .WillCascadeOnDelete(false);
             builder.Entity<ContinuousAssessment>()
                    .HasRequired(x => x.Result)
-                   .WithMany(r => (System.Collections.Generic.List<ContinuousAssessment>)r.ContinuousAssessments)
+                   .WithMany(r => (List<ContinuousAssessment>)r.ContinuousAssessments)
                    .WillCascadeOnDelete(false);
             builder.Entity<Disability>()
                    .HasRequired(d => d.MedicalHistory)
@@ -152,7 +152,7 @@ namespace SwiftSkool.MVC5.Models
                    .WillCascadeOnDelete(false);
             builder.Entity<Result>()
                    .HasRequired(r => r.Student)
-                   .WithMany(s => s.Results)
+                   .WithMany(s => (List<Result>)s.Results)
                    .HasForeignKey(r => r.StudentId)
                    .WillCascadeOnDelete(false);
             builder.Entity<Result>()

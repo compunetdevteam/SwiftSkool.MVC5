@@ -372,6 +372,7 @@
     <Compile Include="BusinessLogic\ReportManager.cs" />
     <Compile Include="BusinessLogic\ResultCommandManager.cs" />
     <Compile Include="BusinessLogic\ResultQueryManager.cs" />
+    <Compile Include="BusinessLogic\StudentCommandManager.cs" />
     <Compile Include="BusinessLogic\StudentQueryManager.cs" />
     <Compile Include="BusinessLogic\SubjectManager.cs" />
     <Compile Include="BusinessLogic\TeacherManager.cs" />
@@ -421,6 +422,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\DroppedSubjects.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperInitializer.cs" />
     <Compile Include="Infrastructure\Validation\ValidationActionFilter.cs" />
     <Compile Include="Migrations\201701310541079_v1.cs" />
