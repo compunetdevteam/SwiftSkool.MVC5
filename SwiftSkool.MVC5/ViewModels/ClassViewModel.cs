@@ -6,5 +6,17 @@
         public string FormMaster { get; set; }
         public int NumberOfStudentInClass { get; set; }
 
+        public int ClassId { get; set; }
+    }
+
+    public class CreateClassViewModel
+    {
+        public string ClassName { get; set; }
+
+        public string Level { get; set; }
+
+        public string Section { get; set; }
+
+
     }
 }

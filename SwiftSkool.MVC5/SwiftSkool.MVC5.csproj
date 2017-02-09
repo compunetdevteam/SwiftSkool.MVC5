@@ -329,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\Entity.cs" />
+    <Compile Include="Abstractions\IClassCommandManager.cs" />
     <Compile Include="Abstractions\IClassManager.cs" />
     <Compile Include="Abstractions\ICommandRepository.cs" />
     <Compile Include="Abstractions\IEntity.cs" />
@@ -362,6 +363,7 @@
     <Compile Include="BusinessLogic\AdminManager.cs" />
     <Compile Include="BusinessLogic\CACommandManager.cs" />
     <Compile Include="BusinessLogic\CAQueryManager.cs" />
+    <Compile Include="BusinessLogic\ClassCommandManager.cs" />
     <Compile Include="BusinessLogic\ClassQueryManager.cs" />
     <Compile Include="BusinessLogic\EntranceExamManager.cs" />
     <Compile Include="Abstractions\IResultQueryManager.cs" />
