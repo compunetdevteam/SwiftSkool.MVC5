@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,7 @@ namespace SwiftSkool.MVC5.ViewModels
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
+        [Display(Name ="Guardian")]
         public int GuardianId { get; set; }
 
         public SelectList guardian { get; set; }

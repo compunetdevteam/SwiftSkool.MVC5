@@ -42,14 +42,23 @@ namespace SwiftSkool.MVC5.BusinessLogic
         /// </summary>
         /// <param name="name">Student's FirstName or LastName</param>
         /// <returns>List of StudentViewModel</returns>
-        public async Task<IEnumerable<Student>> GetStudentsByNameAsync(string name)
+        public async Task<List<StudentViewModel>> GetStudentsAsync()
         {
-            return await db.Students.Where(s => s.FirstName.Contains(name) || 
-                                                s.LastName.Contains(name))
-                                                .OrderBy(o => o.FirstName)
-                                                .Skip(0)
-                                                .Take(20)
-                                                .ToListAsync();
+            return await db.Students.Select(s => new StudentViewModel
+                                    {
+                                        AdmissionNumber = s.AdmissionNumber,
+                                        FirstName = s.FirstName,
+                                        LastName = s.LastName,
+                                        Hostel = s.Hostel.Name,
+                                        Class = s.Class.ClassName,
+                                        AdmissionDate = s.AdmissionDate,
+                                        //FullName = s.FirstName+ " "+s.LastName,
+                                        id = s.Id.Value.ToString()
+                                    })
+                                    .OrderBy(o => o.FirstName)
+                                    .Skip(0)
+                                    .Take(20)
+                                    .ToListAsync();
         }
 
         public async Task<List<StudentViewModel>> GetStudentsByAgeAscendingAsync()
@@ -67,7 +76,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
-                               FullName = s.FullName,
+                               //FullName = s.FullName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }
@@ -91,7 +100,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
-                               FullName = s.FullName,
+                               //FullName = s.FullName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }

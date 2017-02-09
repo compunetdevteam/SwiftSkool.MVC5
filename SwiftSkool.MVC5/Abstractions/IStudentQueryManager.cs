@@ -23,7 +23,7 @@ namespace SwiftSkool.MVC5.Abstractions
         Task<List<StudentAcademicViewModel>> GetStudentsByClass(string classname);
         Task<List<StudentViewModel>> GetStudentsByGender(string gender);
         Task<List<StudentGuardianViewModel>> GetStudentsByGuardianAsync(string guardian);
-        Task<IEnumerable<Student>> GetStudentsByNameAsync(string name);
+        Task<List<StudentViewModel>> GetStudentsAsync();
         Task<List<StudentViewModel>> GetStudentsInSameHostelAsync(string hostelName);
     }
 }
