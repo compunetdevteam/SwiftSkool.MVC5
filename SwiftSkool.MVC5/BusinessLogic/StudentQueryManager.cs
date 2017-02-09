@@ -42,12 +42,23 @@ namespace SwiftSkool.MVC5.BusinessLogic
         /// </summary>
         /// <param name="name">Student's FirstName or LastName</param>
         /// <returns>List of StudentViewModel</returns>
-        public async Task<IEnumerable<Student>> GetStudentsAsync()
+        public async Task<IEnumerable<StudentViewModel>> GetStudentsAsync()
         {
             return await db.Students.OrderBy(o => o.FirstName)
-                                                .Skip(0)
-                                                .Take(20)
-                                                .ToListAsync();
+                                    .Select(s => new StudentViewModel
+                                    {
+                                        AdmissionNumber = s.AdmissionNumber,
+                                        FirstName = s.FirstName,
+                                        LastName = s.LastName,
+                                        Hostel = s.Hostel.Name,
+                                        Class = s.Class.ClassName,
+                                        AdmissionDate = s.AdmissionDate,
+                                        FullName = s.FullName,
+                                        id = s.Id.Value.ToString()
+                                    })
+                                    .Skip(0)
+                                    .Take(20)
+                                    .ToListAsync();
         }
 
         public async Task<List<StudentViewModel>> GetStudentsByAgeAscendingAsync()

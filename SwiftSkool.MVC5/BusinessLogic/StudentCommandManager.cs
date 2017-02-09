@@ -43,6 +43,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         {
             var student = await _db.Students.FindAsync(model.StudentId);
             var studentclass = await _db.Classes.FindAsync(model.ClassId);
+            var club = await _db.Clubs.FindAsync(model.ClubId);
         }
     }
 }
