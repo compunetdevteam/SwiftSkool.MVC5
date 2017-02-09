@@ -44,6 +44,8 @@ namespace SwiftSkool.MVC5.Models
 
         public string FirstName { get; set; }
 
+        public string FullName { get; set; }
+
         public string LastName { get; set; }
 
         public string OtherNames { get; set; }

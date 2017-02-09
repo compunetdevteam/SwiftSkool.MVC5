@@ -24,7 +24,6 @@ namespace SwiftSkool.MVC5.Entities
 
         public string LastName { get; private set; }
 
-        [NotMapped]
         public string FullName => FirstName + " " + OtherName + " " + LastName;
 
         public string OtherName { get; private set; }

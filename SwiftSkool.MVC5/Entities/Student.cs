@@ -44,7 +44,6 @@ namespace SwiftSkool.MVC5.Entities
 
         public string OtherName { get; private set; }
 
-        [NotMapped]
         public string FullName
         {
             get
