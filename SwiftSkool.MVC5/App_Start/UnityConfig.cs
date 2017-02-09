@@ -48,6 +48,9 @@ namespace SwiftSkool.MVC5.App_Start
             container.RegisterType<ICACommandManager, CACommandManager>();
             container.RegisterType<IStudentQueryManager, StudentQueryManager>();
             container.RegisterType<IStudentCommandManager, StudentCommandManager>();
+            container.RegisterType<IClassQueryManager, ClassQueryManager>();
+            container.RegisterType<IClassCommandManager, ClassCommandManager>();
+            
         }
     }
 }
