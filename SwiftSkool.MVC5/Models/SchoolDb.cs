@@ -114,7 +114,7 @@ namespace SwiftSkool.MVC5.Models
                    .HasForeignKey(e => e.EntranceExamCandidateId)
                    .WillCascadeOnDelete(false);
             builder.Entity<Guardian>()
-                   .HasMany(g => g.Students)
+                   .HasMany(g => (List<Student>)g.Students)
                    .WithRequired(s => s.Guardian)
                    .HasForeignKey(s => s.GuardianId)
                    .WillCascadeOnDelete(false);
