@@ -353,6 +353,7 @@
     <Compile Include="Areas\Results\Controllers\ResultsDashboardController.cs" />
     <Compile Include="Areas\Results\ResultsAreaRegistration.cs" />
     <Compile Include="Areas\Students\Controllers\ClassesController.cs" />
+    <Compile Include="Areas\Students\Controllers\GuardiansController.cs" />
     <Compile Include="Areas\Students\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Students\Controllers\StudentsDashboardController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
@@ -442,8 +443,10 @@
     <Compile Include="Models\SchoolDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\CAViewModel.cs" />
     <Compile Include="ViewModels\ClassViewModel.cs" />
+    <Compile Include="ViewModels\GuardianViewModel.cs" />
     <Compile Include="ViewModels\HostelViewModel.cs" />
     <Compile Include="ViewModels\LessonPlanInputModel.cs" />
     <Compile Include="ViewModels\LessonPlanViewModel.cs" />
@@ -513,6 +516,11 @@
     <Content Include="Areas\Students\Views\Classes\Index.cshtml" />
     <Content Include="Areas\Students\Views\Students\Create.cshtml" />
     <Content Include="Areas\Students\Views\Students\Index.cshtml" />
+    <Content Include="Areas\Students\Views\Guardians\Create.cshtml" />
+    <Content Include="Areas\Students\Views\Guardians\Delete.cshtml" />
+    <Content Include="Areas\Students\Views\Guardians\Details.cshtml" />
+    <Content Include="Areas\Students\Views\Guardians\Edit.cshtml" />
+    <Content Include="Areas\Students\Views\Guardians\Index.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -573,6 +581,9 @@
     <Folder Include="Areas\Results\Models\" />
     <Folder Include="Areas\Students\Models\" />
     <Folder Include="Infrastructure\Extensions\" />
+    <Folder Include="Views\AddressViewModel\" />
+    <Folder Include="Views\CreateGuardianInputModel\" />
+    <Folder Include="Views\GuardianViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

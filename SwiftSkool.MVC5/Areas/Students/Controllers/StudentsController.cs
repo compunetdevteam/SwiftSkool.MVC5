@@ -25,8 +25,9 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
             _db = db;
         }
         // GET: Students/Students
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            var students = await _studQry
             return View();
         }
 
