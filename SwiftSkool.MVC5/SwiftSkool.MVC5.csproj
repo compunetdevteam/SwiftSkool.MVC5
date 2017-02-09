@@ -332,6 +332,8 @@
     <Compile Include="Abstractions\IClassManager.cs" />
     <Compile Include="Abstractions\ICommandRepository.cs" />
     <Compile Include="Abstractions\IEntity.cs" />
+    <Compile Include="Abstractions\IGuardianCommandManager.cs" />
+    <Compile Include="Abstractions\IGuardianQueryManager.cs" />
     <Compile Include="Abstractions\ILessonPlanManager.cs" />
     <Compile Include="Abstractions\IPaymentManager.cs" />
     <Compile Include="Abstractions\IReportManager.cs" />
@@ -370,6 +372,8 @@
     <Compile Include="Abstractions\IStudentQueryManager.cs" />
     <Compile Include="Abstractions\IClassQueryManager.cs" />
     <Compile Include="Abstractions\IStudentCommandManager.cs" />
+    <Compile Include="BusinessLogic\GuardianCommandManager.cs" />
+    <Compile Include="BusinessLogic\GuardianQueryManager.cs" />
     <Compile Include="BusinessLogic\LessonPlanManager.cs" />
     <Compile Include="BusinessLogic\PaymentManager.cs" />
     <Compile Include="BusinessLogic\ReportManager.cs" />
