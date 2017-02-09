@@ -165,7 +165,7 @@ namespace SwiftSkool.MVC5.Entities
         /// <returns></returns>
         public IEnumerable<Subject> DropSubjects(DroppedSubjects ds)
         { 
-            ds.AddSubject().Done();
+            ds.Done();
             return Subjects.Except(ds.StudentsDroppedSubjects);
         }
     }

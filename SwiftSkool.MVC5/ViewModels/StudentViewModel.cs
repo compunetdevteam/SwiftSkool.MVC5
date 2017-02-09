@@ -69,6 +69,65 @@ namespace SwiftSkool.MVC5.ViewModels
 
     public class UpdateStudentInputModel
     {
+        public int StudentId { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string OtherName { get; set; }
+
+        public int Age { get; set; }
+
+
+        public DateTime DateOfBirth { get; set; }
+
+        public string Email { get; set; }
+
+        public DateTime AdmissionDate { get; set; }
+
+        public string Gender { get; set; }
+
+        public string StudentPassport { get; set; }
+
+        public string AdmissionNumber { get; set; }
+
+        public string Country { get; set; }
+
+        public bool Active { get; set; }
+
+        public int ClassId { get; set; }
+
+        public SelectList Class { get; set; }
+
+        public int? ClubId { get; set; }
+
+        public SelectList Club { get; set; }
+
+        public int GuardianId { get; set; }
+
+        public SelectList Guardian { get; set; }
+
+        public int HostelId { get; set; }
+
+        public SelectList Hostel { get; set; }
+
+        public int MedicalHistoryId { get; set; }
+
+        public SelectList MedicalHistory { get; set; }
+
+        public int StateId { get; set; }
+
+        public SelectList StateOfOrigin { get; set; }
+
+        public string Street1 { get; set; }
+
+        public string Street2 { get; set; }
+
+        public string City { get; set; }
+
+        public IEnumerable<SelectList> Subjects { get; set; }
+
+        public IEnumerable<SelectList> Payments { get; set; }
     }
 }

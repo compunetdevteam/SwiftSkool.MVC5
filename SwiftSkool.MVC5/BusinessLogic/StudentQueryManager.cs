@@ -42,11 +42,9 @@ namespace SwiftSkool.MVC5.BusinessLogic
         /// </summary>
         /// <param name="name">Student's FirstName or LastName</param>
         /// <returns>List of StudentViewModel</returns>
-        public async Task<IEnumerable<Student>> GetStudentsByNameAsync(string name)
+        public async Task<IEnumerable<Student>> GetStudentsAsync()
         {
-            return await db.Students.Where(s => s.FirstName.Contains(name) || 
-                                                s.LastName.Contains(name))
-                                                .OrderBy(o => o.FirstName)
+            return await db.Students.OrderBy(o => o.FirstName)
                                                 .Skip(0)
                                                 .Take(20)
                                                 .ToListAsync();

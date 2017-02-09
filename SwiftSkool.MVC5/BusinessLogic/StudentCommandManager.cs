@@ -41,7 +41,8 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
         public async Task ChangeStudentDetails(UpdateStudentInputModel model)
         {
-            //var student = await _db.Students.FindAsync(model.StudentId);
+            var student = await _db.Students.FindAsync(model.StudentId);
+            var studentclass = await _db.Classes.FindAsync(model.ClassId);
         }
     }
 }
