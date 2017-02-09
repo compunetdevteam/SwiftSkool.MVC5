@@ -13,8 +13,7 @@ namespace SwiftSkool.MVC5.Entities
 
         }
 
-        public Address(Student student, string streetname, string nameofarea, string city,
-            State state)
+        public Address(string streetname, string nameofarea, string city)
         {
             
         }
