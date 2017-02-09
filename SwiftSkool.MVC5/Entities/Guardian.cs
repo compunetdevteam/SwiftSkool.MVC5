@@ -38,13 +38,7 @@ namespace SwiftSkool.MVC5.Entities
         public Relationship Relationship { get; private set; }
 
 
-        public IEnumerable<Student> Students
-        {
-            get
-            {
-                return Students.ToList(); //defensive copy
-            }
-        }
+        public List<Student> Students { get; private set; }
 
         private void ValidateDependencies(string firstname, string lname, string phone, Address addy)
         {
