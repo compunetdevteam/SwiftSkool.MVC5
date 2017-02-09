@@ -53,7 +53,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                         Hostel = s.Hostel.Name,
                                         Class = s.Class.ClassName,
                                         AdmissionDate = s.AdmissionDate,
-                                        FullName = s.FullName,
+                                        FullName = s.FirstName+ " "+s.LastName,
                                         id = s.Id.Value.ToString()
                                     })
                                     .Skip(0)
