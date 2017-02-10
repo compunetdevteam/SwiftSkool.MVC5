@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using SwiftSkool.MVC5.ViewModels;
 using System.Threading.Tasks;
-using AutoMapper;
 using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
+using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 
 namespace SwiftSkool.MVC5.BusinessLogic
 {
@@ -26,9 +28,25 @@ namespace SwiftSkool.MVC5.BusinessLogic
             await _db.SaveChangesAsync();
         }
 
-        public Task UpdateGuardianDetails(UpdateGuardianVM model)
+        public async Task UpdateGuardianDetails(UpdateGuardianVM model)
         {
+            var guardian = await _db.Guardians.FindAsync(model.GuardianId);
 
+            if (string.IsNullOrWhiteSpace(model.FirstName) || string.IsNullOrWhiteSpace(model.PhoneNumber)
+                || string.IsNullOrWhiteSpace(model.StreetName))
+                throw new ArgumentException("Dunno how you want to update a guardian with some field empty!");
+            var addy = guardian.Address.UpdateAddress(model.StreetName, model.NameOfArea, model.City, model.HouseNumber);
+
+            try
+            {
+                guardian.UpdateGuardian(model);
+                _db.Entry(guardian).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw ex;
+            }
         }
 
         private Guardian MapGuardian(GuardianViewModel model)

@@ -11,5 +11,6 @@ namespace SwiftSkool.MVC5.Abstractions
     {
         Task<List<GuardianIndexVM>> ShowAllGuardians();
         Task<GuardianDetailsVM> ShowGuardianDetails(int? id);
+        Task<UpdateGuardianVM> GetGuardianToUpdate(int? id);
     }
 }

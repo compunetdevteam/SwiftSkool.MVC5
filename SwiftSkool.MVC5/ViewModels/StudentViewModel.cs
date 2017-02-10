@@ -14,7 +14,7 @@ namespace SwiftSkool.MVC5.ViewModels
         public string AdmissionNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string FullName { get; set; }
+        public string OtherName { get; set; }
         public string Hostel { get; set; }
         public string Class { get; set; }
         public DateTime AdmissionDate { get; set; }

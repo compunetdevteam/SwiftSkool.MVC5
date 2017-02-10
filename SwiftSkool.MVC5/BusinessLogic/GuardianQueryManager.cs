@@ -20,6 +20,25 @@ namespace SwiftSkool.MVC5.BusinessLogic
             _db = db;
         }
 
+        public async Task<UpdateGuardianVM> GetGuardianToUpdate(int? id)
+        {
+            return await _db.Guardians.Where(x => x.Id.Value == id.Value)
+                            .Select(g => new UpdateGuardianVM
+                            {
+                                FirstName = g.FirstName,
+                                LastName = g.LastName,
+                                PhoneNumber = g.PhoneNumber,
+                                Occupation = g.Occupation,
+                                OtherNames = g.OtherName,
+                                City = g.Address.City,
+                                GuardianId = g.Id.Value,
+                                HouseNumber = g.Address.HouseNumber,
+                                NameOfArea = g.Address.NameOfArea,
+                                StreetName = g.Address.StreetName,
+                                RelationshipToStudent = g.Relationship
+                            }).FirstOrDefaultAsync();
+        }
+
         public async Task<List<GuardianIndexVM>> ShowAllGuardians()
         {
             return await _db.Guardians.Select(g => new GuardianIndexVM
@@ -49,12 +68,13 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                         AdmissionNumber = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionNumber,
                                         FirstName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().FirstName,
                                         LastName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().LastName,
-                                        FullName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().FullName,
+                                        OtherName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().OtherName,
                                         Class = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().Class.ClassName,
                                         Hostel = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().Hostel.Name
                                     }
                                 },
-                                Address = g.Address
+                                Address = g.Address.HouseNumber+" "+g.Address.StreetName+", "+
+                                          g.Address.NameOfArea+", "+g.Address.City
                             }).FirstOrDefaultAsync();
 
 

@@ -32,7 +32,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     Hostel = s.Hostel.Name,
                                     Class = s.Class.ClassName,
                                     AdmissionDate = s.AdmissionDate,
-                                    FullName = s.FullName,
+                                    OtherName = s.OtherName,
                                     id = s.Id.Value.ToString()
                                 }).SingleOrDefaultAsync();
         }
@@ -130,7 +130,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
-                               FullName = s.FullName,
+                               OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }
@@ -159,7 +159,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             Class = s.Class.ClassName,
                             Hostel = s.Hostel.Name,
                             AdmissionDate = s.AdmissionDate,
-                            FullName = s.FullName,
+                            OtherName = s.OtherName,
                             id = s.Id.Value.ToString()
                         }).ToListAsync();
         }
@@ -203,7 +203,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Class = s.Class.ClassName,
                                 Hostel = s.Hostel.Name,
                                AdmissionDate = s.AdmissionDate,
-                               FullName = s.FullName,
+                               OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }
@@ -222,7 +222,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 AdmissionNumber = s.AdmissionNumber,
                                 Class = s.Class.ClassName,
                                 Hostel = s.Hostel.Name,
-                               FullName = s.FullName,
+                               OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }
@@ -254,7 +254,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                Hostel = s.Hostel.Name,
                                Class = s.Class.ClassName + s.Class.Section,
                                AdmissionDate = s.AdmissionDate,
-                               FullName = s.FullName,
+                               OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
         }

@@ -230,7 +230,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                             FirstName = r.Student.FirstName,
                                             LastName = r.Student.LastName,
 
-                                            FullName = r.Student.FirstName+" "+r.Student.LastName,
+                                            OtherName = r.Student.OtherName,
                                             Hostel = r.Student.Hostel.Name
                                         },
                                         CA = new CAViewModel
@@ -540,7 +540,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                           r.Student.Class.Level + r.Student.Class.Section,
                                     FirstName = r.Student.FirstName,
                                     LastName = r.Student.LastName,
-                                    FullName = r.Student.FirstName + " " + r.Student.LastName,
+                                    OtherName = r.Student.OtherName,
                                     Hostel = r.Student.Hostel.Name
                                 },
                                 Subject = new SimpleSubjectViewModel

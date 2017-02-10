@@ -12,7 +12,5 @@ namespace SwiftSkool.MVC5.Abstractions
         Task RegisterGuardian(GuardianViewModel model);
 
         Task UpdateGuardianDetails(UpdateGuardianVM model);
-
-        Task RemoveGuardian(int? id);
     }
 }

@@ -28,6 +28,15 @@ namespace SwiftSkool.MVC5.Entities
 
         public string City { get; private set; }
 
+        public Address UpdateAddress(string streetname, string noa, string city, string hn)
+        {
+            NameOfArea = noa;
+            StreetName = streetname;
+            City = city;
+            HouseNumber = hn;
+            return this;
+        }
+
 
     }
 }

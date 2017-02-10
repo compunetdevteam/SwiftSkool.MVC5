@@ -32,11 +32,11 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
             {
                 if (sort == "asc")
                 {
-                    results = results.OrderBy(x => x.Student.FullName).ToList();
+                    results = results.OrderBy(x => x.Student.FirstName).ToList();
                 }
                 else if (sort == "desc")
                 {
-                    results = results.OrderByDescending(x => x.Student.FullName).ToList();
+                    results = results.OrderByDescending(x => x.Student.FirstName).ToList();
                 }
             }
 

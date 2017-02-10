@@ -1,4 +1,5 @@
 ﻿using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public Guardian(string firstname, string lastname, Address address, string phonenumber)
         {
-            ValidateDependencies(firstname, lastname, phonenumber, address);
+            ValidateGuardian(firstname, lastname, phonenumber, address);
         }
 
         public string FirstName { get; private set; }
@@ -39,7 +40,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public List<Student> Students { get; private set; }
 
-        private void ValidateDependencies(string firstname, string lname, string phone, Address addy)
+        private void ValidateGuardian(string firstname, string lname, string phone, Address addy)
         {
             validatestring(firstname);
             validatestring(lname);
@@ -59,6 +60,24 @@ namespace SwiftSkool.MVC5.Entities
             if (string.IsNullOrWhiteSpace(astring))
                 throw new ArgumentException("Invalid Arguments are not allowed!");
             return;
+        }
+
+        public void UpdateGuardian(UpdateGuardianVM model)
+        {
+            validatestring(model.FirstName);
+            validatestring(model.LastName);
+            validatestring(model.PhoneNumber);
+            validatestring(model.Occupation);
+            validatestring(model.City);
+            validatestring(model.StreetName);
+            validatestring(model.HouseNumber);
+            validatestring(model.NameOfArea);
+
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            PhoneNumber = model.PhoneNumber;
+            Occupation = model.Occupation;
+            Relationship = model.RelationshipToStudent;
         }
     }
 }
