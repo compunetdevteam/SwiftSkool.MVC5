@@ -46,7 +46,6 @@ namespace SwiftSkool.MVC5.Entities
             validatestring(phone);
             validatestring(addy.StreetName);
             validatestring(addy.NameOfArea);
-            validatestring(addy.HouseNumber);
             validatestring(addy.City);
 
             FirstName = firstname;
@@ -58,8 +57,8 @@ namespace SwiftSkool.MVC5.Entities
         private void validatestring(string astring)
         {
             if (string.IsNullOrWhiteSpace(astring))
-                return;
-            throw new ArgumentException("Invalid Arguments are not allowed!");
+                throw new ArgumentException("Invalid Arguments are not allowed!");
+            return;
         }
     }
 }

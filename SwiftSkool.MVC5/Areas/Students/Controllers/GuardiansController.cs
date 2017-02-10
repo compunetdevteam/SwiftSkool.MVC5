@@ -62,22 +62,13 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(GuardianViewModel guardian)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _gcm.RegisterGuardian(guardian);
-                    return RedirectToAction("Index");
+            if (!ModelState.IsValid)
+                return View(guardian);
 
-                }
-                catch (Exception)
-                {
+            await _gcm.RegisterGuardian(guardian);
+            return RedirectToAction("Index");
 
-                    throw;
-                }
-            }
-
-            return View(guardian);
+            
         }
 
         //// GET: Students/Guardians/Edit/5

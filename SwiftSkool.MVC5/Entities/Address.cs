@@ -15,7 +15,9 @@ namespace SwiftSkool.MVC5.Entities
 
         public Address(string streetname, string nameofarea, string city)
         {
-            
+            StreetName = streetname;
+            NameOfArea = nameofarea;
+            City = city;
         }
 
         public string NameOfArea { get; private set; }

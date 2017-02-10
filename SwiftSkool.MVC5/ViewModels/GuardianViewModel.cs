@@ -66,7 +66,9 @@ namespace SwiftSkool.MVC5.ViewModels
 
         public IEnumerable<StudentViewModel> RelatedStudents { get; set; }
 
-        public Address Address { get; set; }
+        public string Address { get; set; }
+
+        public int GuardianId { get; set; }
     }
 
     public class UpdateGuardianVM
