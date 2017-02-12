@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwiftSkool.Abstractions
+namespace SwiftSkool.MVC5.Abstractions
 {
     public interface IEntity
     {

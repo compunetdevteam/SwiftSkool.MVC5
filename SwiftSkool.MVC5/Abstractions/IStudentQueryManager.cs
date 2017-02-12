@@ -6,10 +6,11 @@ using SwiftSkool.MVC5.ViewModels;
 
 namespace SwiftSkool.MVC5.Abstractions
 {
-    public interface IStudentQueryManager
+    public interface IStudentQueryManager : IManager<Student>
     {
         int CountNumberOfStudents();
         int CountTotalNumberOfStudents();
+        Task<UpdateStudentVM> GetStudentToUpdate(int? id);
         Task<List<SimpleSubjectViewModel>> GetAllStudentsSubjectsByStudentName(string name);
         Task<List<SimpleSubjectViewModel>> GetAllStudentSubjects(int id);
         Task<List<StudentSubjectViewModel>> GetAllStudentSubjectTeacher(int id);

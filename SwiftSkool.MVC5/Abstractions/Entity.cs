@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SwiftSkool.Abstractions
+namespace SwiftSkool.MVC5.Abstractions
 {
     public abstract class Entity : IEntity
     {

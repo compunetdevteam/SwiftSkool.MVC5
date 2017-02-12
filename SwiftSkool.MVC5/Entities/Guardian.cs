@@ -1,10 +1,7 @@
-﻿using SwiftSkool.Abstractions;
+﻿using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace SwiftSkool.MVC5.Entities
 {

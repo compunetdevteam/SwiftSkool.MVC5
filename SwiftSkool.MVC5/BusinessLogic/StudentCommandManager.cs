@@ -20,9 +20,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
         public async Task RegisterStudent(CreateStudentInputModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.FirstName) && string.IsNullOrWhiteSpace(model.LastName)
+            if (string.IsNullOrWhiteSpace(model.FirstName) &&
+                string.IsNullOrWhiteSpace(model.LastName)
                 && model.GuardianId == 0)
-                throw new ArgumentException("Please provide valid values to create a student with!");
+                throw new 
+                    ArgumentException("Please provide valid values to create a student with!");
 
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
 
@@ -39,11 +41,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
             }
         }
 
-        public async Task ChangeStudentDetails(UpdateStudentInputModel model)
+        public async Task ChangeStudentDetails(UpdateStudentVM model)
         {
             var student = await _db.Students.FindAsync(model.StudentId);
             var studentclass = await _db.Classes.FindAsync(model.ClassId);
             var club = await _db.Clubs.FindAsync(model.ClubId);
+            var hostel = await _db.Hostels.FindAsync(model.HostelId);
+            var guardian = await _db.Guardians.FindAsync(model.GuardianId);
+            var state = await _db.States.FindAsync(model.StateId);
         }
     }
 }

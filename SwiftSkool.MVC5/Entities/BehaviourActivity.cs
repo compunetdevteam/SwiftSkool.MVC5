@@ -1,4 +1,5 @@
 ﻿using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Abstractions;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

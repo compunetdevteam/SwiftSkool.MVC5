@@ -1,4 +1,5 @@
-﻿using SwiftSkool.MVC5.Abstractions;
+﻿using AutoMapper;
+using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.BusinessLogic;
 using SwiftSkool.MVC5.Entities;
 using SwiftSkool.MVC5.Models;
@@ -6,6 +7,7 @@ using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +44,7 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         {
             var student = new CreateStudentInputModel();
 
-            student.guardian = new SelectList(_db.Guardians,"Id","FullName");
+            student.Guardian = new SelectList(_db.Guardians,"Id","FullName");
             return View(student);
         }
 
@@ -54,30 +56,32 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
            
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     await _studCmd.RegisterStudent(model);
                 }
 
                 return RedirectToAction("Index");
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-               
+                model.Guardian = new SelectList(_db.Guardians, "Id", "FullName", model.GuardianId);
+                return View(model);
             }
-            model.guardian = new SelectList(_db.Guardians,"Id","FullName",model.GuardianId);
-            return View();
         }
 
         // GET: Students/Students/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var studentvm = await _studQry.GetStudentToUpdate(id);
+            return View(studentvm);
         }
 
         // POST: Students/Students/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UpdateStudentVM model)
         {
             try
             {

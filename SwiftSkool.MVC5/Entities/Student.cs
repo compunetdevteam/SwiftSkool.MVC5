@@ -1,4 +1,5 @@
 ﻿using SwiftSkool.Abstractions;
+using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.Infrastructure;
 using System;
 using System.Collections.Generic;

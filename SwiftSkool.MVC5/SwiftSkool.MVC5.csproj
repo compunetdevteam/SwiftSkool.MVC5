@@ -336,6 +336,7 @@
     <Compile Include="Abstractions\IGuardianCommandManager.cs" />
     <Compile Include="Abstractions\IGuardianQueryManager.cs" />
     <Compile Include="Abstractions\ILessonPlanManager.cs" />
+    <Compile Include="Abstractions\IManager.cs" />
     <Compile Include="Abstractions\IPaymentManager.cs" />
     <Compile Include="Abstractions\IReportManager.cs" />
     <Compile Include="Abstractions\IRepository.cs" />
@@ -535,6 +536,7 @@
     <Content Include="Areas\Students\Views\Guardians\Index.cshtml" />
     <Content Include="Areas\Students\Views\Guardians\Edit.cshtml" />
     <Content Include="Areas\Students\Views\Guardians\Details.cshtml" />
+    <Content Include="Areas\Students\Views\Students\Edit.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

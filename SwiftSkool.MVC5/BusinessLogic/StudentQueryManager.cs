@@ -337,5 +337,33 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
 
         }
+
+        public async Task<UpdateStudentVM> GetStudentToUpdate(int? id)
+        {
+            return await db.Students.Where(g => g.Id.Value == id.Value)
+                                  .Select(g => new UpdateStudentVM
+                                  {
+                                      Active = g.Active,
+                                      AdmissionDate = g.AdmissionDate,
+                                      AdmissionNumber = g.AdmissionNumber,
+                                      Age = g.Age,
+                                      City = g.Address.City,
+                                      DateOfBirth = g.DateOfBirth,
+                                      Country = g.Country,
+                                      Gender = g.Gender,
+                                      FirstName = g.FirstName,
+                                      LastName = g.LastName,
+                                      StudentId = g.Id.Value,
+                                      Street1 = g.Address.StreetName,
+                                      OtherName = g.OtherName,
+                                      Email = g.Email,
+                                      StudentPassport = g.StudentPassport
+                                  }).FirstOrDefaultAsync();
+        }
+
+        public Task<Student> FindStudentById(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
