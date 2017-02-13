@@ -36,8 +36,32 @@ namespace SwiftSkool.MVC5.Migrations
                     new DateTime(2017, 04, 09));
                 var session1 = new SchoolSession("2016/2017", Term.First, new DateTime(2016, 09, 15),
                     new DateTime(2016, 12, 17));
+                var session2 = new SchoolSession("2016/2017", Term.Third, new DateTime(2016, 05, 15),
+                    new DateTime(2016, 07, 31));
                 ctx.Sessions.AddOrUpdate(session1);
                 ctx.Sessions.AddOrUpdate(session);
+                ctx.Sessions.AddOrUpdate(session2);
+                ctx.SaveChanges();
+            }
+
+            if(!ctx.Hostels.Any())
+            {
+                var red = new Hostel(); red.HouseColour = "Red"; red.Name = "Red House";
+                
+                var blue = new Hostel(); blue.HouseColour = "Blue"; red.Name = "Blue House";
+                
+                var yellow = new Hostel(); yellow.HouseColour = "Yellow"; red.Name = "Yellow House";
+                
+                var green = new Hostel(); green.HouseColour = "Green"; green.Name = "Green House";
+                
+                var purple = new Hostel(); purple.HouseColour = "Purple"; purple.Name = "Purple House";
+                
+
+                ctx.Hostels.AddOrUpdate(red);
+                ctx.Hostels.AddOrUpdate(blue);
+                ctx.Hostels.AddOrUpdate(yellow);
+                ctx.Hostels.AddOrUpdate(green);
+                ctx.Hostels.AddOrUpdate(purple);
                 ctx.SaveChanges();
             }
 
@@ -109,6 +133,7 @@ namespace SwiftSkool.MVC5.Migrations
 
                 ctx.SaveChanges();
             }
+
 
             if (!ctx.States.Any())
             {

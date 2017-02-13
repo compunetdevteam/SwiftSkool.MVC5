@@ -1,11 +1,9 @@
-﻿using SwiftSkool.Abstractions;
-using SwiftSkool.MVC5.Abstractions;
+﻿using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.Infrastructure;
+using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SwiftSkool.MVC5.Entities
 {
@@ -17,7 +15,8 @@ namespace SwiftSkool.MVC5.Entities
             
         }
 
-        public Student(Address addy, Guardian relative, string firstname, string lastname)
+        public Student(Address addy, Guardian relative, string firstname, string lastname, 
+            DateTime admissionDate)
         {
             if (relative.Id.Value == 0 && addy == null)
                 throw new ArgumentException("Student cannot be created without an address and a Guardian!");
@@ -25,6 +24,8 @@ namespace SwiftSkool.MVC5.Entities
             Guardian = relative;
             FirstName = firstname;
             LastName = lastname;
+            AdmissionDate = admissionDate;
+            Active = true;
         }
 
         public Student(Guardian relative, string firstname, string lastname)
@@ -37,6 +38,7 @@ namespace SwiftSkool.MVC5.Entities
             Guardian = relative;
             FirstName = firstname;
             LastName = lastname;
+            Active = true;
         }
         
         public string FirstName { get; private set; }
@@ -56,11 +58,11 @@ namespace SwiftSkool.MVC5.Entities
         public int Age { get; private set; }
 
 
-        public DateTime DateOfBirth { get; private set; }
+        public DateTime? DateOfBirth { get; private set; }
 
         public string Email { get; private set; }
 
-        public DateTime AdmissionDate { get; private set; }
+        public DateTime? AdmissionDate { get; private set; }
 
         public string Gender { get; private set; }
 
@@ -89,15 +91,15 @@ namespace SwiftSkool.MVC5.Entities
 
         public Guardian Guardian { get; private set; }
 
-        public int HostelId { get; private set; }
+        public int? HostelId { get; private set; }
 
         public Hostel Hostel { get; private set; }
 
-        public int MedicalHistoryId { get; private set; }
+        public int? MedicalHistoryId { get; private set; }
 
         public MedicalHistory MedicalHistory { get; private set; }
 
-        public int StateId { get; private set; }
+        public int? StateId { get; private set; }
 
         public State StateOfOrigin { get; private set; }
 
@@ -128,7 +130,7 @@ namespace SwiftSkool.MVC5.Entities
         }
 
         public Student PrepareStudent(string firstname, string lastname, string gender, DateTime dob,
-            string passport)
+            string passport,Address add)
         {
             if(!string.IsNullOrEmpty(firstname) && !string.IsNullOrEmpty(lastname) &&
                 !string.IsNullOrEmpty(gender) && !string.IsNullOrEmpty(passport) && dob != null)
@@ -137,8 +139,9 @@ namespace SwiftSkool.MVC5.Entities
                 LastName = lastname;
                 Gender = gender;
                 StudentPassport = passport;
+                Address = add;
                 DateOfBirth = dob;
-                var t = DateOfBirth - DateTime.Now;
+                var t = DateOfBirth.Value - DateTime.Now;
                 Age = (int)t.Days / 365;
                 return this;
             }
@@ -152,9 +155,10 @@ namespace SwiftSkool.MVC5.Entities
 
         }
 
-        public void AssignStudentToClass()
+        public void AssignStudentToClass(Class studentclass)
         {
-
+            Class = studentclass;
+            ClassId = studentclass.Id.Value;
         }
 
         /// <summary>
@@ -167,6 +171,29 @@ namespace SwiftSkool.MVC5.Entities
         { 
             ds.Done();
             return Subjects.Except(ds.StudentsDroppedSubjects);
+        }
+
+        public void UpdateStudentDetails(UpdateStudentVM model)
+        {
+            if (model == null)
+                return;
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            Gender = model.Gender;
+            Email = model.Email;
+            DateOfBirth = model.DateOfBirth;
+
+        }
+
+        public void DeactivateGraduatingStudent()
+        {
+            //determine students graduating status and based on it
+            //change the active status of student to false for deactivated
+        }
+
+        public void DeactivateTransferredStudent()
+        {
+
         }
     }
 }

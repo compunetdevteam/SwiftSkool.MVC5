@@ -55,7 +55,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
             {
                 Student = new StudentViewModel
                 {
-                    AdmissionDate = query.Student.AdmissionDate,
+                    AdmissionDate = query.Student.AdmissionDate.Value,
                     AdmissionNumber = query.Student.AdmissionNumber,
                     Class = query.Student.Class.ClassName +
                                           query.Student.Class.Level + query.Student.Class.Section,
@@ -101,7 +101,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -145,7 +145,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     {
                                         Student = new StudentViewModel
                                         {
-                                            AdmissionDate = r.Student.AdmissionDate,
+                                            AdmissionDate = r.Student.AdmissionDate.Value,
                                             AdmissionNumber = r.Student.AdmissionNumber,
                                             Class = r.Student.Class.ClassName +
                                                   r.Student.Class.Level + r.Student.Class.Section,
@@ -187,7 +187,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -223,7 +223,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     {
                                         Student = new StudentViewModel
                                         {
-                                            AdmissionDate = r.Student.AdmissionDate,
+                                            AdmissionDate = r.Student.AdmissionDate.Value,
                                             AdmissionNumber = r.Student.AdmissionNumber,
                                             Class = r.Student.Class.ClassName +
                                                   r.Student.Class.Level + r.Student.Class.Section,
@@ -269,7 +269,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -313,7 +313,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     {
                                         Student = new StudentViewModel
                                         {
-                                            AdmissionDate = r.Student.AdmissionDate,
+                                            AdmissionDate = r.Student.AdmissionDate.Value,
                                             AdmissionNumber = r.Student.AdmissionNumber,
                                             Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -350,7 +350,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -388,7 +388,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -450,7 +450,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
             {
                 Student = new StudentViewModel
                 {
-                    AdmissionDate = r.Student.AdmissionDate,
+                    AdmissionDate = r.Student.AdmissionDate.Value,
                     AdmissionNumber = r.Student.AdmissionNumber,
                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -489,7 +489,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
             {
                 Student = new StudentViewModel
                 {
-                    AdmissionDate = r.Student.AdmissionDate,
+                    AdmissionDate = r.Student.AdmissionDate.Value,
                     AdmissionNumber = r.Student.AdmissionNumber,
                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,
@@ -534,7 +534,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 Student = new StudentViewModel
                                 {
-                                    AdmissionDate = r.Student.AdmissionDate,
+                                    AdmissionDate = r.Student.AdmissionDate.Value,
                                     AdmissionNumber = r.Student.AdmissionNumber,
                                     Class = r.Student.Class.ClassName +
                                           r.Student.Class.Level + r.Student.Class.Section,

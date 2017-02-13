@@ -68,6 +68,26 @@ namespace SwiftSkool.MVC5.ViewModels
         [Display(Name ="Last Name")]
         public string LastName { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name of Area")]
+        public string NameOfArea { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "House Number")]
+        public string HouseNumber { get; set; }
+
         [Display(Name ="Guardian")]
         public int GuardianId { get; set; }
 
@@ -105,7 +125,7 @@ namespace SwiftSkool.MVC5.ViewModels
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime AdmissionDate { get; set; }
+        public DateTime AdmissionDate { get; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -115,7 +135,7 @@ namespace SwiftSkool.MVC5.ViewModels
 
         [Required]
         [Display(Name ="Admission Number")]
-        public string AdmissionNumber { get; set; }
+        public string AdmissionNumber { get; }
 
         [Display(Name ="Country of Origin")]
         public string Country { get; set; }

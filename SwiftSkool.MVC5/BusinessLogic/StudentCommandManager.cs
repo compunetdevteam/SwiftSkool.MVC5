@@ -26,29 +26,35 @@ namespace SwiftSkool.MVC5.BusinessLogic
                 throw new 
                     ArgumentException("Please provide valid values to create a student with!");
 
+            var address = new Address(model.Street, model.NameOfArea, model.City);
+
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
 
-            var student = new Student(guardian, model.FirstName, model.LastName);
+            var student = new Student(address, guardian, model.FirstName, model.LastName, DateTime.UtcNow.Date);
 
             try
             {
                 _db.Students.Add(student);
                 await _db.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new EntityException("The Student could not be created at this time please try again later!");
+                //throw new EntityException("The Student could not be created at this time please try again later!");
+                throw ex;
             }
         }
 
         public async Task ChangeStudentDetails(UpdateStudentVM model)
         {
             var student = await _db.Students.FindAsync(model.StudentId);
+
             var studentclass = await _db.Classes.FindAsync(model.ClassId);
             var club = await _db.Clubs.FindAsync(model.ClubId);
             var hostel = await _db.Hostels.FindAsync(model.HostelId);
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
             var state = await _db.States.FindAsync(model.StateId);
+
+            student.PrepareStudent()
         }
     }
 }

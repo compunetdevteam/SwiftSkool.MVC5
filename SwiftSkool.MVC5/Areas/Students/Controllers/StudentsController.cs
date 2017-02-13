@@ -53,21 +53,13 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateStudentInputModel model)
         {
-           
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    await _studCmd.RegisterStudent(model);
-                }
-
-                return RedirectToAction("Index");
-            }
-            catch(Exception ex)
+            if (!ModelState.IsValid)
             {
                 model.Guardian = new SelectList(_db.Guardians, "Id", "FullName", model.GuardianId);
                 return View(model);
             }
+            await _studCmd.RegisterStudent(model);
+            return RedirectToAction("Index");
         }
 
         // GET: Students/Students/Edit/5

@@ -18,7 +18,7 @@ namespace SwiftSkool.MVC5.ViewModels
                         OtherName = q.Student.OtherName,
                         FirstName = q.Student.FirstName,
                         LastName = q.Student.LastName,
-                        AdmissionDate = q.Student.AdmissionDate,
+                        AdmissionDate = q.Student.AdmissionDate.Value,
                         AdmissionNumber = q.Student.AdmissionNumber,
                         Class = q.Student.Class.ClassName + q.Student.Class.Section,
                         Hostel = q.Student.Hostel.Name,

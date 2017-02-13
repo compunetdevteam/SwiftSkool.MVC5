@@ -31,7 +31,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     LastName = s.LastName,
                                     Hostel = s.Hostel.Name,
                                     Class = s.Class.ClassName,
-                                    AdmissionDate = s.AdmissionDate,
+                                    AdmissionDate = s.AdmissionDate.Value,
                                     OtherName = s.OtherName,
                                     id = s.Id.Value.ToString()
                                 }).SingleOrDefaultAsync();
@@ -51,7 +51,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                         LastName = s.LastName,
                                         Hostel = s.Hostel.Name,
                                         Class = s.Class.ClassName,
-                                        AdmissionDate = s.AdmissionDate,
+                                        //AdmissionDate = s.AdmissionDate.Value,
                                         //FullName = s.FirstName+ " "+s.LastName,
                                         id = s.Id.Value.ToString()
                                     })
@@ -75,7 +75,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 LastName = s.LastName,
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
-                               AdmissionDate = s.AdmissionDate,
+                               AdmissionDate = s.AdmissionDate.Value,
                                //FullName = s.FullName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
@@ -99,7 +99,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 LastName = s.LastName,
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
-                               AdmissionDate = s.AdmissionDate,
+                               AdmissionDate = s.AdmissionDate.Value,
                                //FullName = s.FullName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
@@ -129,7 +129,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 LastName = s.LastName,
                                 Hostel = s.Hostel.Name,
                                 Class = s.Class.ClassName,
-                               AdmissionDate = s.AdmissionDate,
+                               AdmissionDate = s.AdmissionDate.Value,
                                OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
@@ -158,7 +158,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             LastName = s.LastName,
                             Class = s.Class.ClassName,
                             Hostel = s.Hostel.Name,
-                            AdmissionDate = s.AdmissionDate,
+                            AdmissionDate = s.AdmissionDate.Value,
                             OtherName = s.OtherName,
                             id = s.Id.Value.ToString()
                         }).ToListAsync();
@@ -202,7 +202,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 AdmissionNumber = s.AdmissionNumber,
                                 Class = s.Class.ClassName,
                                 Hostel = s.Hostel.Name,
-                               AdmissionDate = s.AdmissionDate,
+                               AdmissionDate = s.AdmissionDate.Value,
                                OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
@@ -218,7 +218,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             {
                                 FirstName = s.FirstName,
                                 LastName = s.LastName,
-                                AdmissionDate = s.AdmissionDate,
+                                AdmissionDate = s.AdmissionDate.Value,
                                 AdmissionNumber = s.AdmissionNumber,
                                 Class = s.Class.ClassName,
                                 Hostel = s.Hostel.Name,
@@ -253,7 +253,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                AdmissionNumber = s.AdmissionNumber,
                                Hostel = s.Hostel.Name,
                                Class = s.Class.ClassName + s.Class.Section,
-                               AdmissionDate = s.AdmissionDate,
+                               AdmissionDate = s.AdmissionDate.Value,
                                OtherName = s.OtherName,
                                id = s.Id.Value.ToString()
                            }).ToListAsync();
@@ -344,11 +344,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                   .Select(g => new UpdateStudentVM
                                   {
                                       Active = g.Active,
-                                      AdmissionDate = g.AdmissionDate,
+                                      AdmissionDate = g.AdmissionDate.Value,
                                       AdmissionNumber = g.AdmissionNumber,
                                       Age = g.Age,
                                       City = g.Address.City,
-                                      DateOfBirth = g.DateOfBirth,
+                                      DateOfBirth = g.DateOfBirth.Value,
                                       Country = g.Country,
                                       Gender = g.Gender,
                                       FirstName = g.FirstName,

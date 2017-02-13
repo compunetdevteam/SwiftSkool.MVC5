@@ -451,6 +451,30 @@
     <Compile Include="Migrations\201702091117434_v4.Designer.cs">
       <DependentUpon>201702091117434_v4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702130015205_v5.cs" />
+    <Compile Include="Migrations\201702130015205_v5.Designer.cs">
+      <DependentUpon>201702130015205_v5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702130859599_v6.cs" />
+    <Compile Include="Migrations\201702130859599_v6.Designer.cs">
+      <DependentUpon>201702130859599_v6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702130941593_v7.cs" />
+    <Compile Include="Migrations\201702130941593_v7.Designer.cs">
+      <DependentUpon>201702130941593_v7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702130949232_v8.cs" />
+    <Compile Include="Migrations\201702130949232_v8.Designer.cs">
+      <DependentUpon>201702130949232_v8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702131254562_v9.cs" />
+    <Compile Include="Migrations\201702131254562_v9.Designer.cs">
+      <DependentUpon>201702131254562_v9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702131307331_v11.cs" />
+    <Compile Include="Migrations\201702131307331_v11.Designer.cs">
+      <DependentUpon>201702131307331_v11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -529,7 +553,6 @@
     <Content Include="Areas\Students\Views\Classes\Details.cshtml" />
     <Content Include="Areas\Students\Views\Classes\Edit.cshtml" />
     <Content Include="Areas\Students\Views\Classes\Index.cshtml" />
-    <Content Include="Areas\Students\Views\Students\Create.cshtml" />
     <Content Include="Areas\Students\Views\Students\Index.cshtml" />
     <Content Include="Areas\Students\Views\Guardians\Create.cshtml" />
     <Content Include="Areas\Students\Views\Guardians\Delete.cshtml" />
@@ -537,6 +560,7 @@
     <Content Include="Areas\Students\Views\Guardians\Edit.cshtml" />
     <Content Include="Areas\Students\Views\Guardians\Details.cshtml" />
     <Content Include="Areas\Students\Views\Students\Edit.cshtml" />
+    <Content Include="Areas\Students\Views\Students\Create.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -619,6 +643,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702091117434_v4.resx">
       <DependentUpon>201702091117434_v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702130015205_v5.resx">
+      <DependentUpon>201702130015205_v5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702130859599_v6.resx">
+      <DependentUpon>201702130859599_v6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702130941593_v7.resx">
+      <DependentUpon>201702130941593_v7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702130949232_v8.resx">
+      <DependentUpon>201702130949232_v8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702131254562_v9.resx">
+      <DependentUpon>201702131254562_v9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702131307331_v11.resx">
+      <DependentUpon>201702131307331_v11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

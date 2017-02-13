@@ -66,10 +66,10 @@ namespace SwiftSkool.MVC5.Entities
             var subjectsoffered = Student.Subjects.Count();
         }
 
-        public void CalculateSubjectAverage()
+        public void CalculateSubjectAverage(string classname)
         {
             var scores = ContinuousAssessments.Where(x => x.ResultId.Value == Id.Value).Sum(x => x.Score);
-            var students = Subject.Students.Count;
+            var students = Subject.Students.Count(x => x.Class.ClassName == classname);
             SubjectAverage = scores / students;
         }
 

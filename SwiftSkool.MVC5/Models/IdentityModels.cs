@@ -26,21 +26,23 @@ namespace SwiftSkool.MVC5.Models
             
         //}
 
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
 
         public State StateOfOrigin { get; set; }
 
         public Address Address { get; set; }
 
-        public int LessonPlanId { get; set; }
-
         public List<LessonPlan> LessonPlans { get; set; }
 
         public List<Subject> Subjects { get; set; }
 
-        public int SchoolId { get; set; }
+        public int? SchoolId { get; set; }
 
         public School School { get; set; }
+
+        public int HostelId { get; set; }
+
+        public Hostel Hostel { get; set; }
 
         public string FirstName { get; set; }
 
@@ -62,19 +64,6 @@ namespace SwiftSkool.MVC5.Models
 
         public string Gender { get; set; }
     }
-
-    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    //{
-    //    public ApplicationDbContext()
-    //        : base("DefaultConnection", throwIfV1Schema: false)
-    //    {
-    //    }
-
-    //    public static ApplicationDbContext Create()
-    //    {
-    //        return new ApplicationDbContext();
-    //    }
-    //}
 
     public class CustomUserRole : IdentityUserRole<int> { }
     public class CustomUserClaim : IdentityUserClaim<int> { }

@@ -12,9 +12,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public string HousePrefect { get; set; }
 
-        public int TeacherId { get; set; }
-
-        public ApplicationUser Patron { get; set; }
+        public int? Teacher { get; set; }
 
     }
 }

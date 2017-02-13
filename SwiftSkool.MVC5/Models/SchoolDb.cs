@@ -118,9 +118,9 @@ namespace SwiftSkool.MVC5.Models
                    .WithRequired(s => s.Guardian)
                    .HasForeignKey(s => s.GuardianId)
                    .WillCascadeOnDelete(false);
-            builder.Entity<Hostel>()
-                   .HasRequired(h => h.Patron)
-                   .WithOptional().WillCascadeOnDelete(false);
+            //builder.Entity<Hostel>()
+            //       .HasRequired(h => h.Patron)
+            //       .WithOptional().WillCascadeOnDelete(false);
             builder.Entity<Illness>()
                    .HasRequired(i => i.MedicalHistory)
                    .WithMany(m => m.Illnesses)
@@ -187,9 +187,6 @@ namespace SwiftSkool.MVC5.Models
                    .WithRequired(s => s.State)
                    .HasForeignKey(l => l.StateId)
                    .WillCascadeOnDelete(false);
-
-
-
         }
 
         public DbSet<Attendance> Attendance { get; set; }
