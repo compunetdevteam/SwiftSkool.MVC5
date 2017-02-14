@@ -64,7 +64,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 {
                                     new StudentViewModel
                                     {
-                                        AdmissionDate = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionDate.Value,
+                                        AdmissionDate = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionDate,
                                         AdmissionNumber = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionNumber,
                                         FirstName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().FirstName,
                                         LastName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().LastName,

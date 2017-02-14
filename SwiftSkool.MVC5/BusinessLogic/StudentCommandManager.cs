@@ -30,7 +30,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
 
-            var student = new Student(address, guardian, model.FirstName, model.LastName, DateTime.UtcNow.Date);
+            var student = new Student(address, guardian, model.FirstName, model.LastName, DateTime.UtcNow);
 
             try
             {
@@ -54,7 +54,18 @@ namespace SwiftSkool.MVC5.BusinessLogic
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
             var state = await _db.States.FindAsync(model.StateId);
 
-            student.PrepareStudent()
+            student.UpdateStudentDetails(model, studentclass, club, hostel);
+
+            try
+            {
+                _db.Students.Add(student);
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -69,6 +69,12 @@ namespace SwiftSkool.MVC5.ViewModels
         public string LastName { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "yyyy-MM-dd", ApplyFormatInEditMode = true)]
+        [Display(Name ="Admission Date")]
+        public DateTime AdmissionDate { get; set; }
+
+        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "City")]
         public string City { get; set; }
@@ -125,7 +131,8 @@ namespace SwiftSkool.MVC5.ViewModels
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime AdmissionDate { get; }
+        [DisplayFormat(DataFormatString ="0:yyyy-MM-dd", ApplyFormatInEditMode =true)]
+        public DateTime AdmissionDate { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -135,7 +142,7 @@ namespace SwiftSkool.MVC5.ViewModels
 
         [Required]
         [Display(Name ="Admission Number")]
-        public string AdmissionNumber { get; }
+        public string AdmissionNumber { get; set; }
 
         [Display(Name ="Country of Origin")]
         public string Country { get; set; }
@@ -183,6 +190,10 @@ namespace SwiftSkool.MVC5.ViewModels
         [Required]
         [DataType(DataType.Text)]
         public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string NameOfArea { get; set; }
 
         public IEnumerable<SelectList> Subjects { get; set; }
     }

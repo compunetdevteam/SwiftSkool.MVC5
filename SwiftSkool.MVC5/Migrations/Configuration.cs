@@ -8,7 +8,7 @@ namespace SwiftSkool.MVC5.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SchoolDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<SwiftSkool.MVC5.Models.SchoolDb>
     {
         public Configuration()
         {
@@ -44,18 +44,18 @@ namespace SwiftSkool.MVC5.Migrations
                 ctx.SaveChanges();
             }
 
-            if(!ctx.Hostels.Any())
+            if (!ctx.Hostels.Any())
             {
                 var red = new Hostel(); red.HouseColour = "Red"; red.Name = "Red House";
-                
+
                 var blue = new Hostel(); blue.HouseColour = "Blue"; red.Name = "Blue House";
-                
+
                 var yellow = new Hostel(); yellow.HouseColour = "Yellow"; red.Name = "Yellow House";
-                
+
                 var green = new Hostel(); green.HouseColour = "Green"; green.Name = "Green House";
-                
+
                 var purple = new Hostel(); purple.HouseColour = "Purple"; purple.Name = "Purple House";
-                
+
 
                 ctx.Hostels.AddOrUpdate(red);
                 ctx.Hostels.AddOrUpdate(blue);

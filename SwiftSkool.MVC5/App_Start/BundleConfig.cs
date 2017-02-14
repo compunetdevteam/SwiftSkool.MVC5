@@ -9,7 +9,9 @@ namespace SwiftSkool.MVC5
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap-datetimepicker.min.js",
+                        "~/Scripts/bootstrap-select.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,6 +27,8 @@ namespace SwiftSkool.MVC5
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-datetimepicker.min.css",
+                      "~/Content/bootstrap-select.min.css",
                       "~/Content/site.css"));
         }
     }

@@ -38,7 +38,7 @@ namespace SwiftSkool.MVC5.Abstractions
         {
             get;
 
-            private set;
+            set;
         }
 
         [DataType(DataType.DateTime)]
@@ -46,15 +46,7 @@ namespace SwiftSkool.MVC5.Abstractions
         {
             get;
 
-            private set;
-        }
-
-        [Timestamp]
-        public byte[] Version
-        {
-            get;
-
-            private set;
+            set;
         }
     }
 }

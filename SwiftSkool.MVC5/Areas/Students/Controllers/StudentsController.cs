@@ -6,6 +6,7 @@ using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -67,7 +68,14 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         {
             if (id == null || id == 0)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             var studentvm = await _studQry.GetStudentToUpdate(id);
+            studentvm.Class = new SelectList(await _db.Classes.ToListAsync(), "Id", "ClassName");
+            studentvm.Club = new SelectList(await _db.Clubs.ToListAsync(), "Id", "ClubName");
+            studentvm.Guardian = new SelectList(await _db.Guardians.ToListAsync(), "Id", "FullName");
+            studentvm.Hostel = new SelectList(await _db.Hostels.ToListAsync(), "Id", "Name");
+            studentvm.StateOfOrigin = new SelectList(await _db.States.ToListAsync(), "Id", "Name");
+
             return View(studentvm);
         }
 

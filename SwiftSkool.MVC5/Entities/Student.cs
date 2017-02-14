@@ -58,11 +58,11 @@ namespace SwiftSkool.MVC5.Entities
         public int Age { get; private set; }
 
 
-        public DateTime? DateOfBirth { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
 
         public string Email { get; private set; }
 
-        public DateTime? AdmissionDate { get; private set; }
+        public DateTime AdmissionDate { get; private set; }
 
         public string Gender { get; private set; }
 
@@ -111,6 +111,11 @@ namespace SwiftSkool.MVC5.Entities
             {
                 return Subjects.ToList();//defensive copy
             }
+
+            private set
+            {
+
+            }
         }
 
         public IEnumerable<Payment> Payments
@@ -141,7 +146,7 @@ namespace SwiftSkool.MVC5.Entities
                 StudentPassport = passport;
                 Address = add;
                 DateOfBirth = dob;
-                var t = DateOfBirth.Value - DateTime.Now;
+                var t = DateOfBirth - DateTime.Now;
                 Age = (int)t.Days / 365;
                 return this;
             }
@@ -173,7 +178,7 @@ namespace SwiftSkool.MVC5.Entities
             return Subjects.Except(ds.StudentsDroppedSubjects);
         }
 
-        public void UpdateStudentDetails(UpdateStudentVM model)
+        public void UpdateStudentDetails(UpdateStudentVM model, Class studentclass, Club club, Hostel house)
         {
             if (model == null)
                 return;
@@ -182,7 +187,10 @@ namespace SwiftSkool.MVC5.Entities
             Gender = model.Gender;
             Email = model.Email;
             DateOfBirth = model.DateOfBirth;
-
+            Address.UpdateAddress(model.Street1 + model.Street2, model.NameOfArea, model.City, "");
+            Class = studentclass;
+            Club = club;
+            Hostel = house;
         }
 
         public void DeactivateGraduatingStudent()
