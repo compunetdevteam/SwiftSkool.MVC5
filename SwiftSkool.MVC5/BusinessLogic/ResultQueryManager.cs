@@ -156,9 +156,9 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
                                         CA = new CAViewModel
                                         {
-                                            Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                            Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                            Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                            Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                            Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                            Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                         },
                                         ResultId = r.Id.Value,
                                         Session = r.SchoolSession.SessionName,
