@@ -82,9 +82,9 @@ namespace SwiftSkool.MVC5.Migrations
 
             if (!ctx.Classes.Any())
             {
-                var class1 = new Class("JSS", "1", "A");
-                var class2 = new Class("JSS", "2", "B");
-                var class3 = new Class("SSS", "3", "C");
+                var class1 = new Class("JSS", "JS1A", "A");
+                var class2 = new Class("JSS", "JS2B", "B");
+                var class3 = new Class("SSS", "SS3C", "C");
                 ctx.Classes.AddOrUpdate(class1);
                 ctx.Classes.AddOrUpdate(class2);
                 ctx.Classes.AddOrUpdate(class3);

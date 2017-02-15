@@ -4,7 +4,9 @@ using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
 using System;
 using System.Data.Common;
+using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Data.Entity.Migrations;
 using System.Threading.Tasks;
 
 namespace SwiftSkool.MVC5.BusinessLogic
@@ -54,18 +56,15 @@ namespace SwiftSkool.MVC5.BusinessLogic
             var guardian = await _db.Guardians.FindAsync(model.GuardianId);
             var state = await _db.States.FindAsync(model.StateId);
 
+            if (student == null)
+            {
+                throw new NullReferenceException("Student is Null and cannot be updated!");
+            }
+
             student.UpdateStudentDetails(model, studentclass, club, hostel);
-
-            try
-            {
-                _db.Students.Add(student);
-                await _db.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            _db.Students.Attach(student);
+            _db.Entry(student).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
         }
     }
 }

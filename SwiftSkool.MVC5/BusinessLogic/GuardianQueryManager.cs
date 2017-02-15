@@ -64,13 +64,13 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 {
                                     new StudentViewModel
                                     {
-                                        AdmissionDate = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionDate,
-                                        AdmissionNumber = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().AdmissionNumber,
-                                        FirstName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().FirstName,
-                                        LastName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().LastName,
-                                        OtherName = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().OtherName,
-                                        Class = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().Class.ClassName,
-                                        Hostel = g.Students.Where(x => x.GuardianId == id.Value).FirstOrDefault().Hostel.Name
+                                        AdmissionDate = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).AdmissionDate,
+                                        AdmissionNumber = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).AdmissionNumber,
+                                        FirstName = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).FirstName,
+                                        LastName = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).LastName,
+                                        OtherName = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).OtherName,
+                                        Class = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).Class.ClassName,
+                                        Hostel = g.Students.FirstOrDefault(x => x.GuardianId == id.Value).Hostel.Name
                                     }
                                 },
                                 Address = g.Address.HouseNumber+" "+g.Address.StreetName+", "+

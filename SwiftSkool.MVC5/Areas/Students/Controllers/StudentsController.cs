@@ -83,16 +83,12 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         [HttpPost]
         public ActionResult Edit(UpdateStudentVM model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return View(model);
             }
-            catch
-            {
-                return View();
-            }
+            _studCmd.ChangeStudentDetails(model);
+            return RedirectToAction("Index");
         }
 
         // GET: Students/Students/Delete/5
@@ -115,6 +111,37 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
             {
                 return View();
             }
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetClassesSelectListItems(int selectedValue)
+        {
+            var classList = new List<SelectListItem>
+            {
+                new SelectListItem() {Selected = true, Text = "Select Subject", Value = ""}
+            };
+
+            var classes = (from c in await _db.Classes.ToListAsync()
+                                    select c).ToList();
+
+            foreach (var t in classes)
+            {
+                if (t.Id == null) continue;
+                var item = new SelectListItem
+                {
+                    Text = t.Id.Value.ToString(),
+                    Value = t.ClassName
+                };
+
+
+                if (selectedValue == t.Id.Value)
+                {
+                    item.Selected = true;
+                }
+
+                classList.Add(item);
+            }
+
+            return classList;
         }
     }
 }

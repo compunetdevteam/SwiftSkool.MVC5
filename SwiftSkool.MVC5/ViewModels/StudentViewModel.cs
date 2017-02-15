@@ -17,7 +17,7 @@ namespace SwiftSkool.MVC5.ViewModels
         public string OtherName { get; set; }
         public string Hostel { get; set; }
         public string Class { get; set; }
-        public DateTime AdmissionDate { get; set; }
+        public DateTime? AdmissionDate { get; set; }
     }
 
     public class StudentGuardianViewModel
@@ -129,18 +129,16 @@ namespace SwiftSkool.MVC5.ViewModels
         [Display(Name ="Email Address")]
         public string Email { get; set; }
 
-        [Required]
+
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="0:yyyy-MM-dd", ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString ="yyyy-MM-dd")]
         public DateTime AdmissionDate { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         public string Gender { get; set; }
 
         public string StudentPassport { get; set; }
 
-        [Required]
         [Display(Name ="Admission Number")]
         public string AdmissionNumber { get; set; }
 
@@ -148,6 +146,21 @@ namespace SwiftSkool.MVC5.ViewModels
         public string Country { get; set; }
 
         public bool Active { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string Street1 { get; set; }
+
+        [DataType(DataType.Text)]
+        public string Street2 { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string City { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        public string NameOfArea { get; set; }
 
         [Display(Name ="Student Class")]
         [Required]
@@ -157,7 +170,7 @@ namespace SwiftSkool.MVC5.ViewModels
 
         [Required]
         [Display(Name ="Club")]
-        public int? ClubId { get; set; }
+        public int ClubId { get; set; }
 
         public SelectList Club { get; set; }
 
@@ -178,22 +191,6 @@ namespace SwiftSkool.MVC5.ViewModels
         public int StateId { get; set; }
 
         public SelectList StateOfOrigin { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        public string Street1 { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        public string Street2 { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        public string City { get; set; }
-
-        [Required]
-        [DataType(DataType.Text)]
-        public string NameOfArea { get; set; }
 
         public IEnumerable<SelectList> Subjects { get; set; }
     }
