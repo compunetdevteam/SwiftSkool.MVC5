@@ -1,0 +1,74 @@
+﻿@model SwiftSkool.MVC5.ViewModels.StudentViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StudentViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdmissionNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdmissionNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hostel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hostel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Class)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Class)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdmissionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdmissionDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

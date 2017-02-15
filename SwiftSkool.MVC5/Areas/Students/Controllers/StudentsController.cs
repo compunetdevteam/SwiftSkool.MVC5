@@ -1,16 +1,9 @@
-﻿using AutoMapper;
-using SwiftSkool.MVC5.Abstractions;
-using SwiftSkool.MVC5.BusinessLogic;
-using SwiftSkool.MVC5.Entities;
+﻿using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.Models;
 using SwiftSkool.MVC5.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SwiftSkool.MVC5.Areas.Students.Controllers
@@ -35,9 +28,10 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
         }
 
         // GET: Students/Students/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var student = await _studQry.GetStudentDetails(id);
+            return View(student);
         }
 
         // GET: Students/Students/Create
@@ -81,67 +75,36 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
 
         // POST: Students/Students/Edit/5
         [HttpPost]
-        public ActionResult Edit(UpdateStudentVM model)
+        public async Task<ActionResult> Edit(UpdateStudentVM model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                model.Class = new SelectList(await _db.Classes.ToListAsync(), "Id", "ClassName",model.ClassId);
+                model.Club = new SelectList(await _db.Clubs.ToListAsync(), "Id", "ClubName", model.ClubId);
+                model.Guardian = new SelectList(await _db.Guardians.ToListAsync(), "Id", "FullName", model.GuardianId);
+                model.Hostel = new SelectList(await _db.Hostels.ToListAsync(), "Id", "Name", model.HostelId);
+                model.StateOfOrigin = new SelectList(await _db.States.ToListAsync(), "Id", "Name", model.StateId);
                 return View(model);
             }
-            _studCmd.ChangeStudentDetails(model);
+            await _studCmd.ChangeStudentDetails(model);
             return RedirectToAction("Index");
-        }
-
-        // GET: Students/Students/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: Students/Students/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
-            try
+            if (id == 0)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public async Task<IEnumerable<SelectListItem>> GetClassesSelectListItems(int selectedValue)
-        {
-            var classList = new List<SelectListItem>
-            {
-                new SelectListItem() {Selected = true, Text = "Select Subject", Value = ""}
-            };
-
-            var classes = (from c in await _db.Classes.ToListAsync()
-                                    select c).ToList();
-
-            foreach (var t in classes)
-            {
-                if (t.Id == null) continue;
-                var item = new SelectListItem
-                {
-                    Text = t.Id.Value.ToString(),
-                    Value = t.ClassName
-                };
-
-
-                if (selectedValue == t.Id.Value)
-                {
-                    item.Selected = true;
-                }
-
-                classList.Add(item);
+                TempData["Message"] = "You cannot delete nothing! Please click a proper student to delete";
+                return View("Index");
             }
 
-            return classList;
+            var student = await _studQry.FindStudentById(id);
+            _db.Students.Remove(student);
+            _db.SaveChanges();
+            TempData["Success"] = "Deletion Successful!";
+            return View("Index");
         }
     }
 }

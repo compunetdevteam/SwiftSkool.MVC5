@@ -445,6 +445,10 @@
     <Compile Include="Migrations\201702141452089_v1.Designer.cs">
       <DependentUpon>201702141452089_v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702151211341_v2.cs" />
+    <Compile Include="Migrations\201702151211341_v2.Designer.cs">
+      <DependentUpon>201702151211341_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -616,6 +620,7 @@
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Areas\Students\Views\Students\Details.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -760,6 +765,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702141452089_v1.resx">
       <DependentUpon>201702141452089_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702151211341_v2.resx">
+      <DependentUpon>201702151211341_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

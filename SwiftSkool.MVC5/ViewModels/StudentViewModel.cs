@@ -10,7 +10,7 @@ namespace SwiftSkool.MVC5.ViewModels
 {
     public class StudentViewModel
     {
-        public string id { get; set; }
+        public int id { get; set; }
         public string AdmissionNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -191,7 +191,5 @@ namespace SwiftSkool.MVC5.ViewModels
         public int StateId { get; set; }
 
         public SelectList StateOfOrigin { get; set; }
-
-        public IEnumerable<SelectList> Subjects { get; set; }
     }
 }

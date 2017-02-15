@@ -22,7 +22,7 @@ namespace SwiftSkool.MVC5.ViewModels
                         AdmissionNumber = q.Student.AdmissionNumber,
                         Class = q.Student.Class.ClassName + q.Student.Class.Section,
                         Hostel = q.Student.Hostel.Name,
-                        id = q.Student.Id.Value.ToString()
+                        id = q.Student.Id.Value
                     }))
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom(
                     q => Mapper.Map<Subject, SimpleSubjectViewModel>(q.Subject)))
