@@ -8,6 +8,8 @@
 
 <p>
     @Html.ActionLink("  Create Student", "Create","Students",null, htmlAttributes: new { @class = "btn btn-success glyphicon glyphicon-cog"})
+    @Html.ActionLink("  List Students", "Index", "Students", null, htmlAttributes: new { @class = "btn btn-info glyphicon glyphicon-list"})
+
 </p>
 <p>
     <span><b>Number of Student's Enrolled in School :@Model.Count(x => x.Active)</b></span>
@@ -84,7 +86,7 @@
             @Html.DisplayFor(modelItem => item.Club.Clubname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Guardian.FirstName +" "+item.Guardian.OtherName+". "+item.Guardian.LastName)
+            @Html.DisplayFor(modelItem => item.Guardian.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Hostel.Name)

@@ -40,7 +40,7 @@ namespace SwiftSkool.MVC5.Models
 
         public School School { get; set; }
 
-        public int HostelId { get; set; }
+        public int? HostelId { get; set; }
 
         public Hostel Hostel { get; set; }
 

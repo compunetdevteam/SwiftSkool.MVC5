@@ -1,3 +1,5 @@
+using Microsoft.AspNet.Identity;
+
 namespace SwiftSkool.MVC5.Migrations
 {
     using Entities;
@@ -65,6 +67,32 @@ namespace SwiftSkool.MVC5.Migrations
                 ctx.SaveChanges();
             }
 
+            if (!ctx.Clubs.Any())
+            {
+                var newclub = new Club
+                {
+                    Clubname = "Literary & Debating",
+                    Patron = new ApplicationUser
+                    {
+                        Address = new Address("Palmer Street", "Old GRA", "Jos"),
+                        FirstName = "Efe",
+                        LastName = "Johnson",
+                        Email = "efe.johnson@specialschool.ng",
+                        EmailConfirmed = true,
+                        PhoneNumber = "08034477888",
+                        PhoneNumberConfirmed = true,
+                        DateOfBirth = new DateTime(1983, 08, 20),
+                        Qualifications = Qualifications.Degree,
+                        UserName = "efe.johnson",
+                        MaritalStatus = MaritalStatus.Single,
+                        Designation = "Maths Teacher",
+                        PasswordHash = new PasswordHasher().HashPassword("Password")
+                    }
+                };
+                ctx.Clubs.AddOrUpdate(newclub);
+                ctx.SaveChanges();
+            }
+
             if (!ctx.Subjects.Any())
             {
                 var subject1 = new Subject("Mathematics");
@@ -82,9 +110,9 @@ namespace SwiftSkool.MVC5.Migrations
 
             if (!ctx.Classes.Any())
             {
-                var class1 = new Class("JSS", "1", "A");
-                var class2 = new Class("JSS", "2", "B");
-                var class3 = new Class("SSS", "3", "C");
+                var class1 = new Class("JSS", "JS1A", "A");
+                var class2 = new Class("JSS", "JS2B", "B");
+                var class3 = new Class("SSS", "SS3C", "C");
                 ctx.Classes.AddOrUpdate(class1);
                 ctx.Classes.AddOrUpdate(class2);
                 ctx.Classes.AddOrUpdate(class3);

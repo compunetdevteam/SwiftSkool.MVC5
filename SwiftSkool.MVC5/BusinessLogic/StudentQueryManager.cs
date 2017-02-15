@@ -33,7 +33,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     Class = s.Class.ClassName,
                                     AdmissionDate = s.AdmissionDate,
                                     OtherName = s.OtherName,
-                                    id = s.Id.Value.ToString()
+                                    id = s.Id.Value
                                 }).SingleOrDefaultAsync();
         }
 
@@ -53,7 +53,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                         Class = s.Class.ClassName,
                                         AdmissionDate = s.AdmissionDate,
                                         //FullName = s.FirstName+ " "+s.LastName,
-                                        id = s.Id.Value.ToString()
+                                        id = s.Id.Value
                                     })
                                     .OrderBy(o => o.FirstName)
                                     .Skip(0)
@@ -77,7 +77,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
                                //FullName = s.FullName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -101,7 +101,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
                                //FullName = s.FullName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -131,7 +131,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Class = s.Class.ClassName,
                                AdmissionDate = s.AdmissionDate,
                                OtherName = s.OtherName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -160,7 +160,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             Hostel = s.Hostel.Name,
                             AdmissionDate = s.AdmissionDate,
                             OtherName = s.OtherName,
-                            id = s.Id.Value.ToString()
+                            id = s.Id.Value
                         }).ToListAsync();
         }
 
@@ -204,7 +204,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Hostel = s.Hostel.Name,
                                AdmissionDate = s.AdmissionDate,
                                OtherName = s.OtherName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -223,7 +223,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 Class = s.Class.ClassName,
                                 Hostel = s.Hostel.Name,
                                OtherName = s.OtherName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -255,7 +255,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                Class = s.Class.ClassName + s.Class.Section,
                                AdmissionDate = s.AdmissionDate,
                                OtherName = s.OtherName,
-                               id = s.Id.Value.ToString()
+                               id = s.Id.Value
                            }).ToListAsync();
         }
 
@@ -293,7 +293,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         /// <returns>Task of Int</returns>
         public int CountTotalNumberOfStudents()
         {
-            return db.Students.Where(x => x.FirstName != "").Count();
+            return db.Students.Count(x => x.FirstName != "");
         }
 
 
@@ -361,9 +361,25 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                   }).FirstOrDefaultAsync();
         }
 
-        public Task<Student> FindStudentById(int? id)
+        public async Task<Student> FindStudentById(int? id)
         {
-            throw new NotImplementedException();
+            return await db.Students.FindAsync(id.Value);
+        }
+
+        public async Task<StudentViewModel> GetStudentDetails(int? id)
+        {
+            return await db.Students.Where(s => s.Id == id.Value)
+                .Select(x => new StudentViewModel
+                {
+                    AdmissionDate = x.AdmissionDate,
+                    AdmissionNumber = x.AdmissionNumber,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    OtherName = x.OtherName,
+                    Hostel = x.Hostel.Name,
+                    Class = x.Class.ClassName,
+                    id = x.Id.Value
+                }).FirstOrDefaultAsync();
         }
     }
 }
