@@ -335,7 +335,6 @@
     <Compile Include="Abstractions\Entity.cs" />
     <Compile Include="Abstractions\IClassCommandManager.cs" />
     <Compile Include="Abstractions\IClassManager.cs" />
-    <Compile Include="Abstractions\ICommandRepository.cs" />
     <Compile Include="Abstractions\IEntity.cs" />
     <Compile Include="Abstractions\IGuardianCommandManager.cs" />
     <Compile Include="Abstractions\IGuardianQueryManager.cs" />
@@ -448,6 +447,10 @@
     <Compile Include="Migrations\201702151211341_v2.cs" />
     <Compile Include="Migrations\201702151211341_v2.Designer.cs">
       <DependentUpon>201702151211341_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702160849126_v3.cs" />
+    <Compile Include="Migrations\201702160849126_v3.Designer.cs">
+      <DependentUpon>201702160849126_v3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -768,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702151211341_v2.resx">
       <DependentUpon>201702151211341_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702160849126_v3.resx">
+      <DependentUpon>201702160849126_v3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

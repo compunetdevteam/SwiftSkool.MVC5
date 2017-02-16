@@ -29,7 +29,7 @@ namespace SwiftSkool.MVC5.Entities
         public string SubjectCode { get; private set; }
 
 
-        public IEnumerable<ApplicationUser> Teachers
+        public ICollection<ApplicationUser> Teachers
         {
             get
             {
@@ -37,7 +37,7 @@ namespace SwiftSkool.MVC5.Entities
             }
         }
 
-        public IEnumerable<Student> Students
+        public ICollection<Student> Students
         {
             get
             {

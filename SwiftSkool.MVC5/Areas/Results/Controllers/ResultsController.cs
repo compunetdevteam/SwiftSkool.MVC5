@@ -51,7 +51,7 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
 
             rim.SchoolSession = new SelectList(_ctx.Sessions, "Id", "SessionName");
             rim.Student = new SelectList(_ctx.Students, "Id", "FullName");
-            rim.Subject = new SelectList(_ctx.Subjects, "SubjectCode", "Name");
+            rim.Subject = new SelectList(_ctx.Subjects, "Id", "Name");
             return View(rim);
         }
 

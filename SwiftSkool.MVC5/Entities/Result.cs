@@ -38,7 +38,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public ScoreGrade ScoreGrade { get; private set; }
 
-        public IEnumerable<ContinuousAssessment> ContinuousAssessments
+        public ICollection<ContinuousAssessment> ContinuousAssessments
         {
             get
             {

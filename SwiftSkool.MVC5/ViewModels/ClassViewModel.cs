@@ -9,14 +9,17 @@
         public int ClassId { get; set; }
     }
 
-    public class CreateClassViewModel
+    public class CreateClassVM
     {
         public string ClassName { get; set; }
 
         public string Level { get; set; }
 
         public string Section { get; set; }
+    }
 
-
+    public class UpdateClassVM
+    {
+        
     }
 }

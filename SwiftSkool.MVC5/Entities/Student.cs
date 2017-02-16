@@ -105,7 +105,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public Address Address { get;  private set; }
 
-        public IEnumerable<Subject> Subjects
+        public ICollection<Subject> Subjects
         {
             get
             {
@@ -118,7 +118,7 @@ namespace SwiftSkool.MVC5.Entities
             }
         }
 
-        public IEnumerable<Payment> Payments
+        public ICollection<Payment> Payments
         {
             get
             {
@@ -126,7 +126,7 @@ namespace SwiftSkool.MVC5.Entities
             }
         }
 
-        public IEnumerable<Result> Results
+        public ICollection<Result> Results
         {
             get
             {
