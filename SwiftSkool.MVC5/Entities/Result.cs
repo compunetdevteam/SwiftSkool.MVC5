@@ -12,19 +12,19 @@ namespace SwiftSkool.MVC5.Entities
 
         }
 
-        public Result(Student student, Subject subject, SchoolSession session)
+        public Result(Student student, Subject subject, SchoolTerm term)
         {
-            if(student.Id != 0 && subject.Id != 0 && session.Id != 0)
+            if(student.Id != 0 && subject.Id != 0 && term.Id != 0)
             {
                 Student = student;
                 Subject = subject;
-                SchoolSession = session;
+                SchoolTerm = term;
             }
         }
 
-        public int SchoolSessionId { get; private set; }
+        public int SchoolTermId { get; private set; }
 
-        public SchoolSession SchoolSession { get; private set; }
+        public SchoolTerm SchoolTerm { get; private set; }
 
         public int StudentId { get; private set; }
 
@@ -38,17 +38,7 @@ namespace SwiftSkool.MVC5.Entities
 
         public ScoreGrade ScoreGrade { get; private set; }
 
-        public ICollection<ContinuousAssessment> ContinuousAssessments
-        {
-            get
-            {
-                return ContinuousAssessments.ToList(); //defensive copy of our sequence
-            }
-            private set
-            {
-
-            }
-        }
+        public ICollection<ContinuousAssessment> ContinuousAssessments { get; private set; }
 
         public double TermTotal { get; private set; }
 
@@ -60,9 +50,9 @@ namespace SwiftSkool.MVC5.Entities
 
         public string Status { get; private set; }
 
-        public void CalculateClassAverage(SchoolSession session)
+        public void CalculateClassAverage(SchoolTerm session)
         {
-            var result = ContinuousAssessments.Where(x => x.Result.SchoolSession == session).Sum(y => y.Score);
+            var result = ContinuousAssessments.Where(x => x.Result.SchoolTerm == session).Sum(y => y.Score);
             var subjectsoffered = Student.Subjects.Count();
         }
 

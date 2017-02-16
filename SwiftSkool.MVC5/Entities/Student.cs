@@ -105,34 +105,11 @@ namespace SwiftSkool.MVC5.Entities
 
         public Address Address { get;  private set; }
 
-        public ICollection<Subject> Subjects
-        {
-            get
-            {
-                return Subjects.ToList();//defensive copy
-            }
+        public ICollection<Subject> Subjects { get; private set; }
 
-            private set
-            {
+        public ICollection<Payment> Payments { get; private set; }
 
-            }
-        }
-
-        public ICollection<Payment> Payments
-        {
-            get
-            {
-                return Payments.ToList();//defensive copy
-            }
-        }
-
-        public ICollection<Result> Results
-        {
-            get
-            {
-                return Results.ToList(); //defensive copy
-            }
-        }
+        public ICollection<Result> Results { get; private set; }
 
         public Student PrepareStudent(string firstname, string lastname, string gender, DateTime dob,
             string passport,Address add)

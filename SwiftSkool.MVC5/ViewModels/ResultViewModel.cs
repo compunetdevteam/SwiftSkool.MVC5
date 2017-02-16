@@ -29,7 +29,7 @@ namespace SwiftSkool.MVC5.ViewModels
                 .ForMember(d => d.CA, opt =>
                 opt.MapFrom(q => Mapper.Map<ContinuousAssessment, CAViewModel>
                 (q.ContinuousAssessments.Single())))
-                .ForMember(d => d.Session, opt => opt.MapFrom(src => src.SchoolSession.SessionName));            CreateMap<Student, StudentViewModel>()
+                .ForMember(d => d.Session, opt => opt.MapFrom(src => src.SchoolTerm.SchoolSession.SessionName));            CreateMap<Student, StudentViewModel>()
                 .ForMember(dest => dest.OtherName, opt => opt.MapFrom(
                     q => q.FirstName + " " + q.LastName)).ReverseMap();
 
@@ -189,22 +189,20 @@ namespace SwiftSkool.MVC5.ViewModels
 
     public class CreateResultViewModel
     {
-        [Display(Name ="Student")]
+        [Display(Name ="Select Student :")]
         public int StudentId { get; set; }
 
         public SelectList Student { get; set; }
 
-        [Display(Name = "Subject")]
+        [Display(Name = "Select Subject :")]
         public int SubjectId { get; set; }
 
         public SelectList Subject { get; set; }
 
-        [Display(Name ="Session")]
-        public int SessionId { get; set; }
+        [Display(Name ="Select Term :")]
+        public int SchoolTermsId { get; set; }
 
-        public SelectList SchoolSession { get; set; }
-
-        public Term Term { get; set; }
+        public SelectList SchoolTerms { get; set; }
     }
 
     public class UpdateResultViewModel

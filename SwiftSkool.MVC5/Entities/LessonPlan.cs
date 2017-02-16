@@ -7,9 +7,9 @@ namespace SwiftSkool.MVC5.Entities
 {
     public class LessonPlan : Entity
     {
-        public SchoolSession Session { get; set; }
+        public SchoolTerm Term { get; set; }
 
-        public int SchoolSessionId { get; set; }
+        public int SchoolTermId { get; set; }
 
         public string ClassLevel { get; set; }
 

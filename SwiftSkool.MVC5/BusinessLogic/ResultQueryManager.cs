@@ -24,7 +24,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         public IQueryable<Result> GetResults()
         {
             return   _db.Results.Include(r => r.ContinuousAssessments)
-                                    .Include(r => r.SchoolSession)
+                                    .Include(r => r.SchoolTerm)
                                     .Include(r => r.ScoreGrade)
                                     .Include(r => r.Student)
                                     .Include(r => r.Subject);                          
@@ -72,9 +72,9 @@ namespace SwiftSkool.MVC5.BusinessLogic
                 },
 
                 ResultId = query.Id.Value,
-                Session = query.SchoolSession.SessionName,
+                Session = query.SchoolTerm.SchoolSession.SessionName,
                 ClassAverage = query.ClassAverage,
-                Term = query.SchoolSession.Term.ToString(),
+                Term = query.SchoolTerm.TermName,
                 Grade = query.Subject.ScoreGrade.Grade.RatingGrade,
                 Position = query.Position,
                 TermTotal = query.TermTotal
@@ -95,7 +95,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             .Include(r => r.Student.Class)
                             .Include(r => r.Subject)
                             .Include(r => r.ContinuousAssessments)
-                            .Include(r => r.SchoolSession)
+                            .Include(r => r.SchoolTerm)
                             .Where(r => r.Subject.Name.Contains(name))
                             .Select(r => new ResultViewModel
                             {
@@ -111,15 +111,15 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 },
                                 CA = new CAViewModel
                                 {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).SingleOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).SingleOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).SingleOrDefault().Score
+                                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                 },
 
                                 ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
+                                Session = r.SchoolTerm.SchoolSession.SessionName,
                                 ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
+                                Term = r.SchoolTerm.TermName,
                                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                 Position = r.Position,
                                 TermTotal = r.TermTotal
@@ -138,7 +138,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     .Include(s => s.Student.Class)
                                     .Include(r => r.Subject)
                                     .Include(r => r.ContinuousAssessments)
-                                    .Include(r => r.SchoolSession)
+                                    .Include(r => r.SchoolTerm)
                                     .OrderBy(r => r.Student.FirstName)
                                     .Take(10)
                                     .Select(r => new ResultViewModel
@@ -161,9 +161,9 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                             Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                         },
                                         ResultId = r.Id.Value,
-                                        Session = r.SchoolSession.SessionName,
+                                        Session = r.SchoolTerm.SchoolSession.SessionName,
                                         ClassAverage = r.ClassAverage,
-                                        Term = r.SchoolSession.Term.ToString(),
+                                        Term = r.SchoolTerm.TermName,
                                         Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                         Position = r.Position,
                                         TermTotal = r.TermTotal
@@ -181,7 +181,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
             return await _db.Results
                             .Include(r => r.Student)
                             .Include(r => r.Subject)
-                            .Include(r => r.SchoolSession)
+                            .Include(r => r.SchoolTerm)
                             .Where(r => r.Student.FullName.Contains(name))
                             .Select(r => new ResultViewModel
                             {
@@ -197,14 +197,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 },
                                 CA = new CAViewModel
                                 {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                 },
                                 ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
+                                Session = r.SchoolTerm.SchoolSession.SessionName,
                                 ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
+                                Term = r.SchoolTerm.TermName,
                                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                 Position = r.Position,
                                 TermTotal = r.TermTotal
@@ -218,7 +218,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     .Include(s => s.Student.Class)
                                     .Include(r => r.Subject)
                                     .Include(r => r.ContinuousAssessments)
-                                    .Include(r => r.SchoolSession)
+                                    .Include(r => r.SchoolTerm)
                                     .Select(r => new ResultViewModel
                                     {
                                         Student = new StudentViewModel
@@ -240,9 +240,9 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                             Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId == r.Id.Value).Score
                                         },
                                         ResultId = r.Id.Value,
-                                        Session = r.SchoolSession.SessionName,
+                                        Session = r.SchoolTerm.SchoolSession.SessionName,
                                         ClassAverage = r.ClassAverage,
-                                        Term = r.SchoolSession.Term.ToString(),
+                                        Term = r.SchoolTerm.TermName,
                                         Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                         Position = r.Position,
                                         TermTotal = r.TermTotal,
@@ -263,35 +263,35 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     .Include(s => s.Student.Class)
                                     .Include(r => r.Subject)
                                     .Include(r => r.ContinuousAssessments)
-                                    .Include(r => r.SchoolSession)
-                            .Where(r => r.SchoolSession.SessionName.Contains(sessionname))
-                            .Select(r => new ResultViewModel
-                            {
-                                Student = new StudentViewModel
-                                {
-                                    AdmissionDate = r.Student.AdmissionDate,
-                                    AdmissionNumber = r.Student.AdmissionNumber,
-                                    Class = r.Student.Class.ClassName +
-                                          r.Student.Class.Level + r.Student.Class.Section,
-                                    FirstName = r.Student.FirstName,
-                                    LastName = r.Student.LastName,
-                                    Hostel = r.Student.Hostel.Name
-                                },
+                                    .Include(r => r.SchoolTerm)
+                                    .Where(r => r.SchoolTerm.SchoolSession.SessionName.Contains(sessionname))
+                                    .Select(r => new ResultViewModel
+                                    {
+                                        Student = new StudentViewModel
+                                        {
+                                            AdmissionDate = r.Student.AdmissionDate,
+                                            AdmissionNumber = r.Student.AdmissionNumber,
+                                            Class = r.Student.Class.ClassName +
+                                                  r.Student.Class.Level + r.Student.Class.Section,
+                                            FirstName = r.Student.FirstName,
+                                            LastName = r.Student.LastName,
+                                            Hostel = r.Student.Hostel.Name
+                                        },
 
-                                CA = new CAViewModel
-                                {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
-                                },
-                                ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
-                                ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
-                                Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
-                                Position = r.Position,
-                                TermTotal = r.TermTotal
-                            }).ToListAsync();
+                                        CA = new CAViewModel
+                                        {
+                                            Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                            Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                            Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
+                                        },
+                                        ResultId = r.Id.Value,
+                                        Session = r.SchoolTerm.SchoolSession.SessionName,
+                                        ClassAverage = r.ClassAverage,
+                                        Term = r.SchoolTerm.TermName,
+                                        Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
+                                        Position = r.Position,
+                                        TermTotal = r.TermTotal
+                                    }).ToListAsync();
         }
 
 
@@ -307,7 +307,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                     .Include(s => s.Student.Class)
                                     .Include(r => r.Subject)
                                     .Include(r => r.ContinuousAssessments)
-                                    .Include(r => r.SchoolSession)
+                                    .Include(r => r.SchoolTerm)
                                     .Where(r => r.Student.FullName.Contains(name))
                                     .Select(r => new ResultViewModel
                                     {
@@ -323,14 +323,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                         },
                                         CA = new CAViewModel
                                         {
-                                            Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                            Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                            Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                            Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                            Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                            Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                         },
                                         ResultId = r.Id.Value,
-                                        Session = r.SchoolSession.SessionName,
+                                        Session = r.SchoolTerm.SchoolSession.SessionName,
                                         ClassAverage = r.ClassAverage,
-                                        Term = r.SchoolSession.Term.ToString(),
+                                        Term = r.SchoolTerm.TermName,
                                         Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                         Position = r.Position,
                                         TermTotal = r.TermTotal
@@ -343,8 +343,8 @@ namespace SwiftSkool.MVC5.BusinessLogic
             return await _db.Results
                             .Include(r => r.Student)
                             .Include(r => r.Subject)
-                            .Include(r => r.SchoolSession)
-                            .Where(r => r.SchoolSession.Term.ToString().Contains(termname))
+                            .Include(r => r.SchoolTerm)
+                            .Where(r => r.SchoolTerm.TermName.Contains(termname))
                             .Take(20)
                             .Select(r => new ResultViewModel
                             {
@@ -361,14 +361,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
                                 CA = new CAViewModel
                                 {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                 },
                                 ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
+                                Session = r.SchoolTerm.SchoolSession.SessionName,
                                 ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
+                                Term = r.SchoolTerm.TermName,
                                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                 Position = r.Position,
                                 TermTotal = r.TermTotal
@@ -381,7 +381,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             .Include(r => r.Student)
                             .Include(s => s.Student.Class)
                             .Include(r => r.Subject)
-                            .Include(r => r.SchoolSession)
+                            .Include(r => r.SchoolTerm)
                             .Include(r => r.ContinuousAssessments)
                             .Where(r => r.Student.FullName.Contains(studentname))
                             .Select(r => new ResultViewModel
@@ -399,20 +399,20 @@ namespace SwiftSkool.MVC5.BusinessLogic
 
                                 CA = new CAViewModel
                                 {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                 },
                                 ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
+                                Session = r.SchoolTerm.SchoolSession.SessionName,
                                 ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
+                                Term = r.SchoolTerm.TermName,
                                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                 Position = r.Position,
                                 TermTotal = r.TermTotal
                             }).ToListAsync();
         }
-
+        
 
         public async Task<List<StudentResultCAViewModel>> GetCABySingleStudent(string caname)
         {
@@ -420,8 +420,8 @@ namespace SwiftSkool.MVC5.BusinessLogic
                               .Include(r => r.Student)
                               .Include(r => r.Subject)
                               .Include(r => r.ContinuousAssessments)
-                              .Where(r => r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name == caname)
-                              .OrderBy(r => r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name)
+                              .Where(r => r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name == caname)
+                              .OrderBy(r => r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name)
                               .Take(10)
                               .Select(r => new StudentResultCAViewModel
                               {
@@ -441,7 +441,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                  .Include(r => r.Student)
                                  .Include(s => s.Student.Class)
                                  .Include(r => r.Subject)
-                                 .Include(r => r.SchoolSession)
+                                 .Include(r => r.SchoolTerm)
                                  .Include(r => r.ContinuousAssessments)
                                  .Where(r => r.Id == id)
                                  .OrderBy(r => r.TermTotal)
@@ -460,14 +460,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
                 },
                 CA = new CAViewModel
                 {
-                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                 },
                 ResultId = r.Id.Value,
-                Session = r.SchoolSession.SessionName,
+                Session = r.SchoolTerm.SchoolSession.SessionName,
                 ClassAverage = r.ClassAverage,
-                Term = r.SchoolSession.Term.ToString(),
+                Term = r.SchoolTerm.TermName,
                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                 Position = r.Position,
                 TermTotal = r.TermTotal
@@ -479,7 +479,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         {
             var query = await _db.Results.Include(r => r.Student)
                                    .Include(s => s.Student.Class)
-                                   .Include(r => r.SchoolSession)
+                                   .Include(r => r.SchoolTerm)
                                    .Include(r => r.Subject)
                                    .Include(r => r.ContinuousAssessments)
                                    .Where(r => r.Id == id)
@@ -499,14 +499,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
                 },
                 CA = new CAViewModel
                 {
-                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                 },
                 ResultId = r.Id.Value,
-                Session = r.SchoolSession.SessionName,
+                Session = r.SchoolTerm.SchoolSession.SessionName,
                 ClassAverage = r.ClassAverage,
-                Term = r.SchoolSession.Term.ToString(),
+                Term = r.SchoolTerm.TermName,
                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                 Position = r.Position,
                 TermTotal = r.TermTotal
@@ -526,7 +526,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
                             .Include(r => r.Student)
                             .Include(s => s.Student.Class)
                             .Include(r => r.Subject)
-                            .Include(r => r.SchoolSession)
+                            .Include(r => r.SchoolTerm)
                             .Include(r => r.ContinuousAssessments)
                             .OrderBy(r => r.UpdatedAt)
                             .Take(20)
@@ -550,14 +550,14 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                 },
                                 CA = new CAViewModel
                                 {
-                                    Id = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Id.Value,
-                                    Name = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Name,
-                                    Score = r.ContinuousAssessments.Where(x => x.ResultId.Value == r.Id.Value).FirstOrDefault().Score
+                                    Id = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Id.Value,
+                                    Name = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Name,
+                                    Score = r.ContinuousAssessments.FirstOrDefault(x => x.ResultId.Value == r.Id.Value).Score
                                 },
                                 ResultId = r.Id.Value,
-                                Session = r.SchoolSession.SessionName,
+                                Session = r.SchoolTerm.SchoolSession.SessionName,
                                 ClassAverage = r.ClassAverage,
-                                Term = r.SchoolSession.Term.ToString(),
+                                Term = r.SchoolTerm.TermName,
                                 Grade = r.Subject.ScoreGrade.Grade.RatingGrade,
                                 Position = r.Position,
                                 TermTotal = r.TermTotal
@@ -575,23 +575,23 @@ namespace SwiftSkool.MVC5.BusinessLogic
             var results = await _db.Results.Include(r => r.Subject)
                                      .Include(r => r.Student)
                                      .Include(r => r.Student.Class)
-                                     .Include(r => r.SchoolSession)
+                                     .Include(r => r.SchoolTerm)
                                      .Where(r => r.Subject.Name == subjectName && r.Student.Class.ClassName.Contains(className)
                                      && r.Student.Class.Section.Contains(className) && r.Student.Class.Level.Contains(className)
                                      && r.Student.FullName.Contains(studentname))
                                      .ToListAsync();
 
-            var firsttermtotal = results.FirstOrDefault(x => x.SchoolSession.Term == Entities.Term.First).TermTotal;
-            var secondtermtotal = results.FirstOrDefault(x => x.SchoolSession.Term == Entities.Term.Second).TermTotal;
-            var thirdtermtotal = results.FirstOrDefault(x => x.SchoolSession.Term == Entities.Term.Third).TermTotal;
+            var firsttermtotal = results.FirstOrDefault(x => x.SchoolTerm.TermName == "First Term").TermTotal;
+            var secondtermtotal = results.FirstOrDefault(x => x.SchoolTerm.TermName == "Second Term").TermTotal;
+            var thirdtermtotal = results.FirstOrDefault(x => x.SchoolTerm.TermName == "Third Term").TermTotal;
             return firsttermtotal + secondtermtotal + thirdtermtotal / 3;
         }
 
-        public double CalculateFirstTermTotalPerStudent(List<Entities.Result> results, string studentname)
+        public double CalculateFirstTermTotalPerStudent(List<Result> results, string studentname)
         {
             double termTotal = 0.0;
 
-            if(results.All(x => x.SchoolSession.Term == Entities.Term.First) 
+            if(results.All(x => x.SchoolTerm.TermName.Contains("First Term")) 
                 && results.All(x => x.Student.FullName.Contains(studentname)))
             {
                 foreach(var result in results)
@@ -603,10 +603,42 @@ namespace SwiftSkool.MVC5.BusinessLogic
             throw new ArgumentException("Either the results passed isn't valid or a student name was not supplied!");
         }
 
+        public double CalculateSecondTermTotalPerStudent(List<Result> results, string studentname)
+        {
+            double termTotal = 0.0;
+
+            if (results.All(x => x.SchoolTerm.TermName.Contains("Second Term"))
+                && results.All(x => x.Student.FullName.Contains(studentname)))
+            {
+                foreach (var result in results)
+                {
+                    termTotal += result.TermTotal;
+                }
+                return termTotal;
+            }
+            throw new ArgumentException("Either the results passed isn't valid or a student name was not supplied!");
+        }
+
+        public double CalculateThirdTermTotalPerStudent(List<Result> results, string studentname)
+        {
+            double termTotal = 0.0;
+
+            if (results.All(x => x.SchoolTerm.TermName.Contains("Third Term"))
+                && results.All(x => x.Student.FullName.Contains(studentname)))
+            {
+                foreach (var result in results)
+                {
+                    termTotal += result.TermTotal;
+                }
+                return termTotal;
+            }
+            throw new ArgumentException("Either the results passed isn't valid or a student name was not supplied!");
+        }
+
         public async Task<double> CalculateClassHighestPerSubject(string classname, string subjectname, string term)
         {
             var result = await _db.Results.Include(r => r.Subject)
-                                          .Include(r => r.SchoolSession)
+                                          .Include(r => r.SchoolTerm)
                                           .Include(r => r.ContinuousAssessments)
                                           .Include(r => r.Student)
                                           .Include(s => s.Student.Class)
@@ -614,16 +646,16 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                           r.Student.Class.Level.Contains(classname) &&
                                           r.Student.Class.Section.Contains(classname) &&
                                           r.Subject.Name == subjectname &&
-                                          r.SchoolSession.Term.ToString() == term)
+                                          r.SchoolTerm.TermName == term)
                                           .Skip(0)
                                           .Take(1).SingleOrDefaultAsync();
-            return result.ContinuousAssessments.SingleOrDefault().Score;
+            return result.ContinuousAssessments.FirstOrDefault().Score;
         }
 
         public async Task<double> CalculateClassLowestPerSubject(string classname, string subjectname, string term)
         {
             var result = await _db.Results.Include(r => r.Subject)
-                                          .Include(r => r.SchoolSession)
+                                          .Include(r => r.SchoolTerm)
                                           .Include(r => r.ContinuousAssessments)
                                           .Include(r => r.Student)
                                           .Include(s => s.Student.Class)
@@ -631,11 +663,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
                                           r.Student.Class.Level.Contains(classname) &&
                                           r.Student.Class.Section.Contains(classname) &&
                                           r.Subject.Name == subjectname &&
-                                          r.SchoolSession.Term.ToString() == term)
+                                          r.SchoolTerm.TermName == term)
                                           .OrderByDescending(r => r.ContinuousAssessments.FirstOrDefault().Score)
                                           .Skip(0)
-                                          .Take(1).SingleOrDefaultAsync();
-            return result.ContinuousAssessments.SingleOrDefault().Score;
+                                          .Take(1).FirstOrDefaultAsync();
+            return result.ContinuousAssessments.FirstOrDefault().Score;
         }
 
         public async Task<int> CountNumberOfResultsAsync()

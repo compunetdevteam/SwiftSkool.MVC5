@@ -34,11 +34,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
             }
             var student = await _db.Students.FindAsync(result.StudentId);
             var subject = await _db.Subjects.FindAsync(result.SubjectId);
-            var session = await _db.Sessions.FindAsync(result.SessionId);
+            var term = await _db.SchoolTerms.FindAsync(result.SchoolTermsId);
 
             try
             {
-                var newresult = new Result(student, subject, session);
+                var newresult = new Result(student, subject, term);
                 _db.Results.Add(newresult);
                 return await _db.SaveChangesAsync();
             }

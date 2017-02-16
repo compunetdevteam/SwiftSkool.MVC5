@@ -68,6 +68,8 @@ namespace SwiftSkool.MVC5.Models
                    .HasKey(s => s.Id);
             builder.Entity<LocalGovernment>()
                    .HasKey(l => l.Id);
+            builder.Entity<SchoolTerm>()
+                   .HasKey(st => st.Id);
 
             builder.Entity<Allergy>()
                    .HasRequired(a => a.MedicalHistory)
@@ -96,7 +98,7 @@ namespace SwiftSkool.MVC5.Models
             //       .WillCascadeOnDelete(false);
             builder.Entity<ContinuousAssessment>()
                    .HasRequired(x => x.Result)
-                   .WithMany(r => (List<ContinuousAssessment>)r.ContinuousAssessments)
+                   .WithMany(r => r.ContinuousAssessments)
                    .WillCascadeOnDelete(false);
             builder.Entity<Disability>()
                    .HasRequired(d => d.MedicalHistory)
@@ -118,16 +120,13 @@ namespace SwiftSkool.MVC5.Models
                    .WithRequired(s => s.Guardian)
                    .HasForeignKey(s => s.GuardianId)
                    .WillCascadeOnDelete(false);
-            //builder.Entity<Hostel>()
-            //       .HasRequired(h => h.Patron)
-            //       .WithOptional().WillCascadeOnDelete(false);
             builder.Entity<Illness>()
                    .HasRequired(i => i.MedicalHistory)
                    .WithMany(m => m.Illnesses)
                    .HasForeignKey(i => i.MedicalHistoryId)
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
-                   .HasRequired(l => l.Session)
+                   .HasRequired(l => l.Term)
                    .WithOptional()
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
@@ -150,9 +149,10 @@ namespace SwiftSkool.MVC5.Models
                    .HasRequired(r => r.BehaviourActivity)
                    .WithRequiredPrincipal(b => b.Rating)
                    .WillCascadeOnDelete(false);
+
             builder.Entity<Result>()
                    .HasRequired(r => r.Student)
-                   .WithMany(s => (List<Result>)s.Results)
+                   .WithMany(s => s.Results)
                    .HasForeignKey(r => r.StudentId)
                    .WillCascadeOnDelete(false);
             builder.Entity<Result>()
@@ -169,11 +169,22 @@ namespace SwiftSkool.MVC5.Models
             builder.Entity<School>()
                    .HasMany(s => s.Staff)
                    .WithOptional().WillCascadeOnDelete(false);
+
             builder.Entity<SchoolSession>()
                    .HasOptional(s => s.School)
                    .WithMany(s => s.Sessions)
                    .HasForeignKey(s => s.SchoolId)
                    .WillCascadeOnDelete(false);
+
+            builder.Entity<SchoolTerm>()
+                   .HasRequired(st => st.SchoolSession)
+                   .WithMany(x => x.SchoolTerms)
+                   .WillCascadeOnDelete(false);
+            builder.Entity<SchoolTerm>()
+                    .HasMany(st => st.Results)
+                    .WithRequired(r => r.SchoolTerm)
+                    .WillCascadeOnDelete(false);
+
             builder.Entity<ScoreGrade>()
                    .HasRequired(s => s.Grade)
                    .WithOptional()
@@ -220,6 +231,8 @@ namespace SwiftSkool.MVC5.Models
         public DbSet<Payment> Payments { get; set; }
 
         public DbSet<SchoolSession> Sessions { get; set; }
+
+        public DbSet<SchoolTerm> SchoolTerms { get; set; }
 
         public DbSet<ContinuousAssessment> ContinuousAssessment { get; set; }
 

@@ -136,7 +136,7 @@ namespace SwiftSkool.MVC5.BusinessLogic
         public async Task<List<LessonPlanClassViewModel>> GetLessonPlanByClassName(string classname)
         {
             return await db.LessonPlans
-                           .Include(l => l.Session)
+                           .Include(l => l.Term)
                            .Where(l => l.Class.Contains(classname))
                            .OrderBy(l => l.Class + l.ClassLevel)
                            .Skip(0)
@@ -189,16 +189,16 @@ namespace SwiftSkool.MVC5.BusinessLogic
         public async Task<List<LessonPlanSessionViewModel>> GetLessonPlanByTerm(string termname)
         {
             return await db.LessonPlans
-                     .Include(l => l.Session)
+                     .Include(l => l.Term)
                      .Include(l => l.Subject)
-                     .Where(l => l.Session.Term.ToString().Contains(termname))
+                     .Where(l => l.Term.TermName.Contains(termname))
                      .Select(p => new LessonPlanSessionViewModel
                      {
                          PlanDescription = p.PlanDescription,
                          TeacherName = p.Teacher.FirstName + " " + p.Teacher.LastName,
-                         Session = p.Session.SessionName,
+                         Session = p.Term.SchoolSession.SessionName,
                          SubjectName = p.Subject.Name,
-                         Term = p.Session.Term.ToString(),
+                         Term = p.Term.TermName,
                          Week = p.Week
                      }).ToListAsync();
         }
@@ -206,17 +206,17 @@ namespace SwiftSkool.MVC5.BusinessLogic
         public async Task<List<LessonPlanSessionViewModel>> GetLessonPlanBySessionName(string session)
         {
             return await db.LessonPlans
-                     .Include(l => l.Session)
+                     .Include(l => l.Term)
                      .Include(l => l.Subject)
-                     .Where(l => l.Session.SessionName.Contains(session))
+                     .Where(l => l.Term.SchoolSession.SessionName.Contains(session))
                      .Select(p => new LessonPlanSessionViewModel
                     {
                         PlanDescription = p.PlanDescription,
                         TeacherName = p.Teacher.FirstName + " " + p.Teacher.LastName,
-                        Session = p.Session.SessionName,
+                        Session = p.Term.SchoolSession.SessionName,
                         SubjectName = p.Subject.Name,
-                        Term = p.Session.Term.ToString(),
-                        Week = p.Week
+                         Term = p.Term.TermName,
+                         Week = p.Week
                     }).ToListAsync();
         }
 

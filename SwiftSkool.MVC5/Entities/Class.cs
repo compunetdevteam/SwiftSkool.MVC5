@@ -1,9 +1,11 @@
-﻿using SwiftSkool.Abstractions;
+﻿using System;
+using SwiftSkool.Abstractions;
 using SwiftSkool.MVC5.Abstractions;
 using SwiftSkool.MVC5.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SwiftSkool.MVC5.ViewModels;
 
 namespace SwiftSkool.MVC5.Entities
 {
@@ -37,13 +39,13 @@ namespace SwiftSkool.MVC5.Entities
         public string Section { get; private set; }
 
 
-        public int? TeacherId { get; private set; }
+        public int? FormTeacherId { get; private set; }
 
         public ApplicationUser FormTeacher { get; private set; }
 
-        public List<Student> Students { get; private set; }
+        public ICollection<Student> Students { get; private set; }
 
-        public IEnumerable<Subject> Subjects
+        public ICollection<Subject> Subjects
         {
             get
             {
@@ -66,6 +68,43 @@ namespace SwiftSkool.MVC5.Entities
             if (!subjects.Any())
                 return;
             Subjects = subjects;
+        }
+
+        public Class AddSubjectToClass(Subject subject)
+        {
+            if (subject == null)
+                throw new ArgumentNullException("Please add a valid subject!");
+            Subjects.Add(subject);
+            return this;
+        }
+
+        public Class DiscontinueSubjectFromClass(Subject subject)
+        {
+            if (subject == null)
+                throw new ArgumentNullException("Only a valid subject can be Discontinued!");
+            Subjects.Remove(subject);
+            return this;
+        }
+
+        public Class ChangeFormTeacher(ApplicationUser formTeacher)
+        {
+            if(formTeacher == null)
+                throw new ArgumentNullException("Only a valid Teacher should be assigned to a class");
+            FormTeacher = formTeacher;
+            return this;
+        }
+
+        public Class ChangeClassName(UpdateClassVM model)
+        {
+            ClassName = model.ClassName;
+            Level = model.Level;
+            Section = model.Section;
+            return this;
+        }
+
+        public Class FinishedChangingSubjects()
+        {
+            return this;
         }
 
     }

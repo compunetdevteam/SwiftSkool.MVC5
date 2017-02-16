@@ -36,19 +36,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SessionId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SchoolTermsId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SessionId, Model.SchoolSession, string.Empty,
+                @Html.DropDownListFor(model => model.SchoolTermsId, Model.SchoolTerms, string.Empty,
                new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SessionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Term, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Term, null, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SessionId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.SchoolTermsId, "", new { @class = "text-danger" })
             </div>
         </div>
 

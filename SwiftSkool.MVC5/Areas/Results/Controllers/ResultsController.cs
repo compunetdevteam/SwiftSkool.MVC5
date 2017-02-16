@@ -49,7 +49,7 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
         {
             var rim = new CreateResultViewModel();
 
-            rim.SchoolSession = new SelectList(_ctx.Sessions, "Id", "SessionName");
+            rim.SchoolTerms = new SelectList(_ctx.SchoolTerms, "Id", "TermName");
             rim.Student = new SelectList(_ctx.Students, "Id", "FullName");
             rim.Subject = new SelectList(_ctx.Subjects, "Id", "Name");
             return View(rim);
@@ -77,7 +77,7 @@ namespace SwiftSkool.MVC5.Areas.Results.Controllers
                 throw;
             }
 
-            model.SchoolSession = new SelectList(_ctx.Sessions, "Id", "SessionName", model.SessionId);
+            model.SchoolTerms = new SelectList(_ctx.Sessions, "Id", "SessionName", model.SchoolTermsId);
             model.Student = new SelectList(_ctx.Students, "Id", "FirstName", model.StudentId);
             model.Subject = new SelectList(_ctx.Subjects, "Id", "Name", model.SubjectId);
             return View(model);

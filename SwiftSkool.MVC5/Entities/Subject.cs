@@ -29,21 +29,9 @@ namespace SwiftSkool.MVC5.Entities
         public string SubjectCode { get; private set; }
 
 
-        public ICollection<ApplicationUser> Teachers
-        {
-            get
-            {
-                return Teachers.ToList();
-            }
-        }
+        public ICollection<ApplicationUser> Teachers { get; private set; }
 
-        public ICollection<Student> Students
-        {
-            get
-            {
-                return Students.ToList(); //Defensive Copy
-            }
-        }
+        public ICollection<Student> Students { get; private set; }
 
         public int? ScoreGradeId { get; private set; }
 

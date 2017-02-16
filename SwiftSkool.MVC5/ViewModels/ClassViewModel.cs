@@ -1,4 +1,7 @@
-﻿namespace SwiftSkool.MVC5.ViewModels
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+
+namespace SwiftSkool.MVC5.ViewModels
 {
     public class ClassViewModel
     {
@@ -20,6 +23,21 @@
 
     public class UpdateClassVM
     {
-        
+        public string ClassName { get; set; }
+
+        public string Level { get; set; }
+
+        public string Section { get; set; }
+
+        public int ClassId { get; set; }
+
+        public int FormTeacherId { get; set; }
+
+        public SelectList FormTeacher { get; set; }
+
+        public IEnumerable<SelectListItem> Subjects { get; set; }
+
+        public IEnumerable<SelectListItem> Students { get; set; }
+
     }
 }

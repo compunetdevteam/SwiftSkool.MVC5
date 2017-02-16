@@ -38,8 +38,8 @@ namespace SwiftSkool.MVC5.Migrations
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Students", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Students", t => t.StudentId)
+                .Index(t => t.StudentId);
             
             CreateTable(
                 "dbo.Disabilities",
@@ -143,9 +143,9 @@ namespace SwiftSkool.MVC5.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Classes", t => t.ClassId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.TeacherId)
                 .ForeignKey("dbo.SchoolSessions", t => t.SessionId, cascadeDelete: true)
-                .Index(t => t.Id)
+                .Index(t => t.TeacherId)
                 .Index(t => t.SessionId)
                 .Index(t => t.ClassId);
             
@@ -157,16 +157,15 @@ namespace SwiftSkool.MVC5.Migrations
                         Level = c.String(),
                         ClassName = c.String(),
                         Section = c.String(),
-                        TeacherId = c.Int(),
+                        FormTeacherId = c.Int(),
                         CreatedBy = c.String(maxLength: 50),
                         CreatedAt = c.DateTime(),
                         ModifiedBy = c.String(),
                         UpdatedAt = c.DateTime(),
-                        FormTeacher_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.FormTeacher_Id)
-                .Index(t => t.FormTeacher_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.FormTeacherId)
+                .Index(t => t.FormTeacherId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -179,7 +178,7 @@ namespace SwiftSkool.MVC5.Migrations
                         Address_HouseNumber = c.String(),
                         Address_City = c.String(),
                         SchoolId = c.Int(),
-                        HostelId = c.Int(nullable: false),
+                        HostelId = c.Int(),
                         FirstName = c.String(),
                         FullName = c.String(),
                         LastName = c.String(),
@@ -204,7 +203,7 @@ namespace SwiftSkool.MVC5.Migrations
                         School_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Hostels", t => t.HostelId, cascadeDelete: true)
+                .ForeignKey("dbo.Hostels", t => t.HostelId)
                 .ForeignKey("dbo.Schools", t => t.School_Id)
                 .ForeignKey("dbo.Schools", t => t.SchoolId)
                 .ForeignKey("dbo.States", t => t.StateId)
@@ -248,7 +247,7 @@ namespace SwiftSkool.MVC5.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SchoolSessionId = c.Int(nullable: false),
+                        SchoolTermId = c.Int(nullable: false),
                         ClassLevel = c.String(),
                         Class = c.String(),
                         Week = c.Int(nullable: false),
@@ -267,49 +266,11 @@ namespace SwiftSkool.MVC5.Migrations
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SchoolSessions", t => t.Id)
-                .ForeignKey("dbo.Subjects", t => t.Id)
+                .ForeignKey("dbo.Subjects", t => t.SubjectId)
                 .ForeignKey("dbo.AspNetUsers", t => t.TeacherId)
-                .Index(t => t.Id)
+                .ForeignKey("dbo.SchoolTerms", t => t.SchoolTermId)
+                .Index(t => t.SubjectId)
                 .Index(t => t.TeacherId);
-            
-            CreateTable(
-                "dbo.SchoolSessions",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SessionName = c.String(),
-                        Term = c.Int(nullable: false),
-                        TermStarts = c.DateTime(nullable: false),
-                        TermEnds = c.DateTime(nullable: false),
-                        SchoolId = c.Int(),
-                        CreatedBy = c.String(maxLength: 50),
-                        CreatedAt = c.DateTime(),
-                        ModifiedBy = c.String(),
-                        UpdatedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Schools", t => t.SchoolId)
-                .Index(t => t.SchoolId);
-            
-            CreateTable(
-                "dbo.Schools",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Address = c.String(),
-                        Logo = c.String(),
-                        OwnerName = c.String(),
-                        SchoolMotto = c.String(),
-                        Email = c.String(),
-                        PhoneNumber = c.String(),
-                        CreatedBy = c.String(maxLength: 50),
-                        CreatedAt = c.DateTime(),
-                        ModifiedBy = c.String(),
-                        UpdatedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Subjects",
@@ -325,11 +286,11 @@ namespace SwiftSkool.MVC5.Migrations
                         CreatedAt = c.DateTime(),
                         ModifiedBy = c.String(),
                         UpdatedAt = c.DateTime(),
-                        ApplicationUser_Id = c.Int(),
+                        Class_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
-                .Index(t => t.ApplicationUser_Id);
+                .ForeignKey("dbo.Classes", t => t.Class_Id)
+                .Index(t => t.Class_Id);
             
             CreateTable(
                 "dbo.ScoreGrades",
@@ -348,9 +309,9 @@ namespace SwiftSkool.MVC5.Migrations
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Ratings", t => t.Id)
-                .ForeignKey("dbo.Subjects", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Ratings", t => t.RatingId)
+                .ForeignKey("dbo.Subjects", t => t.SubjectId)
+                .Index(t => t.RatingId);
             
             CreateTable(
                 "dbo.Ratings",
@@ -380,8 +341,8 @@ namespace SwiftSkool.MVC5.Migrations
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Ratings", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Ratings", t => t.RatingId)
+                .Index(t => t.RatingId);
             
             CreateTable(
                 "dbo.KeyToRatings",
@@ -407,8 +368,116 @@ namespace SwiftSkool.MVC5.Migrations
                         UpdatedAt = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BehaviourActivities", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.BehaviourActivities", t => t.BehaviourActivityId)
+                .Index(t => t.BehaviourActivityId);
+            
+            CreateTable(
+                "dbo.SchoolTerms",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        TermName = c.String(),
+                        TermStarts = c.DateTime(),
+                        TermEnds = c.DateTime(),
+                        MidTermBreak = c.Boolean(nullable: false),
+                        MidTermStarts = c.DateTime(),
+                        MidTermEnds = c.DateTime(),
+                        SchoolSessionId = c.Int(nullable: false),
+                        CreatedBy = c.String(maxLength: 50),
+                        CreatedAt = c.DateTime(),
+                        ModifiedBy = c.String(),
+                        UpdatedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.SchoolSessions", t => t.SchoolSessionId)
+                .Index(t => t.SchoolSessionId);
+            
+            CreateTable(
+                "dbo.Results",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SchoolTermId = c.Int(nullable: false),
+                        StudentId = c.Int(nullable: false),
+                        SubjectId = c.Int(nullable: false),
+                        ScoreGradeId = c.Int(nullable: false),
+                        TermTotal = c.Double(nullable: false),
+                        ClassAverage = c.Double(nullable: false),
+                        SubjectAverage = c.Double(nullable: false),
+                        Position = c.String(),
+                        Status = c.String(),
+                        CreatedBy = c.String(maxLength: 50),
+                        CreatedAt = c.DateTime(),
+                        ModifiedBy = c.String(),
+                        UpdatedAt = c.DateTime(),
+                        SchoolSession_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ScoreGrades", t => t.ScoreGradeId, cascadeDelete: true)
+                .ForeignKey("dbo.Students", t => t.StudentId)
+                .ForeignKey("dbo.Subjects", t => t.SubjectId)
+                .ForeignKey("dbo.SchoolTerms", t => t.SchoolTermId)
+                .ForeignKey("dbo.SchoolSessions", t => t.SchoolSession_Id)
+                .Index(t => t.SubjectId)
+                .Index(t => t.SchoolTermId)
+                .Index(t => t.StudentId)
+                .Index(t => t.ScoreGradeId)
+                .Index(t => t.SchoolSession_Id);
+            
+            CreateTable(
+                "dbo.ContinuousAssessments",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Score = c.Double(nullable: false),
+                        Name = c.String(),
+                        SubjectId = c.Int(nullable: false),
+                        ResultId = c.Int(nullable: false),
+                        CreatedBy = c.String(maxLength: 50),
+                        CreatedAt = c.DateTime(),
+                        ModifiedBy = c.String(),
+                        UpdatedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Results", t => t.ResultId)
+                .ForeignKey("dbo.Subjects", t => t.SubjectId, cascadeDelete: true)
+                .Index(t => t.SubjectId)
+                .Index(t => t.ResultId);
+            
+            CreateTable(
+                "dbo.SchoolSessions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SessionName = c.String(),
+                        SchoolId = c.Int(),
+                        CreatedBy = c.String(maxLength: 50),
+                        CreatedAt = c.DateTime(),
+                        ModifiedBy = c.String(),
+                        UpdatedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Schools", t => t.SchoolId)
+                .Index(t => t.SchoolId);
+            
+            CreateTable(
+                "dbo.Schools",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Address = c.String(),
+                        Logo = c.String(),
+                        OwnerName = c.String(),
+                        SchoolMotto = c.String(),
+                        Email = c.String(),
+                        PhoneNumber = c.String(),
+                        CreatedBy = c.String(maxLength: 50),
+                        CreatedAt = c.DateTime(),
+                        ModifiedBy = c.String(),
+                        UpdatedAt = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetUserLogins",
@@ -504,53 +573,40 @@ namespace SwiftSkool.MVC5.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ContinuousAssessments",
+                "dbo.Payments",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Score = c.Double(nullable: false),
-                        Name = c.String(),
-                        SubjectId = c.Int(nullable: false),
-                        ResultId = c.Int(nullable: false),
+                        PaymentStatus = c.Int(nullable: false),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        PaymentDate = c.DateTime(nullable: false),
                         CreatedBy = c.String(maxLength: 50),
                         CreatedAt = c.DateTime(),
                         ModifiedBy = c.String(),
                         UpdatedAt = c.DateTime(),
+                        Student_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Results", t => t.ResultId)
-                .ForeignKey("dbo.Subjects", t => t.SubjectId, cascadeDelete: true)
-                .Index(t => t.SubjectId)
-                .Index(t => t.ResultId);
+                .ForeignKey("dbo.Students", t => t.Student_Id)
+                .Index(t => t.Student_Id);
             
             CreateTable(
-                "dbo.Results",
+                "dbo.PaymentTypes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SchoolSessionId = c.Int(nullable: false),
-                        StudentId = c.Int(nullable: false),
-                        SubjectId = c.Int(nullable: false),
-                        ScoreGradeId = c.Int(nullable: false),
-                        TermTotal = c.Double(nullable: false),
-                        ClassAverage = c.Double(nullable: false),
-                        SubjectAverage = c.Double(nullable: false),
-                        Position = c.String(),
-                        Status = c.String(),
+                        Name = c.String(),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Description = c.String(),
                         CreatedBy = c.String(maxLength: 50),
                         CreatedAt = c.DateTime(),
                         ModifiedBy = c.String(),
                         UpdatedAt = c.DateTime(),
+                        Payment_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SchoolSessions", t => t.SchoolSessionId, cascadeDelete: true)
-                .ForeignKey("dbo.ScoreGrades", t => t.ScoreGradeId, cascadeDelete: true)
-                .ForeignKey("dbo.Students", t => t.StudentId)
-                .ForeignKey("dbo.Subjects", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.SchoolSessionId)
-                .Index(t => t.StudentId)
-                .Index(t => t.ScoreGradeId);
+                .ForeignKey("dbo.Payments", t => t.Payment_Id)
+                .Index(t => t.Payment_Id);
             
             CreateTable(
                 "dbo.EntranceExamCandidates",
@@ -629,39 +685,6 @@ namespace SwiftSkool.MVC5.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Payments",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        PaymentStatus = c.Int(nullable: false),
-                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        PaymentDate = c.DateTime(nullable: false),
-                        CreatedBy = c.String(maxLength: 50),
-                        CreatedAt = c.DateTime(),
-                        ModifiedBy = c.String(),
-                        UpdatedAt = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.PaymentTypes",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Description = c.String(),
-                        CreatedBy = c.String(maxLength: 50),
-                        CreatedAt = c.DateTime(),
-                        ModifiedBy = c.String(),
-                        UpdatedAt = c.DateTime(),
-                        Payment_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Payments", t => t.Payment_Id)
-                .Index(t => t.Payment_Id);
-            
-            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -671,24 +694,45 @@ namespace SwiftSkool.MVC5.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.SubjectStudents",
+                c => new
+                    {
+                        Subject_Id = c.Int(nullable: false),
+                        Student_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Subject_Id, t.Student_Id })
+                .ForeignKey("dbo.Subjects", t => t.Subject_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Students", t => t.Student_Id, cascadeDelete: true)
+                .Index(t => t.Subject_Id)
+                .Index(t => t.Student_Id);
+            
+            CreateTable(
+                "dbo.SubjectApplicationUsers",
+                c => new
+                    {
+                        Subject_Id = c.Int(nullable: false),
+                        ApplicationUser_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Subject_Id, t.ApplicationUser_Id })
+                .ForeignKey("dbo.Subjects", t => t.Subject_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
+                .Index(t => t.Subject_Id)
+                .Index(t => t.ApplicationUser_Id);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.PaymentTypes", "Payment_Id", "dbo.Payments");
             DropForeignKey("dbo.EntranceExamSubjects", "EntranceExamCandidateId", "dbo.EntranceExamCandidates");
             DropForeignKey("dbo.EntranceExamSubjects", "EntranceExamId", "dbo.EntranceExams");
             DropForeignKey("dbo.EntranceExamCandidates", "EntranceExamId", "dbo.EntranceExams");
-            DropForeignKey("dbo.ContinuousAssessments", "SubjectId", "dbo.Subjects");
-            DropForeignKey("dbo.ContinuousAssessments", "ResultId", "dbo.Results");
-            DropForeignKey("dbo.Results", "Id", "dbo.Subjects");
-            DropForeignKey("dbo.Results", "StudentId", "dbo.Students");
-            DropForeignKey("dbo.Results", "ScoreGradeId", "dbo.ScoreGrades");
-            DropForeignKey("dbo.Results", "SchoolSessionId", "dbo.SchoolSessions");
             DropForeignKey("dbo.Allergies", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.MedicalHistories", "Id", "dbo.Students");
             DropForeignKey("dbo.Students", "StateId", "dbo.States");
+            DropForeignKey("dbo.Payments", "Student_Id", "dbo.Students");
+            DropForeignKey("dbo.PaymentTypes", "Payment_Id", "dbo.Payments");
             DropForeignKey("dbo.Students", "HostelId", "dbo.Hostels");
             DropForeignKey("dbo.Students", "GuardianId", "dbo.Guardians");
             DropForeignKey("dbo.Students", "ClubId", "dbo.Clubs");
@@ -697,49 +741,68 @@ namespace SwiftSkool.MVC5.Migrations
             DropForeignKey("dbo.Attendances", "SessionId", "dbo.SchoolSessions");
             DropForeignKey("dbo.Attendances", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Attendances", "ClassId", "dbo.Classes");
+            DropForeignKey("dbo.Subjects", "Class_Id", "dbo.Classes");
             DropForeignKey("dbo.Students", "ClassId", "dbo.Classes");
-            DropForeignKey("dbo.Classes", "FormTeacher_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Subjects", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Classes", "FormTeacherId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "StateId", "dbo.States");
             DropForeignKey("dbo.LocalGovernments", "StateId", "dbo.States");
             DropForeignKey("dbo.AspNetUsers", "SchoolId", "dbo.Schools");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.LessonPlans", "Id", "dbo.SchoolTerms");
+            DropForeignKey("dbo.SchoolTerms", "SchoolSessionId", "dbo.SchoolSessions");
+            DropForeignKey("dbo.SchoolSessions", "SchoolId", "dbo.Schools");
+            DropForeignKey("dbo.Students", "School_Id", "dbo.Schools");
+            DropForeignKey("dbo.AspNetUsers", "School_Id", "dbo.Schools");
+            DropForeignKey("dbo.Results", "SchoolSession_Id", "dbo.SchoolSessions");
+            DropForeignKey("dbo.Results", "SchoolTermId", "dbo.SchoolTerms");
+            DropForeignKey("dbo.Results", "Id", "dbo.Subjects");
+            DropForeignKey("dbo.Results", "StudentId", "dbo.Students");
+            DropForeignKey("dbo.Results", "ScoreGradeId", "dbo.ScoreGrades");
+            DropForeignKey("dbo.ContinuousAssessments", "SubjectId", "dbo.Subjects");
+            DropForeignKey("dbo.ContinuousAssessments", "ResultId", "dbo.Results");
             DropForeignKey("dbo.LessonPlans", "TeacherId", "dbo.AspNetUsers");
             DropForeignKey("dbo.LessonPlans", "Id", "dbo.Subjects");
+            DropForeignKey("dbo.SubjectApplicationUsers", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SubjectApplicationUsers", "Subject_Id", "dbo.Subjects");
+            DropForeignKey("dbo.SubjectStudents", "Student_Id", "dbo.Students");
+            DropForeignKey("dbo.SubjectStudents", "Subject_Id", "dbo.Subjects");
             DropForeignKey("dbo.ScoreGrades", "Id", "dbo.Subjects");
             DropForeignKey("dbo.ScoreGrades", "Id", "dbo.Ratings");
             DropForeignKey("dbo.BehaviourActivities", "Id", "dbo.Ratings");
             DropForeignKey("dbo.KeyToRatings", "Id", "dbo.BehaviourActivities");
-            DropForeignKey("dbo.LessonPlans", "Id", "dbo.SchoolSessions");
-            DropForeignKey("dbo.SchoolSessions", "SchoolId", "dbo.Schools");
-            DropForeignKey("dbo.Students", "School_Id", "dbo.Schools");
-            DropForeignKey("dbo.AspNetUsers", "School_Id", "dbo.Schools");
             DropForeignKey("dbo.AspNetUsers", "HostelId", "dbo.Hostels");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Illnesses", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.Disabilities", "MedicalHistoryId", "dbo.MedicalHistories");
+            DropIndex("dbo.SubjectApplicationUsers", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.SubjectApplicationUsers", new[] { "Subject_Id" });
+            DropIndex("dbo.SubjectStudents", new[] { "Student_Id" });
+            DropIndex("dbo.SubjectStudents", new[] { "Subject_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.PaymentTypes", new[] { "Payment_Id" });
             DropIndex("dbo.EntranceExamSubjects", new[] { "EntranceExamId" });
             DropIndex("dbo.EntranceExamSubjects", new[] { "EntranceExamCandidateId" });
             DropIndex("dbo.EntranceExamCandidates", new[] { "EntranceExamId" });
-            DropIndex("dbo.Results", new[] { "ScoreGradeId" });
-            DropIndex("dbo.Results", new[] { "StudentId" });
-            DropIndex("dbo.Results", new[] { "SchoolSessionId" });
-            DropIndex("dbo.Results", new[] { "Id" });
-            DropIndex("dbo.ContinuousAssessments", new[] { "ResultId" });
-            DropIndex("dbo.ContinuousAssessments", new[] { "SubjectId" });
+            DropIndex("dbo.PaymentTypes", new[] { "Payment_Id" });
+            DropIndex("dbo.Payments", new[] { "Student_Id" });
             DropIndex("dbo.Clubs", new[] { "Patron_Id" });
             DropIndex("dbo.LocalGovernments", new[] { "StateId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.SchoolSessions", new[] { "SchoolId" });
+            DropIndex("dbo.ContinuousAssessments", new[] { "ResultId" });
+            DropIndex("dbo.ContinuousAssessments", new[] { "SubjectId" });
+            DropIndex("dbo.Results", new[] { "SchoolSession_Id" });
+            DropIndex("dbo.Results", new[] { "ScoreGradeId" });
+            DropIndex("dbo.Results", new[] { "StudentId" });
+            DropIndex("dbo.Results", new[] { "SchoolTermId" });
+            DropIndex("dbo.Results", new[] { "Id" });
+            DropIndex("dbo.SchoolTerms", new[] { "SchoolSessionId" });
             DropIndex("dbo.KeyToRatings", new[] { "Id" });
             DropIndex("dbo.BehaviourActivities", new[] { "Id" });
             DropIndex("dbo.ScoreGrades", new[] { "Id" });
-            DropIndex("dbo.Subjects", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.SchoolSessions", new[] { "SchoolId" });
+            DropIndex("dbo.Subjects", new[] { "Class_Id" });
             DropIndex("dbo.LessonPlans", new[] { "TeacherId" });
             DropIndex("dbo.LessonPlans", new[] { "Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -748,7 +811,7 @@ namespace SwiftSkool.MVC5.Migrations
             DropIndex("dbo.AspNetUsers", new[] { "HostelId" });
             DropIndex("dbo.AspNetUsers", new[] { "SchoolId" });
             DropIndex("dbo.AspNetUsers", new[] { "StateId" });
-            DropIndex("dbo.Classes", new[] { "FormTeacher_Id" });
+            DropIndex("dbo.Classes", new[] { "FormTeacherId" });
             DropIndex("dbo.Attendances", new[] { "ClassId" });
             DropIndex("dbo.Attendances", new[] { "SessionId" });
             DropIndex("dbo.Attendances", new[] { "Id" });
@@ -763,28 +826,31 @@ namespace SwiftSkool.MVC5.Migrations
             DropIndex("dbo.Disabilities", new[] { "MedicalHistoryId" });
             DropIndex("dbo.MedicalHistories", new[] { "Id" });
             DropIndex("dbo.Allergies", new[] { "MedicalHistoryId" });
+            DropTable("dbo.SubjectApplicationUsers");
+            DropTable("dbo.SubjectStudents");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.PaymentTypes");
-            DropTable("dbo.Payments");
             DropTable("dbo.EntranceExamRegistrations");
             DropTable("dbo.EntranceExamSubjects");
             DropTable("dbo.EntranceExams");
             DropTable("dbo.EntranceExamCandidates");
-            DropTable("dbo.Results");
-            DropTable("dbo.ContinuousAssessments");
+            DropTable("dbo.PaymentTypes");
+            DropTable("dbo.Payments");
             DropTable("dbo.Guardians");
             DropTable("dbo.Clubs");
             DropTable("dbo.LocalGovernments");
             DropTable("dbo.States");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.Schools");
+            DropTable("dbo.SchoolSessions");
+            DropTable("dbo.ContinuousAssessments");
+            DropTable("dbo.Results");
+            DropTable("dbo.SchoolTerms");
             DropTable("dbo.KeyToRatings");
             DropTable("dbo.BehaviourActivities");
             DropTable("dbo.Ratings");
             DropTable("dbo.ScoreGrades");
             DropTable("dbo.Subjects");
-            DropTable("dbo.Schools");
-            DropTable("dbo.SchoolSessions");
             DropTable("dbo.LessonPlans");
             DropTable("dbo.Hostels");
             DropTable("dbo.AspNetUserClaims");
