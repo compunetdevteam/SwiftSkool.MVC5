@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using SwiftSkool.MVC5.Abstractions;
 using System.Threading.Tasks;
+using System.Net;
+using SwiftSkool.MVC5.ViewModels;
 
 namespace SwiftSkool.MVC5.Areas.Students.Controllers
 {
@@ -21,64 +23,22 @@ namespace SwiftSkool.MVC5.Areas.Students.Controllers
             return View(await qdb.GetClassesAsync());
         }
 
-        //// GET: Students/Classes/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Class @class = db.GetClassesAsync.Find(id);
-        //    if (@class == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(@class);
-        //}
 
-        //// GET: Students/Classes/Create
-        //public ActionResult Create()
-        //{
-        //    var newclass = new ClassViewModel();
-        //    return View(newclass);
-        //}
+        // GET: Students/Classes/Details/5
+        public async Task<ActionResult> Details(int? id)
+        {
 
-        //// POST: Students/Classes/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //// public ActionResult Create([Bind(Include = "Id,Level,ClassName,Section,TeacherId,CreatedBy,CreatedAt,ModifiedBy,UpdatedAt,Version")] Class @class)
-        //public ActionResult Create(CreateClassViewModel  model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await db.CreateClass(model);
-        //        return RedirectToAction("Index");
-        //    }
+            var aclass = await qdb.GetClassesAsync();
+            return View(aclass);
+        }
 
-        //    return View(@class);
-        //}
+        // GET: Students/Classes/Create
+        public ActionResult Create()
+        {
+            var newclass = new CreateClassVM();
+            return View(newclass);
+        }
 
-        //private void CreateClass()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //// GET: Students/Classes/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Class @class = db.Classes.Find(id);
-        //    if (@class == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(@class);
-        //}
 
         //// POST: Students/Classes/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
