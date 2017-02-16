@@ -11,25 +11,19 @@ namespace SwiftSkool.MVC5.BusinessLogic
 {
     public class LessonPlanManager //: ILessonPlanManager
     {
-        private readonly ICommandRepository<LessonPlan> _db;
         private readonly SchoolDb db;
-        public LessonPlanManager(ICommandRepository<LessonPlan> lessonplan)
-        {
-            _db = lessonplan;
-        }
 
-        public LessonPlanManager(
-            ICommandRepository<LessonPlan> lessonplan, SchoolDb dbd)
+        public LessonPlanManager(SchoolDb dbd)
         {
-            _db = lessonplan;
             db = dbd;
         }
 
         //// deleting an existing lesson plan
-        public bool Delete(LessonPlanViewModel plan)
+        public void Delete(LessonPlanViewModel plan)
         {
-            var deleteplan = _db.FindById((int)plan.LessonPlanId);
-            return _db.Delete(deleteplan);
+            var deleteplan = db.LessonPlans.Find((int)plan.LessonPlanId);
+            db.LessonPlans.Remove(deleteplan);
+            db.SaveChanges();
         }
 
         public async Task<LessonPlanViewModel> SearchLessonPlanBySubjectId(int id)
@@ -83,10 +77,11 @@ namespace SwiftSkool.MVC5.BusinessLogic
         // * possible queries for deleting lesson plans
         // * Deleting a lesson plan by Teacher Id
         // **/
-        public bool DeleteLessonPlanByTeacherId(int teacherid) // Sir pls check if it's neccessary to do theses various deletes.
+        public void DeleteLessonPlanByTeacherId(int teacherid) // Sir pls check if it's neccessary to do theses various deletes.
         {
-            var deletet_id = _db.FindById(teacherid);
-            return _db.Delete(deletet_id); //here you use _db to do a delete. 
+            var deletet_id = db.LessonPlans.Find(teacherid);
+            db.LessonPlans.Remove(deletet_id); //here you use _db to do a delete.
+            db.SaveChanges();
         }
 
         public async Task<LessonPlanViewModel> GetLessonPlanBySubjectId(int id)

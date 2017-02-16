@@ -51,6 +51,7 @@ namespace SwiftSkool.MVC5.App_Start
             container.RegisterType<IGuardianCommandManager, GuardianCommandManager>();
             container.RegisterType<IGuardianQueryManager, GuardianQueryManager>();
             container.RegisterType<IClassCommandManager, ClassCommandManager>();
+            container.RegisterType<IClassQueryManager, ClassQueryManager>();
         }
     }
 }

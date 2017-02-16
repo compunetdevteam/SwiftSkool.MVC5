@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using SwiftSkool.MVC5.Entities;
-using SwiftSkool.MVC5.Models;
-using SwiftSkool.MVC5.ViewModels;
+﻿using System.Web.Mvc;
 using SwiftSkool.MVC5.Abstractions;
 using System.Threading.Tasks;
 
