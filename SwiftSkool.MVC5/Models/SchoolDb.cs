@@ -83,7 +83,8 @@ namespace SwiftSkool.MVC5.Models
                    .WillCascadeOnDelete(false);
             builder.Entity<Attendance>()
                    .HasRequired(a => a.FormTeacher)
-                   .WithOptional().WillCascadeOnDelete(false);
+                   .WithOptional()
+                   .WillCascadeOnDelete(false);
             builder.Entity<BehaviourActivity>()
                    .HasRequired(b => b.KeyToRating)
                    .WithRequiredPrincipal(k => k.BehaviourActivity)
@@ -99,6 +100,7 @@ namespace SwiftSkool.MVC5.Models
             builder.Entity<ContinuousAssessment>()
                    .HasRequired(x => x.Result)
                    .WithMany(r => r.ContinuousAssessments)
+                   .HasForeignKey(x => x.ResultId)
                    .WillCascadeOnDelete(false);
             builder.Entity<Disability>()
                    .HasRequired(d => d.MedicalHistory)
@@ -127,7 +129,8 @@ namespace SwiftSkool.MVC5.Models
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
                    .HasRequired(l => l.Term)
-                   .WithOptional()
+                   .WithMany(t => t.LessonPlans)
+                   .HasForeignKey(x => x.SchoolTermId)
                    .WillCascadeOnDelete(false);
             builder.Entity<LessonPlan>()
                    .HasRequired(l => l.Subject)
@@ -156,8 +159,9 @@ namespace SwiftSkool.MVC5.Models
                    .HasForeignKey(r => r.StudentId)
                    .WillCascadeOnDelete(false);
             builder.Entity<Result>()
-                   .HasRequired(r => r.Subject)
-                   .WithOptional().WillCascadeOnDelete(false);
+                .HasRequired(r => r.Subject)
+                .WithOptional()
+                .WillCascadeOnDelete(false);
             
             builder.Entity<School>()
                    .HasMany(s => s.Staff)

@@ -35,6 +35,8 @@ namespace SwiftSkool.MVC5.Entities
 
         public ICollection<Result> Results { get; set; }
 
+        public ICollection<LessonPlan> LessonPlans { get; set; }
+
         public void PrepareTerm(string termname, DateTime startterm, DateTime endTerm)
         {
             TermName = termname;

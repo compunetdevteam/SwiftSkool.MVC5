@@ -39,16 +39,31 @@ namespace SwiftSkool.MVC5.Migrations
 
             if (!ctx.SchoolTerms.Any())
             {
-                var first = new SchoolTerm("First Term", new DateTime(2016, 9, 22), new DateTime(2016, 12, 18));
+                var first = new SchoolTerm("FirstTerm", new DateTime(2016, 9, 22), new DateTime(2016, 12, 18));
                 first.SchoolSessionId = 1;
-                var second = new SchoolTerm("Second Term", new DateTime(2017, 01, 09), new DateTime(2017, 03, 19));
+                var second = new SchoolTerm("SecondTerm", new DateTime(2017, 01, 09), new DateTime(2017, 03, 19));
                 second.SchoolSessionId = 1;
-                var third = new SchoolTerm("Third Term", new DateTime(2017, 04, 09), new DateTime(2017, 07, 1));
+                var third = new SchoolTerm("ThirdTerm", new DateTime(2017, 04, 09), new DateTime(2017, 07, 1));
                 third.SchoolSessionId = 1;
 
                 ctx.SchoolTerms.AddOrUpdate(first);
                 ctx.SchoolTerms.AddOrUpdate(second);
                 ctx.SchoolTerms.AddOrUpdate(third);
+                ctx.SaveChanges();
+            }
+
+            if (!ctx.Subjects.Any())
+            {
+                var subject1 = new Subject("Mathematics");
+                var subject2 = new Subject("Englist Language");
+                var subject3 = new Subject("Economics");
+                var subject4 = new Subject("Government");
+                var subject5 = new Subject("Accounting");
+                ctx.Subjects.AddOrUpdate(subject1);
+                ctx.Subjects.AddOrUpdate(subject2);
+                ctx.Subjects.AddOrUpdate(subject3);
+                ctx.Subjects.AddOrUpdate(subject4);
+                ctx.Subjects.AddOrUpdate(subject5);
                 ctx.SaveChanges();
             }
         }

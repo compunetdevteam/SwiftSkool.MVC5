@@ -41,6 +41,10 @@ namespace SwiftSkool.MVC5.Entities
 
         public LessonPlan LessonPlan { get; private set; }
 
+        public int ResultId { get; set; }
+
+        public Result Result { get; set; }
+
         public void SetSubjectDetails(string description, string subjectcode)
         {
             if(!string.IsNullOrWhiteSpace(description) && string.IsNullOrWhiteSpace(subjectcode))
